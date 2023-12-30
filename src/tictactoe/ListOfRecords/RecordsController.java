@@ -25,7 +25,6 @@ public class RecordsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ancPane.getStylesheets().add(getClass().getResource("records.css").toString());
     }    
     
 }
