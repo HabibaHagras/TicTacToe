@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 29, 2023, 1:36:59 AM
+    Author     : DELL
+*/
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+.root{
+    -fx-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
+    -fx-background-color: #003055;
+}
+#btnEasy{
+    -fx-background-color: A2CECE;
+    -fx-border-style:solid;
+    -fx-background-radius: 90;
+     -fx-border-width: 2px;
+     -fx-border-color: #FFFFFF;
+    -fx-border-radius:90;
+    -fx-text-fill: white;
+    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
+    -fx-text-fill:white;
+    -fx-font-size: 30px;
+}
+#txtLevels{
+    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
+    -fx-text-fill: white;  
+    -fx-font-size: 40px;
+    -fx-background-color: #FFFFFF;
+
+}
+#btnMedium{
+    -fx-background-color: #FBF33F;
+    -fx-border-style:solid;
+    -fx-background-radius: 90;
+     -fx-border-width: 2px;
+     -fx-border-color: #FFFFFF;
+    -fx-border-radius:90;
+    -fx-text-fill: white;
+    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
+    -fx-text-fill:white;
+    -fx-font-size: 30px;
+}
+
+#btnHard{
+    -fx-background-color: F26161;
+    -fx-border-style:solid;
+    -fx-background-radius: 90;
+     -fx-border-width: 2px;
+     -fx-border-color: #FFFFFF;
+    -fx-border-radius:90;
+    -fx-text-fill: white;
+    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
+    -fx-text-fill:white;
+    -fx-font-size: 30px;
+}

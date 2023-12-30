@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="txtLevels" fill="WHITE" layoutX="282.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVELS">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnEasy" layoutX="212.0" layoutY="140.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="252.0" text="EASY">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnMedium" layoutX="212.0" layoutY="223.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="252.0" text="MEDIUM">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnHard" layoutX="212.0" layoutY="303.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="252.0" text="HARD">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
