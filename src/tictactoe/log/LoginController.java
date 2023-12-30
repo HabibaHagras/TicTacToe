@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe;
+package tictactoe.log;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,20 +14,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import tictactoe.FXMLDocumentController;
 
 /**
  * FXML Controller class
  *
  * @author HP
  */
-public class FXMLDocumentController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
      AnchorPane apane;
@@ -40,9 +40,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField feild;
     @FXML
-    private Text Text;
+    private TextField feild1;
     @FXML
-    private Button button;
+    private Button buttonlogin;
+    @FXML
+    private Button buttonregistration1;
+    @FXML
+    private Text Text;
 
     /**
      * Initializes the controller class.
@@ -51,27 +55,44 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-//    private void setaction(ActionEvent event) throws IOException {
-//        AnchorPane pane = FXMLLoader.load(getClass().getResource("2.fxml"));
-//        apane.getChildren().setAll(pane);
-//                
-//            
-//    }
- private void setaction(ActionEvent event)  {
-    
+    private void setaction(ActionEvent event) {
+        
         AnchorPane pane;
        
         try {
-            pane = FXMLLoader.load(getClass().getResource("page2.fxml"));
+            pane = FXMLLoader.load(getClass().getResource("login.fxml"));
                            apane.getChildren().setAll(pane);
+                           
+                           System.out.println("cliiiiiicked");
 
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                                       System.out.println("cliiiiiicked");
+
         }
        
+                           System.out.println("cliiiiiicked");
 
 }
+
+    @FXML
+    private void setaction1(ActionEvent event) {
+           AnchorPane pane;
+       
+        try {
+            pane = FXMLLoader.load(getClass().getResource("login.fxml"));
+                           apane.getChildren().setAll(pane);
+                           
+                           System.out.println("cliiiiiicked");
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                                       System.out.println("cliiiiiicked");
+
+        }
+       
+                           System.out.println("cliiiiiicked");
+
+    }
     
 }

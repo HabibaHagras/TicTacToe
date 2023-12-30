@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+//import tictactoe.loginpage ;
 
 /**
  *
@@ -19,10 +20,9 @@ public class TicTacToe extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root);
-        
+        scene.getStylesheets().add(getClass().getResource("1.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
