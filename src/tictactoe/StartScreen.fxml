@@ -10,38 +10,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@start.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<GridPane fx:id="gpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="589.0" stylesheets="@start.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.StartScreenController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="173.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="477.0" minWidth="10.0" prefWidth="252.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="179.33334350585938" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="477.0" minWidth="10.0" prefWidth="379.6666564941406" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="477.0" minWidth="10.0" prefWidth="175.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="214.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="353.3333282470703" minHeight="10.0" prefHeight="340.6666717529297" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="283.0" prefWidth="349.0" vgap="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="241.0" text="Computer">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="241.0" text="Local" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="241.0" text="Online" />
+            <Button fx:id="buttonlocal" mnemonicParsing="false" onAction="#onclick1" prefHeight="50.0" prefWidth="241.0" text="Local" />
+            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="254.0" text="Online" />
          </children>
       </FlowPane>
-      <Text fx:id="toe" strokeType="OUTSIDE" strokeWidth="0.0" text="TOE" textAlignment="CENTER" wrappingWidth="74.5107421875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text fx:id="toe" strokeType="OUTSIDE" strokeWidth="0.0" text="  TOE" textAlignment="CENTER" wrappingWidth="77.84405517578125" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="140.0" />
+            <Insets bottom="40.0" left="160.0" />
          </GridPane.margin>
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <Button alignment="CENTER" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" text="i" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="helpicon" alignment="CENTER" mnemonicParsing="false" onAction="#onclick2" prefHeight="65.0" prefWidth="62.0" text="i" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -55,10 +55,13 @@
          <font>
             <Font size="36.0" />
          </font>
-      </Text>
-      <Text fx:id="tic" strokeType="OUTSIDE" strokeWidth="0.0" text="TIC" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="35.0" />
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Text>
+      <Text fx:id="tic" strokeType="OUTSIDE" strokeWidth="0.0" text="TIC" wrappingWidth="64.27606201171875" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="100.0" />
          </GridPane.margin>
          <font>
             <Font size="32.0" />

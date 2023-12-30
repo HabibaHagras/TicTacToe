@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import tictactoe.FXMLDocumentController;
+import tictactoe.helpcontroller;
 
 
 /**
@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
                            System.out.println("cliiiiiicked");
 
         } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
                                        System.out.println("cliiiiiicked");
 
         }
@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
                            System.out.println("cliiiiiicked");
 
         } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
                                        System.out.println("cliiiiiicked");
 
         }
