@@ -21,7 +21,7 @@
       <TextField fx:id="feild" layoutX="154.0" layoutY="217.0" prefHeight="14.0" prefWidth="300.0" />
       <ImageView fitHeight="51.0" fitWidth="49.0" layoutX="7.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@arrow.jpg" />
+            <Image url="@../assest/btn.png" />
          </image>
       </ImageView>
    </children>

@@ -5,51 +5,31 @@
  */
 package tictactoe;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 /**
- * FXML Controller class
  *
  * @author HP
  */
 public class FXMLDocumentController implements Initializable {
-
+    
     @FXML
-     AnchorPane apane;
+    private Label label;
+    
     @FXML
-    private Rectangle Rectangle;
-    @FXML
-    private Label username;
-    @FXML
-    private Label password;
-    @FXML
-    private TextField feild;
-    @FXML
-    private Text Text;
-    @FXML
-    private Button button;
-
-    /**
-     * Initializes the controller class.
-     */
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
 }
