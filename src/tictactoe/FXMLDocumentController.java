@@ -52,16 +52,4 @@ public class FXMLDocumentController implements Initializable {
         // TODO
     }    
 
-    @FXML
-//    private void setaction(ActionEvent event) throws IOException {
-//        AnchorPane pane = FXMLLoader.load(getClass().getResource("2.fxml"));
-//        apane.getChildren().setAll(pane);
-//                
-//            
-//    }
- private void setaction(ActionEvent event)  {}
-    
-
-       
-  
 }

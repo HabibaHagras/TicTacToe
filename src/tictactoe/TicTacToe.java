@@ -22,7 +22,7 @@ public class TicTacToe extends Application {
     public void start(Stage stage) throws Exception {
 
 
-        
+
 
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root);
