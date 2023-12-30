@@ -9,7 +9,11 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <jar href="TicTacToe.jar" size="22562" download="eager" />
+=======
+    <jar href="TicTacToe.jar" size="7069" download="eager" />
+>>>>>>> dev
 =======
     <jar href="TicTacToe.jar" size="2881716" download="eager" />
 >>>>>>> dev
