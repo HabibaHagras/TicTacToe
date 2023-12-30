@@ -59,19 +59,9 @@ public class FXMLDocumentController implements Initializable {
 //                
 //            
 //    }
- private void setaction(ActionEvent event)  {
+ private void setaction(ActionEvent event)  {}
     
-        AnchorPane pane;
-       
-        try {
-            pane = FXMLLoader.load(getClass().getResource("page2.fxml"));
-                           apane.getChildren().setAll(pane);
 
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
        
-
-}
-    
+  
 }
