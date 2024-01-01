@@ -22,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tictactoe.helpcontroller;
+
 
 /**
  *
@@ -77,13 +79,32 @@ public class GameController implements Initializable {
                 stage.setTitle("My New Scene");
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace(); // Handle the exception appropriately
+                e.printStackTrace()
             }
         });
     
         // TODO
     } 
+
     
+          public void onclicknewgame(ActionEvent event) throws IOException{
+  
+        Stage stage = null;
+        Parent myNewScene = null;
+
+        if (event.getSource() == newButton){
+            stage = (Stage) newButton.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("My New Scene");
+        stage.show();
+                
+
+          }
+                  
           public void onclicknewgame(ActionEvent event) throws IOException{
   
         Stage stage = null;
