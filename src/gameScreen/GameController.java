@@ -143,6 +143,19 @@ public class GameController implements Initializable {
 //
 //    }   
           
+           public void updateScore(String symbol){
+//           
+             if(symbol.equalsIgnoreCase("X")){
+                countX++;
+                score1.setText(String.valueOf(countX));
+             }  
+             else if(symbol.equalsIgnoreCase("O")){
+                 countO++;    
+                 score2.setText(String.valueOf(countO));
+             }
+
+    }   
+          
           
           
           
