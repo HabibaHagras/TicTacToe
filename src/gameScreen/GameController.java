@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tictactoe.helpcontroller;
 
+
 /**
  *
  * @author HP
@@ -31,13 +32,31 @@ import tictactoe.helpcontroller;
 public class GameController implements Initializable {
 
     @FXML
-    private Text txt;
+    private Text player1;
     @FXML
-    private Text gusetScore;
+    private Text player2;
     @FXML
-    private Text computerScore;
+    private Text score1;
     @FXML
-    private Button btn;
+    private Text score2;
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button2;
+    @FXML
+    private Button button3;
+    @FXML
+    private Button button4;
+    @FXML
+    private Button button5;
+    @FXML
+    private Button button6;
+    @FXML
+    private Button button7;
+    @FXML
+    private Button button8;
+    @FXML
+    private Button button9;
     @FXML
     private ImageView backBtn;
     @FXML
@@ -60,12 +79,13 @@ public class GameController implements Initializable {
                 stage.setTitle("My New Scene");
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace(); // Handle the exception appropriately
+                e.printStackTrace()
             }
         });
     
         // TODO
     } 
+
     
           public void onclicknewgame(ActionEvent event) throws IOException{
   
@@ -84,24 +104,22 @@ public class GameController implements Initializable {
                 
 
           }
-              
-   
-//            try {
-//        // Load the FXML file
-//                GridPane pane = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-//
-//        // Verify if gpane is initialized before setting its children
-//        if (apane != null) {
-//            // Clear the existing children and set the new pane
-//            apane.getChildren().setAll(pane);
-//        } else {
-//            System.err.println("Error: gpane is not initialized.");
-//        }
-//
-//    } catch (IOException ex) {
-//        Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//            
-//}
-    
+                  
+          public void onclicknewgame(ActionEvent event) throws IOException{
+  
+        Stage stage = null;
+        Parent myNewScene = null;
+
+        if (event.getSource() == newButton){
+            stage = (Stage) newButton.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("My New Scene");
+        stage.show();
+                
+
+          }
 }
