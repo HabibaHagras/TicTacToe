@@ -66,6 +66,9 @@ public class GameController implements Initializable {
       Stage stage = null;
         Parent myNewScene = null;
         
+        int countX=0;
+        int countO=0;
+        
  @Override
  public void initialize(URL url, ResourceBundle rb) {
            
@@ -79,7 +82,7 @@ public class GameController implements Initializable {
                 stage.setTitle("My New Scene");
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace()
+                e.printStackTrace();
             }
         });
     
@@ -104,22 +107,44 @@ public class GameController implements Initializable {
                 
 
           }
-                  
-          public void onclicknewgame(ActionEvent event) throws IOException{
-  
-        Stage stage = null;
-        Parent myNewScene = null;
+          public void playAgain(ActionEvent e){
 
-        if (event.getSource() == newButton){
-            stage = (Stage) newButton.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-        } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
-
-        Scene scene = new Scene(myNewScene);
-        stage.setScene(scene);
-        stage.setTitle("My New Scene");
-        stage.show();
-                
-
-          }
+            button1.setText("");
+            button2.setText("");
+            button3.setText("");
+            button4.setText("");
+            button5.setText("");
+            button6.setText("");
+            button7.setText("");
+            button8.setText("");
+            button9.setText("");
+            
+            button1.setDisable(false);
+            button2.setDisable(false);
+            button3.setDisable(false);
+            button4.setDisable(false);
+            button5.setDisable(false);
+            button6.setDisable(false);
+            button7.setDisable(false);
+            button8.setDisable(false);
+            button9.setDisable(false);
+            }
+          
+//            public void updateScore(){
+//           
+//             if(checkWinner(player1)){
+//                countX++;
+//                score1.setText(String.valueOf(countX));
+//             }  
+//             else if(checkWinner(player2)){
+//                 countO++;    
+//                 score2.setText(String.valueOf(countO));
+//             }
+//
+//    }   
+          
+          
+          
+          
+         
 }
