@@ -133,8 +133,79 @@ public class GameController implements Initializable {
         stage.setTitle("TicTacToe");
         stage.show();
        }
-
-    
                   
+    
+    
+    public String checkWinner(String playerX , String playerO){
+        playerX = player1.getText();
+        playerO = player2.getText();
+        String winner = null;
+        String b1 = button1.getText();
+        String b2 = button2.getText();
+        String b3 = button3.getText();
+        String b4 = button4.getText();
+        String b5 = button5.getText();
+        String b6 = button6.getText();
+        String b7 = button7.getText();
+        String b8 = button8.getText();
+        String b9 = button9.getText();
         
+        if(b1.equals(b2) && b1.equals(b3)){
+            if(b1.equals("X")){
+                winner = playerX;
+            }else if(b1.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b4.equals(b5) && b4.equals(b6)){
+            if(b4.equals("X")){
+                winner = playerX;
+            }else if(b4.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b7.equals(b8) && b7.equals(b9)){
+            if(b7.equals("X")){
+                winner = playerX;
+            }else if(b7.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b1.equals(b4) && b1.equals(b7)){
+            if(b1.equals("X")){
+                winner = playerX;
+            }else if(b1.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b2.equals(b5) && b2.equals(b8)){
+            if(b2.equals("X")){
+                winner = playerX;
+            }else if(b2.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b3.equals(b6) && b3.equals(b9)){
+            if(b3.equals("X")){
+                winner = playerX;
+            }else if(b3.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b1.equals(b5) && b1.equals(b9)){
+            if(b1.equals("X")){
+                winner = playerX;
+            }else if(b1.equals("O")){
+                winner = playerO;
+            }
+        }
+        if(b3.equals(b5) && b3.equals(b7)){
+            if(b3.equals("X")){
+                winner = playerX;
+            }else if(b3.equals("O")){
+                winner = playerO;
+            }
+        }
+      return winner;   
+    }
 }
