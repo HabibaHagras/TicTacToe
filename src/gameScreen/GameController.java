@@ -138,6 +138,7 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("TicTacToe");
         stage.show();
+
     }
 
     public void showwin() {
@@ -152,27 +153,18 @@ public class GameController implements Initializable {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //FXMLLoader loader = new FXMLLoader();
-        //   loader.setLocation(getClass().getResource("/playagainwin/playagainwin.fxml"));
-        // root = loader.load();
-        //Stage stage = new Stage();
-        //Scene scene = new Scene(root);
-        //stage.setScene(scene);
-        //stage.show();
-
-//        
-//        root = FXMLLoader.load(getClass().getResource("/playagainwin/playagainwin.fxml"));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.setTitle("TicTacToe");
-//        stage.show();
+   
     }
 
-    public String checkWinner(String playerX, String playerO) {
-//        playerX = player1.getText();
-//        playerO = player2.getText();
-        //String winner = null;
+
+                  
+    
+    
+    public String checkWinner(String playerX , String playerO){
+        playerX = player1.getText();
+        playerO = player2.getText();
+        String winner = null;
+
         String b1 = button1.getText();
         String b2 = button2.getText();
         String b3 = button3.getText();
@@ -275,17 +267,7 @@ public class GameController implements Initializable {
         }
         return winner;
     }
-
-    @FXML
-    private void onclickback(MouseEvent event) {
-    }
-//     public void onclickplayagain(ActionEvent event) throws IOException {
-//
-//        root = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.setTitle("TicTacToe");
-//        stage.show();
-//    } 
 }
+
+
+
