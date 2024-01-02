@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/start.css</file>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/ListOfRecords/records.css</file>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/TicTacToe.java</file>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/ListOfRecords/Records.fxml</file>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/FXMLDocumentController.java</file>
-            <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/ListOfRecords/RecordsController.java</file>
-        </group>
+        <group/>
     </open-files>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/H:/iti/JavaProject/TicTacToe/src/tictactoe/TicTacToe.java</file>
-            <file>file:/H:/iti/JavaProject/TicTacToe/src/tictactoe/FXMLDocumentController.java</file>
-        </group>
-    </open-files>
-=======
->>>>>>> dev
-=======
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/F:/Java/Java%20Project/TicTacToe/src/tictactoe/FXMLDocumentController.java</file>
-            <file>file:/F:/Java/Java%20Project/TicTacToe/src/tictactoe/TicTacToe.java</file>
-        </group>
-    </open-files>
->>>>>>> dev
->>>>>>> dev
 </project-private>

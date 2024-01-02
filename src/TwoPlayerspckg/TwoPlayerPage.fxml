@@ -10,56 +10,54 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TwoPlayerspckg.TwoPlayerPageController">
-   <bottom>
-      <ImageView fx:id="backbtn" fitHeight="63.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_LEFT">
-         <image>
-            <Image url="@../assest/btn.png" />
-         </image>
-      </ImageView>
-   </bottom>
-   <top>
-      <AnchorPane fx:id="apane" prefHeight="433.0" prefWidth="690.0" stylesheets="@TwoPlayersPage.css" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TwoPlayerspckg.TwoPlayerPageController">
+   <center>
+      <AnchorPane id="root" fx:id="apane" prefHeight="433.0" prefWidth="690.0" stylesheets="@TwoPlayersPage.css" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="297.0" layoutX="141.0" layoutY="106.0" stroke="WHITE" strokeType="INSIDE" width="415.0" />
-            <Text fx:id="txtPlayerO" layoutX="270.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
+            <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="109.0" layoutY="106.0" stroke="WHITE" strokeType="INSIDE" width="598.0" />
+            <Text fx:id="txtPlayerO" layoutX="305.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
                <font>
                   <Font size="36.0" />
                </font>
             </Text>
-            <TextField fx:id="txtfieldPayerO" layoutX="199.0" layoutY="301.0" prefHeight="50.0" prefWidth="299.0" />
-            <Button fx:id="btnStart" layoutX="262.0" layoutY="371.0" mnemonicParsing="false" onAction="#onclickstart" prefHeight="58.0" prefWidth="172.0" text="START">
+            <TextField fx:id="txtfieldPayerO" layoutX="238.0" layoutY="324.0" prefHeight="50.0" prefWidth="299.0" />
+            <Button fx:id="btnStart" layoutX="314.0" layoutY="414.0" mnemonicParsing="false" onAction="#onclickstart" prefHeight="58.0" prefWidth="172.0" text="START">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="169.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="174.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtfieldPayerX" layoutX="199.0" layoutY="190.0" prefHeight="50.0" prefWidth="299.0" />
-            <Text fx:id="txtPlayerX" layoutX="273.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
+            <TextField fx:id="txtfieldPayerX" layoutX="238.0" layoutY="208.0" prefHeight="50.0" prefWidth="299.0" />
+            <Text fx:id="txtPlayerX" layoutX="305.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
                <font>
                   <Font size="36.0" />
                </font>
             </Text>
-            <ImageView fx:id="TwoPlayerImg" fitHeight="115.0" fitWidth="120.0" layoutX="424.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="TwoPlayerImg" fitHeight="109.0" fitWidth="131.0" layoutX="504.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-            <Text fx:id="txtVS" fill="#fbf33f" layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
+            <Text fx:id="txtVS" fill="#fbf33f" layoutX="320.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
                <font>
                   <Font size="96.0" />
                </font>
             </Text>
-            <Text fx:id="txtVS" fill="#003055" layoutX="349.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+            <Text fx:id="txtVS" fill="#003055" layoutX="385.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
                <font>
                   <Font size="96.0" />
                </font>
             </Text>
+            <ImageView fx:id="backbtn" fitHeight="85.0" fitWidth="115.0" layoutX="57.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assest/btn.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-   </top>
+   </center>
 </BorderPane>
