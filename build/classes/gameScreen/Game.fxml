@@ -58,7 +58,11 @@
          </font>
       </Button>
       <Button id="btn" fx:id="button9" layoutX="472.0" layoutY="397.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="136.0" textFill="#ffc300" />
+<<<<<<< HEAD
       <ImageView fx:id="backBtn" fitHeight="85.0" fitWidth="115.0" layoutX="35.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+=======
+      <ImageView fx:id="backBtn" fitHeight="85.0" fitWidth="115.0" layoutX="35.0" layoutY="501.0" onMouseClicked="#onclickback" pickOnBounds="true" preserveRatio="true">
+>>>>>>> dev
          <image>
             <Image url="@../assest/btn.png" />
          </image>

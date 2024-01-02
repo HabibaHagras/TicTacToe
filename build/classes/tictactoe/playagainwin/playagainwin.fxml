@@ -7,20 +7,20 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="apane" prefHeight="400.0" prefWidth="600.0" stylesheets="@playagainwin/1.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane fx:id="apane" prefHeight="400.0" prefWidth="600.0" stylesheets="@1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.playagainwin.PlayagainwinController">
    <children>
-      <Text fx:id="Text" layoutX="253.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WIN!" />
-      <MediaView fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="57.0" />
-      <Button fx:id="button1" layoutX="162.0" layoutY="324.0" mnemonicParsing="false" text="YES" />
-      <Button fx:id="button1" layoutX="326.0" layoutY="324.0" mnemonicParsing="false" text="NO" />
+      <Text fx:id="Text" layoutX="126.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WIN!" />
+      <MediaView fx:id="MediaFile" fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="57.0" />
+      <Button fx:id="button1yes" layoutX="162.0" layoutY="324.0" mnemonicParsing="false" onAction="#onclickplayagain" text="YES" />
+      <Button fx:id="button1no" layoutX="326.0" layoutY="324.0" mnemonicParsing="false" text="NO" />
       <Text fx:id="Text1" layoutX="165.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do You" />
       <Text fx:id="Text1" layoutX="240.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Want To" />
       <Text fx:id="Text1" layoutX="326.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Play Again?" />
       <ImageView fitHeight="51.0" fitWidth="49.0" layoutX="7.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@playagainwin/arrow.jpg" />
+            <Image url="@arrow.jpg" />
          </image>
       </ImageView>
+      <Text fx:id="player" layoutX="289.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </AnchorPane>
