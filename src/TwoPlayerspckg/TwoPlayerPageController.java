@@ -5,6 +5,7 @@
  */
 package TwoPlayerspckg;
 
+import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,7 +77,8 @@ public class TwoPlayerPageController implements Initializable {
     @FXML
     public void onclickstart(ActionEvent event) throws IOException{
         
-        
+        String x=txtfieldPayerX.getText();
+        String o=txtfieldPayerO.getText();
         
         
              Stage stage = null;
@@ -84,7 +86,11 @@ public class TwoPlayerPageController implements Initializable {
 
         if (event.getSource() == btnStart){
             stage = (Stage) btnStart.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
+           // myNewScene = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
+           FXMLLoader loader= new FXMLLoader(getClass().getResource("/gameScreen/Game.fxml"));
+            myNewScene=loader.load();
+            GameController game= loader.getController();
+            game.displayPlayers(x, o);
         } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
 
         Scene scene = new Scene(myNewScene);

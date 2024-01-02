@@ -107,36 +107,36 @@ public class GameController implements Initializable {
                 
 
           }
-          public void playAgain(ActionEvent e){
-
-            button1.setText("");
-            button2.setText("");
-            button3.setText("");
-            button4.setText("");
-            button5.setText("");
-            button6.setText("");
-            button7.setText("");
-            button8.setText("");
-            button9.setText("");
-            
-            button1.setDisable(false);
-            button2.setDisable(false);
-            button3.setDisable(false);
-            button4.setDisable(false);
-            button5.setDisable(false);
-            button6.setDisable(false);
-            button7.setDisable(false);
-            button8.setDisable(false);
-            button9.setDisable(false);
-            }
+//          public void playAgain(ActionEvent e){
+//
+//            button1.setText("");
+//            button2.setText("");
+//            button3.setText("");
+//            button4.setText("");
+//            button5.setText("");
+//            button6.setText("");
+//            button7.setText("");
+//            button8.setText("");
+//            button9.setText("");
+//            
+//            button1.setDisable(false);
+//            button2.setDisable(false);
+//            button3.setDisable(false);
+//            button4.setDisable(false);
+//            button5.setDisable(false);
+//            button6.setDisable(false);
+//            button7.setDisable(false);
+//            button8.setDisable(false);
+//            button9.setDisable(false);
+//            }
           
 //            public void updateScore(){
-//           
-//             if(checkWinner(player1)){
+//           String player = checkWinner(player1,player2);
+//             if(player1.equals(player)){
 //                countX++;
 //                score1.setText(String.valueOf(countX));
 //             }  
-//             else if(checkWinner(player2)){
+//             else if(player2.equals(player)){
 //                 countO++;    
 //                 score2.setText(String.valueOf(countO));
 //             }
@@ -155,9 +155,11 @@ public class GameController implements Initializable {
              }
 
     }   
+           public void displayPlayers(String x, String o){
+                player1.setText(x);
+                player2.setText(o);
+           }
+       
           
-          
-          
-          
-         
+                  
 }
