@@ -77,7 +77,16 @@ public class GameController implements Initializable {
     // String winner = null;
     public static String winner;
     @FXML
-    AnchorPane apane;
+
+     AnchorPane apane;
+    
+        Parent myNewScene = null;
+        
+        int countX=0;
+        int countO=0;
+        
+
+   
     @FXML
     private Text txt;
 
@@ -88,6 +97,7 @@ public class GameController implements Initializable {
 
         buttons.forEach(button -> {
             setupButton(button);
+
         });
     }
 
@@ -155,6 +165,65 @@ public class GameController implements Initializable {
 
    
     }
+
+
+
+          
+//          public void playAgain(ActionEvent e){
+//
+//            button1.setText("");
+//            button2.setText("");
+//            button3.setText("");
+//            button4.setText("");
+//            button5.setText("");
+//            button6.setText("");
+//            button7.setText("");
+//            button8.setText("");
+//            button9.setText("");
+//            
+//            button1.setDisable(false);
+//            button2.setDisable(false);
+//            button3.setDisable(false);
+//            button4.setDisable(false);
+//            button5.setDisable(false);
+//            button6.setDisable(false);
+//            button7.setDisable(false);
+//            button8.setDisable(false);
+//            button9.setDisable(false);
+//            }
+          
+//            public void updateScore(){
+//           String player = checkWinner(player1,player2);
+//             if(player1.equals(player)){
+//                countX++;
+//                score1.setText(String.valueOf(countX));
+//             }  
+//             else if(player2.equals(player)){
+//                 countO++;    
+//                 score2.setText(String.valueOf(countO));
+//             }
+//
+//    }   
+          
+           public void updateScore(String symbol){
+           
+             if(symbol.equalsIgnoreCase("X")){
+                countX++;
+                score1.setText(String.valueOf(countX));
+             }  
+             else if(symbol.equalsIgnoreCase("O")){
+                 countO++;    
+                 score2.setText(String.valueOf(countO));
+             }
+
+    }   
+           public void displayPlayers(String x, String o){
+                player1.setText(x);
+                player2.setText(o);
+           }
+       
+          
+                  
 
 
                   
@@ -268,6 +337,7 @@ public class GameController implements Initializable {
         return winner;
     }
 }
+
 
 
 

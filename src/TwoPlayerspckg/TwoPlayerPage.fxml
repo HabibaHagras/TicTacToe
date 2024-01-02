@@ -47,7 +47,11 @@
                   <Font size="96.0" />
                </font>
             </Text>
-            <Text fx:id="txtVS" fill="#003055" layoutX="385.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+
+            <Text fx:id="txtS" fill="#003055" layoutX="349.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+
+            
+
                <font>
                   <Font size="96.0" />
                </font>
