@@ -96,7 +96,7 @@
     -fx-font-size: 18px;
     
 }
-#button1{
+#button1no{
 
   -fx-pref-width:100  ; 
     -fx-pref-height:40;
@@ -111,4 +111,22 @@
     -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
     -fx-text-fill:white;
     -fx-font-size: 20px;
+}
+#button1yes{
+
+  -fx-pref-width:100  ; 
+    -fx-pref-height:40;
+    /*-fx-fill: #FBF33F;*/
+    -fx-background-color: #FBF33F;
+    -fx-border-style:solid;
+    -fx-background-radius: 90;
+     -fx-border-width: 2px;
+     -fx-border-color: #FFFFFF;
+    -fx-border-radius:90;
+    -fx-text-fill: white;
+    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
+    -fx-text-fill:white;
+    -fx-font-size: 20px;
+
+
 }
