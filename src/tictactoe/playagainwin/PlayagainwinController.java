@@ -64,7 +64,6 @@ public class PlayagainwinController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         MediaFile.setMediaPlayer(mediaPlayer);
         mediaPlayer.play();
-        mediaPlayer.play();
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
@@ -105,7 +104,8 @@ public class PlayagainwinController implements Initializable {
         gameController.resetButton(gameController.button7);
         gameController.resetButton(gameController.button8);
         gameController.resetButton(gameController.button9);
-
+        mediaPlayer.setAutoPlay(false);
+        mediaPlayer.stop();
         stage.close();
     }
 

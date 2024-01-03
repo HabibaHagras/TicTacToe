@@ -120,6 +120,7 @@ public class GameController implements Initializable {
     public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
+        button.setStyle("-fx-background-color: #003055;");
     }
 
     public void onclickback(MouseEvent event) {
