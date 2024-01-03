@@ -86,10 +86,10 @@ public class PlayagainwinController implements Initializable {
 
     }
 
-//    public void onclickplayagain(ActionEvent event) throws IOException {
-//
-//       
-//        stage.close();
-//    }
+    public void onclickplayagain(ActionEvent event) throws IOException {
+
+       
+        stage.close();
+    }
 
 }
