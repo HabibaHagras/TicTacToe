@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,21 +34,25 @@ import javafx.util.Duration;
 public class PlayagainwinController implements Initializable {
 
     Scene scene = null;
-    Stage stage ;
+    Stage stage;
     Parent root = null;
     @FXML
     private AnchorPane apane;
     @FXML
     private Text Text;
     @FXML
-    private Button button1;
-    @FXML
     private Text Text1;
-    @FXML
-    private Text player;
     @FXML
     private MediaView MediaFile;
     private MediaPlayer mediaPlayer;
+    private String winner;
+    @FXML
+    private Button button1yes;
+    @FXML
+    private Button button1no;
+    @FXML
+    private Label labelplayer;
+    private GameController gameController;
 
     /**
      * Initializes the controller class.
@@ -72,24 +77,60 @@ public class PlayagainwinController implements Initializable {
                 new Runnable() {
             @Override
             public void run() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet."); 
             }
         }
         );
-        // TODO
     }
 
-    public void getname() {
-
-        String playername = GameController.winner;
-        System.out.println(playername);
-
+    public void setWinner(String winner) {
+        this.winner = winner;
+        labelplayer.setText(winner);
+        System.out.println(winner);
     }
 
-    public void onclickplayagain(ActionEvent event) throws IOException {
 
-       
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    @FXML
+    public void onclickplayagain(ActionEvent event) {
+        gameController.resetButton(gameController.button1);
+        gameController.resetButton(gameController.button2);
+        gameController.resetButton(gameController.button3);
+        gameController.resetButton(gameController.button4);
+        gameController.resetButton(gameController.button5);
+        gameController.resetButton(gameController.button6);
+        gameController.resetButton(gameController.button7);
+        gameController.resetButton(gameController.button8);
+        gameController.resetButton(gameController.button9);
+
         stage.close();
     }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    @FXML
+    public void onclickNo(ActionEvent event) throws IOException {
+
+        gameController.closeGameStage();
+        closePlayagainwinStage();          
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        Parent myNewScene = loader.load();
+        Scene newScene = new Scene(myNewScene);
+
+        Stage newStage = new Stage();
+        newStage.setScene(newScene);
+        newStage.setTitle("Start Screen");
+        newStage.show();
+    }
+
+    public void closePlayagainwinStage() {
+        Stage playagainwinStage = (Stage) apane.getScene().getWindow();
+        playagainwinStage.close();
+    }
 }

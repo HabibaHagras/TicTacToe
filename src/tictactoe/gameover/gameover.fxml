@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="apane" prefHeight="400.0" prefWidth="600.0" stylesheets="@1.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.gameover.GameoverController">
+   <children>
+      <Text fx:id="Text" layoutX="193.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over !!" />
+      <Text fx:id="Text1" layoutX="235.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No Winner..." />
+      <Button fx:id="button" layoutX="197.0" layoutY="266.0" mnemonicParsing="false" onAction="#startscreenClick" text="Start Screen" />
+   </children>
+</AnchorPane>

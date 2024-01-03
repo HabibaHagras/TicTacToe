@@ -30,7 +30,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tictactoe.gameover.GameoverController;
 import tictactoe.helpcontroller;
+import tictactoe.playagainwin.PlayagainwinController;
 
 /**
  *
@@ -38,7 +40,7 @@ import tictactoe.helpcontroller;
  */
 public class GameController implements Initializable {
 
-    Scene scene =null;
+    Scene scene = null;
     Stage stage = null;
     Parent root = null;
     @FXML
@@ -50,23 +52,23 @@ public class GameController implements Initializable {
     @FXML
     private Text score2;
     @FXML
-    private Button button1;
+    public Button button1;
     @FXML
-    private Button button2;
+    public Button button2;
     @FXML
-    private Button button3;
+    public Button button3;
     @FXML
-    private Button button4;
+    public Button button4;
     @FXML
-    private Button button5;
+    public Button button5;
     @FXML
-    private Button button6;
+    public Button button6;
     @FXML
-    private Button button7;
+    public Button button7;
     @FXML
-    private Button button8;
+    public Button button8;
     @FXML
-    private Button button9;
+    public Button button9;
     @FXML
     private ImageView backBtn;
     @FXML
@@ -77,11 +79,13 @@ public class GameController implements Initializable {
     private int playerTurn = 0;
     ArrayList<Button> buttons;
     public static String winner;
-    
-    int countX=0;
-    int countO=0;
-        
-    
+
+    int countX = 0;
+    int countO = 0;
+
+  
+
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -90,6 +94,7 @@ public class GameController implements Initializable {
             setupButton(button);
 
         });
+
     }
 
     private void setupButton(Button button) {
@@ -143,37 +148,65 @@ public class GameController implements Initializable {
 
     public void showwin() {
         try {
-            root = FXMLLoader.load((getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml")));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
+            root = loader.load();
+            PlayagainwinController playAgainWinController = loader.getController();
+            playAgainWinController.setWinner(winner);
+            playAgainWinController.setGameController(this); 
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
+            playAgainWinController.setStage(stage);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
-          
-    public void updateScore(String symbol){
-        if(symbol.equalsIgnoreCase("X")){
+    
+    
+
+    public void showgameover() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
+            root = loader.load();
+            GameoverController GameoverController = loader.getController();
+            GameoverController.setGameController(this); 
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            GameoverController.setStage(stage);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void updateScore(String symbol) {
+
+        if (symbol.equalsIgnoreCase(player1.getText())) {
             countX++;
             score1.setText(String.valueOf(countX));
-        }  
-        else if(symbol.equalsIgnoreCase("O")){
-            countO++;    
+        } else if (symbol.equalsIgnoreCase(player2.getText())) {
+            countO++;
             score2.setText(String.valueOf(countO));
         }
-    }   
-    
-    public void displayPlayers(String x, String o){
+
+    }
+
+    public void displayPlayers(String x, String o) {
         player1.setText(x);
         player2.setText(o);
     }
-       
-    public String checkWinner(String playerX , String playerO){
+
+    public String checkWinner(String playerX, String playerO) {
         playerX = player1.getText();
         playerO = player2.getText();
-        String winner = null;
+        //String winner = null;
 
         String b1 = button1.getText();
         String b2 = button2.getText();
@@ -195,12 +228,16 @@ public class GameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
 
                 showwin();
+                updateScore(winner);
+
             } else if (b1.equals("O")) {
                 winner = playerO;
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
+
             }
         }
         if (b4.equals(b5) && b4.equals(b6)) {
@@ -210,12 +247,15 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
+
             } else if (b4.equals("O")) {
                 winner = playerO;
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -226,6 +266,7 @@ public class GameController implements Initializable {
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             } else if (b7.equals("O")) {
                 winner = playerO;
@@ -233,6 +274,7 @@ public class GameController implements Initializable {
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -243,6 +285,7 @@ public class GameController implements Initializable {
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             } else if (b1.equals("O")) {
                 winner = playerO;
@@ -250,6 +293,7 @@ public class GameController implements Initializable {
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -260,12 +304,16 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
+
             } else if (b2.equals("O")) {
                 winner = playerO;
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
+
             }
         }
         if (b3.equals(b6) && b3.equals(b9)) {
@@ -275,12 +323,15 @@ public class GameController implements Initializable {
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
+
             } else if (b3.equals("O")) {
                 winner = playerO;
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -291,6 +342,7 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             } else if (b1.equals("O")) {
                 winner = playerO;
@@ -298,6 +350,7 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -308,6 +361,7 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             } else if (b3.equals("O")) {
                 winner = playerO;
@@ -315,20 +369,23 @@ public class GameController implements Initializable {
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
                 showwin();
+                updateScore(winner);
 
             }
         }
-        if (true) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Game Over");
-            alert.setHeaderText("Congratulations! Player " + winner + " wins!");
-            alert.setContentText("Click OK to play again.");
-
+        if (b1.isEmpty() || b2.isEmpty() || b3.isEmpty()
+                || b4.isEmpty() || b5.isEmpty() || b6.isEmpty()
+                || b7.isEmpty() || b8.isEmpty() || b9.isEmpty()) {
+            return null;
+        } else {
+            showgameover();
+            return null;
         }
-        return winner;
     }
+
+    public void closeGameStage() {
+        Stage gameStage = (Stage) apane.getScene().getWindow();
+        gameStage.close();
+    }
+
 }
-
-
-
-
