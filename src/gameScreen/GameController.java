@@ -29,7 +29,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tictactoe.gameover.GameoverController;
 import tictactoe.helpcontroller;
+import tictactoe.playagainwin.PlayagainwinController;
 
 /**
  *
@@ -37,7 +39,7 @@ import tictactoe.helpcontroller;
  */
 public class GameController implements Initializable {
 
-    Scene scene =null;
+    Scene scene = null;
     Stage stage = null;
     Parent root = null;
     @FXML
@@ -49,23 +51,23 @@ public class GameController implements Initializable {
     @FXML
     private Text score2;
     @FXML
-    private Button button1;
+    public Button button1;
     @FXML
-    private Button button2;
+    public Button button2;
     @FXML
-    private Button button3;
+    public Button button3;
     @FXML
-    private Button button4;
+    public Button button4;
     @FXML
-    private Button button5;
+    public Button button5;
     @FXML
-    private Button button6;
+    public Button button6;
     @FXML
-    private Button button7;
+    public Button button7;
     @FXML
-    private Button button8;
+    public Button button8;
     @FXML
-    private Button button9;
+    public Button button9;
     @FXML
     private ImageView backBtn;
     @FXML
@@ -78,15 +80,13 @@ public class GameController implements Initializable {
     public static String winner;
     @FXML
 
-     AnchorPane apane;
-    
-        Parent myNewScene = null;
-        
-        int countX=0;
-        int countO=0;
-        
+    AnchorPane apane;
 
-   
+    Parent myNewScene = null;
+
+    int countX = 0;
+    int countO = 0;
+
     @FXML
     private Text txt;
 
@@ -99,6 +99,7 @@ public class GameController implements Initializable {
             setupButton(button);
 
         });
+
     }
 
     private void setupButton(Button button) {
@@ -154,85 +155,71 @@ public class GameController implements Initializable {
     public void showwin() {
 
         try {
-            root = FXMLLoader.load((getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml")));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
+            root = loader.load();
+            PlayagainwinController playAgainWinController = loader.getController();
+            playAgainWinController.setWinner(winner);
+            playAgainWinController.setGameController(this); // Set the GameController reference
+
+            //root = FXMLLoader.load((getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml")));
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
+            playAgainWinController.setStage(stage);
+
             stage.show();
+
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-   
     }
 
+    public void showgameover() {
 
+        try {
 
-          
-//          public void playAgain(ActionEvent e){
-//
-//            button1.setText("");
-//            button2.setText("");
-//            button3.setText("");
-//            button4.setText("");
-//            button5.setText("");
-//            button6.setText("");
-//            button7.setText("");
-//            button8.setText("");
-//            button9.setText("");
-//            
-//            button1.setDisable(false);
-//            button2.setDisable(false);
-//            button3.setDisable(false);
-//            button4.setDisable(false);
-//            button5.setDisable(false);
-//            button6.setDisable(false);
-//            button7.setDisable(false);
-//            button8.setDisable(false);
-//            button9.setDisable(false);
-//            }
-          
-//            public void updateScore(){
-//           String player = checkWinner(player1,player2);
-//             if(player1.equals(player)){
-//                countX++;
-//                score1.setText(String.valueOf(countX));
-//             }  
-//             else if(player2.equals(player)){
-//                 countO++;    
-//                 score2.setText(String.valueOf(countO));
-//             }
-//
-//    }   
-          
-           public void updateScore(String symbol){
-           
-             if(symbol.equalsIgnoreCase("X")){
-                countX++;
-                score1.setText(String.valueOf(countX));
-             }  
-             else if(symbol.equalsIgnoreCase("O")){
-                 countO++;    
-                 score2.setText(String.valueOf(countO));
-             }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
+            root = loader.load();
+            GameoverController GameoverController = loader.getController();
+            GameoverController.setGameController(this); // Set the GameController reference
 
-    }   
-           public void displayPlayers(String x, String o){
-                player1.setText(x);
-                player2.setText(o);
-           }
-       
-          
-                  
+            //root = FXMLLoader.load((getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml")));
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            GameoverController.setStage(stage);
 
+            stage.show();
 
-                  
-    
-    
-    public String checkWinner(String playerX , String playerO){
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void updateScore(String symbol) {
+
+        if (symbol.equalsIgnoreCase(player1.getText())) {
+            countX++;
+            score1.setText(String.valueOf(countX));
+        } else if (symbol.equalsIgnoreCase(player2.getText())) {
+            countO++;
+            score2.setText(String.valueOf(countO));
+        }
+
+    }
+
+    public void displayPlayers(String x, String o) {
+        player1.setText(x);
+        player2.setText(o);
+    }
+
+    public String checkWinner(String playerX, String playerO) {
         playerX = player1.getText();
         playerO = player2.getText();
-        String winner = null;
+        //String winner = null;
 
         String b1 = button1.getText();
         String b2 = button2.getText();
@@ -249,18 +236,25 @@ public class GameController implements Initializable {
             if (b1.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
+
             } else if (b1.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
+
             }
         }
         if (b4.equals(b5) && b4.equals(b6)) {
             if (b4.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
+
             } else if (b4.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -268,10 +262,12 @@ public class GameController implements Initializable {
             if (b7.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
 
             } else if (b7.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -279,10 +275,12 @@ public class GameController implements Initializable {
             if (b1.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
 
             } else if (b1.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -290,18 +288,25 @@ public class GameController implements Initializable {
             if (b2.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
+
             } else if (b2.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
+
             }
         }
         if (b3.equals(b6) && b3.equals(b9)) {
             if (b3.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
+
             } else if (b3.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -309,10 +314,12 @@ public class GameController implements Initializable {
             if (b1.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
 
             } else if (b1.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
@@ -320,24 +327,49 @@ public class GameController implements Initializable {
             if (b3.equals("X")) {
                 winner = playerX;
                 showwin();
+                updateScore(winner);
 
             } else if (b3.equals("O")) {
                 winner = playerO;
                 showwin();
+                updateScore(winner);
 
             }
         }
-        if (true) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Game Over");
-            alert.setHeaderText("Congratulations! Player " + winner + " wins!");
-            alert.setContentText("Click OK to play again.");
+        if (b1.isEmpty() || b2.isEmpty() || b3.isEmpty()
+                || b4.isEmpty() || b5.isEmpty() || b6.isEmpty()
+                || b7.isEmpty() || b8.isEmpty() || b9.isEmpty()) {
+            // Game still in progress
+            return null;
+        } else {
 
+            // It's a draw
+//            Alert alert = new Alert(AlertType.INFORMATION);
+//            alert.setTitle("Game Over");
+//            alert.setHeaderText("It's a draw!");
+//            alert.setContentText("Click OK to play again.");
+//            alert.showAndWait();
+//            resetButton(button1);
+//            resetButton(button2);
+//            resetButton(button3);
+//            resetButton(button4);
+//            resetButton(button5);
+//            resetButton(button6);
+//            resetButton(button7);
+//            resetButton(button8);
+//            resetButton(button9);
+            showgameover();
+
+            return null;
         }
-        return winner;
+        //  System.out.println(winner);
+
+        //return winner;
     }
+
+    public void closeGameStage() {
+        Stage gameStage = (Stage) apane.getScene().getWindow();
+        gameStage.close();
+    }
+
 }
-
-
-
-
