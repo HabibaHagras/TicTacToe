@@ -71,27 +71,17 @@ public class GameController implements Initializable {
     private ImageView backBtn;
     @FXML
     private Button newButton;
-
+    @FXML
+    AnchorPane apane;
+  
     private int playerTurn = 0;
-
     ArrayList<Button> buttons;
-    // String winner = null;
     public static String winner;
-    @FXML
-
-     AnchorPane apane;
     
-        Parent myNewScene = null;
+    int countX=0;
+    int countO=0;
         
-        int countX=0;
-        int countO=0;
-        
-
-   
-    @FXML
-    private Text txt;
-
-    //public static String  name = checkWinner(player1.getText(), player2.getText());
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -127,9 +117,9 @@ public class GameController implements Initializable {
         button.setText("");
     }
 
-    public void onclickback(ActionEvent event) {
+    public void onclickback(MouseEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("/TwoPlayerPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,11 +139,9 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("TicTacToe");
         stage.show();
-
     }
 
     public void showwin() {
-
         try {
             root = FXMLLoader.load((getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml")));
             stage = new Stage();
@@ -163,73 +151,25 @@ public class GameController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-   
     }
-
-
-
+ 
           
-//          public void playAgain(ActionEvent e){
-//
-//            button1.setText("");
-//            button2.setText("");
-//            button3.setText("");
-//            button4.setText("");
-//            button5.setText("");
-//            button6.setText("");
-//            button7.setText("");
-//            button8.setText("");
-//            button9.setText("");
-//            
-//            button1.setDisable(false);
-//            button2.setDisable(false);
-//            button3.setDisable(false);
-//            button4.setDisable(false);
-//            button5.setDisable(false);
-//            button6.setDisable(false);
-//            button7.setDisable(false);
-//            button8.setDisable(false);
-//            button9.setDisable(false);
-//            }
-          
-//            public void updateScore(){
-//           String player = checkWinner(player1,player2);
-//             if(player1.equals(player)){
-//                countX++;
-//                score1.setText(String.valueOf(countX));
-//             }  
-//             else if(player2.equals(player)){
-//                 countO++;    
-//                 score2.setText(String.valueOf(countO));
-//             }
-//
-//    }   
-          
-           public void updateScore(String symbol){
-           
-             if(symbol.equalsIgnoreCase("X")){
-                countX++;
-                score1.setText(String.valueOf(countX));
-             }  
-             else if(symbol.equalsIgnoreCase("O")){
-                 countO++;    
-                 score2.setText(String.valueOf(countO));
-             }
-
+    public void updateScore(String symbol){
+        if(symbol.equalsIgnoreCase("X")){
+            countX++;
+            score1.setText(String.valueOf(countX));
+        }  
+        else if(symbol.equalsIgnoreCase("O")){
+            countO++;    
+            score2.setText(String.valueOf(countO));
+        }
     }   
-           public void displayPlayers(String x, String o){
-                player1.setText(x);
-                player2.setText(o);
-           }
+    
+    public void displayPlayers(String x, String o){
+        player1.setText(x);
+        player2.setText(o);
+    }
        
-          
-                  
-
-
-                  
-    
-    
     public String checkWinner(String playerX , String playerO){
         playerX = player1.getText();
         playerO = player2.getText();
