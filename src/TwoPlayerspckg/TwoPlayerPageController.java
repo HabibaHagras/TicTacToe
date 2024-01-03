@@ -58,85 +58,40 @@ public class TwoPlayerPageController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) { backbtn.setOnMouseClicked(event -> {
+    public void initialize(URL url, ResourceBundle rb) {
+        backbtn.setOnMouseClicked(event -> {
             try {
                 Stage stage = (Stage) backbtn.getScene().getWindow();
                 Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-
                 Scene scene = new Scene(myNewScene);
                 stage.setScene(scene);
                 stage.setTitle("My New Scene");
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace(); // Handle the exception appropriately
+                e.printStackTrace(); 
             }
         });
-        
-        // TODO
-    }    
+    }
+    
     @FXML
-    public void onclickstart(ActionEvent event) throws IOException{
-        
-        String x=txtfieldPayerX.getText();
-        String o=txtfieldPayerO.getText();
-        
-        
-             Stage stage = null;
+    public void onclickstart(ActionEvent event) throws IOException{    
+        String playerX=txtfieldPayerX.getText();
+        String playerO=txtfieldPayerO.getText();
+    
+        Stage stage = null;
         Parent myNewScene = null;
 
         if (event.getSource() == btnStart){
             stage = (Stage) btnStart.getScene().getWindow();
-           // myNewScene = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
            FXMLLoader loader= new FXMLLoader(getClass().getResource("/gameScreen/Game.fxml"));
             myNewScene=loader.load();
             GameController game= loader.getController();
-            game.displayPlayers(x, o);
+            game.displayPlayers(playerX, playerO);
         } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
 
         Scene scene = new Scene(myNewScene);
         stage.setScene(scene);
         stage.setTitle("My New Scene");
-        stage.show();
-        
-        
-//            try {
-//        // Load the FXML file
-//                AnchorPane pane = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
-//
-//        // Verify if gpane is initialized before setting its children
-//        if (apane != null) {
-//            // Clear the existing children and set the new pane
-//            apane.getChildren().setAll(pane);
-//        } else {
-//            System.err.println("Error: gpane is not initialized.");
-//        }
-//
-//    } catch (IOException ex) {
-//        Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//            
-}
-       public void onclicknewgame(){
-        
-           
-           
-//           
-//           try {
-//        // Load the FXML file
-//                AnchorPane pane = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-//
-//        // Verify if gpane is initialized before setting its children
-//        if (apane != null) {
-//            // Clear the existing children and set the new pane
-//            apane.getChildren().setAll(pane);
-//        } else {
-//            System.err.println("Error: gpane is not initialized.");
-//        }
-//
-//    } catch (IOException ex) {
-//        Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-            
-}
-    
+        stage.show();   
+    }           
 }

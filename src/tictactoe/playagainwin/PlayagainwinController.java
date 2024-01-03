@@ -77,21 +77,18 @@ public class PlayagainwinController implements Initializable {
                 new Runnable() {
             @Override
             public void run() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet."); 
             }
         }
         );
-        // TODO
     }
 
     public void setWinner(String winner) {
-
-        //String playername = GameController.winner; 
         this.winner = winner;
         labelplayer.setText(winner);
         System.out.println(winner);
-
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -120,7 +117,7 @@ public class PlayagainwinController implements Initializable {
     public void onclickNo(ActionEvent event) throws IOException {
 
         gameController.closeGameStage();
-        closePlayagainwinStage();          // Close the Playagainwin stage
+        closePlayagainwinStage();          
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
         Parent myNewScene = loader.load();
@@ -130,23 +127,6 @@ public class PlayagainwinController implements Initializable {
         newStage.setScene(newScene);
         newStage.setTitle("Start Screen");
         newStage.show();
-
-//        Stage stage = null;
-//        Parent myNewScene = null;
-//
-//        if (event.getSource() == button1no) {
-//            stage = (Stage) button1no.getScene().getWindow();
-//            // myNewScene = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
-//            myNewScene = loader.load();
-//            Scene scene = new Scene(myNewScene);
-//            stage.setScene(scene);
-//            stage.setTitle("My New Scene");
-//            stage.show();
-//
-//        } else {
-//            System.out.println("gameScreen.GameController.onclicknewgame()");
-//        }
     }
 
     public void closePlayagainwinStage() {
