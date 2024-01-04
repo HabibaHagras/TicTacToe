@@ -13,22 +13,22 @@
             <Font name="System Bold" size="55.0" />
          </font>
       </Text>
-      <Text fx:id="txt" fill="#fbf33f" layoutX="333.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAC" textAlignment="CENTER" wrappingWidth="126.6708984375">
+      <Text fx:id="txt1" fill="#fbf33f" layoutX="333.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAC" textAlignment="CENTER" wrappingWidth="126.6708984375">
          <font>
             <Font name="System Bold" size="65.0" />
          </font>
       </Text>
-      <Text fx:id="txt" layoutX="460.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOE" textAlignment="CENTER" wrappingWidth="111.6708984375">
+      <Text fx:id="txt2" layoutX="460.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOE" textAlignment="CENTER" wrappingWidth="111.6708984375">
          <font>
             <Font name="System Bold" size="55.0" />
          </font>
       </Text>
-      <Text fx:id="txt" layoutX="104.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe is a classic game of strategy and wit, enjoyed by allages for generations. Played on a simple 3x3 grid, it pits two players, one wielding X's and the other wielding O's, against each other in a battle for dominance." textAlignment="CENTER" wrappingWidth="636.31298828125">
+      <Text fx:id="txt3" layoutX="104.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe is a classic game of strategy and wit, enjoyed by allages for generations. Played on a simple 3x3 grid, it pits two players, one wielding X's and the other wielding O's, against each other in a battle for dominance." textAlignment="CENTER" wrappingWidth="636.31298828125">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="txt" layoutX="108.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The goal is simple: be the first player to create an unbroken line of three of your symbols, either horizontally, vertically, or diagonally. But achieving this seemingly straightforward objective requires cunning strategic thinking and careful observation." textAlignment="CENTER" wrappingWidth="628.6708984375">
+      <Text fx:id="txt4" layoutX="108.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The goal is simple: be the first player to create an unbroken line of three of your symbols, either horizontally, vertically, or diagonally. But achieving this seemingly straightforward objective requires cunning strategic thinking and careful observation." textAlignment="CENTER" wrappingWidth="628.6708984375">
          <font>
             <Font size="24.0" />
          </font>

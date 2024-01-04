@@ -53,12 +53,13 @@ public class HelpController implements Initializable {
         backbtn.setOnMouseClicked(event -> {
             try {
                 Stage stage = (Stage) backbtn.getScene().getWindow();
-                Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
-
-                Scene scene = new Scene(myNewScene);
-                stage.setScene(scene);
-                stage.setTitle("My New Scene");
-                stage.show();
+        FXMLLoader loader = new FXMLLoader();
+                Parent myNewScene = loader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+                stage.getScene().setRoot(myNewScene);
+//                Scene scene = new Scene(myNewScene);
+//                stage.setScene(scene);
+//                stage.setTitle("My New Scene");
+//                stage.show();
             } catch (Exception e) {
                 e.printStackTrace(); // Handle the exception appropriately
             }
@@ -71,7 +72,8 @@ public class HelpController implements Initializable {
                    GridPane pane;
        
         try {
-            pane = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+            pane = loader.load(getClass().getResource("StartScreen.fxml"));
                            apane.getChildren().setAll(pane);
 
         } catch (IOException ex) {
@@ -84,7 +86,8 @@ public class HelpController implements Initializable {
 
         if (event.getSource() == backbtn){
             stage = (Stage) backbtn.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+            myNewScene = loader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
         } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
 
         Scene scene = new Scene(myNewScene);
@@ -98,7 +101,8 @@ public class HelpController implements Initializable {
       public void setOnMousePressed(ActionEvent event) throws IOException{
    try {
                     Stage stage = (Stage) backbtn.getScene().getWindow();
-                    Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+                    Parent myNewScene = loader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
 
                     Scene scene = new Scene(myNewScene);
                     stage.setScene(scene);

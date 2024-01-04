@@ -61,7 +61,8 @@ public class TwoPlayerPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) { backbtn.setOnMouseClicked(event -> {
             try {
                 Stage stage = (Stage) backbtn.getScene().getWindow();
-                Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+                Parent myNewScene = loader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
 
                 Scene scene = new Scene(myNewScene);
                 stage.setScene(scene);

@@ -20,18 +20,13 @@ public class TicTacToe extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("StartScreen.fxml"));
         
         Scene scene = new Scene(root);
-       String css=this.getClass().getResource("start.css").toExternalForm();
-        scene.getStylesheets().add(css);
+//       String css=this.getClass().getResource("start.css").toExternalForm();
+//        scene.getStylesheets().add(css);
 
-
-
-
-
-    
         stage.setScene(scene);
         stage.show();
     }

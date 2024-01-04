@@ -62,7 +62,8 @@ public class StartScreenController implements Initializable {
 
        if (event.getSource() == helpicon){
             stage = (Stage) helpicon.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/HelpScreen/Help.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+            myNewScene = loader.load(getClass().getResource("/HelpScreen/Help.fxml"));
 
         Scene scene = new Scene(myNewScene);
         stage.setScene(scene);
@@ -108,32 +109,39 @@ public class StartScreenController implements Initializable {
 
         if (event.getSource() == buttonlocal){
             stage = (Stage) buttonlocal.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+            myNewScene = loader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
         } 
-
-        Scene scene = new Scene(myNewScene);
-        stage.setScene(scene);
-        stage.setTitle("My New Scene");
-        stage.show();
+stage.getScene().setRoot(myNewScene);
+//        Scene scene = new Scene(myNewScene);
+//        stage.setScene(scene);
+//        stage.setTitle("My New Scene");
+//        stage.show();
                 
         
     }
 
 //////////////////////////////////
           public void onclick2(ActionEvent event)throws IOException{
-        
+              System.out.println("help btn is clicked");
              Stage stage = null;
         Parent myNewScene = null;
 
         if (event.getSource() == helpicon){
+              System.out.println("help btn start load");
             stage = (Stage) helpicon.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/HelpScreen/Help.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+            myNewScene = loader.load(getClass().getResource("/HelpScreen/Help.fxml"));
         } 
+        
+              System.out.println("help btn scence created");
+        stage.getScene().setRoot(myNewScene);
+              System.out.println("help btn scence loaded");
 
-        Scene scene = new Scene(myNewScene);
-        stage.setScene(scene);
-        stage.setTitle("My New Scene");
-        stage.show();
+//        Scene scene = new Scene(myNewScene);
+//        stage.setScene(scene);
+//        stage.setTitle("My New Scene");
+//        stage.show();
                 
         
     }
