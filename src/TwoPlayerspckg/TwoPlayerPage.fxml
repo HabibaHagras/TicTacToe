@@ -21,24 +21,24 @@
       <AnchorPane id="root" fx:id="apane" prefHeight="433.0" prefWidth="690.0" stylesheets="@TwoPlayersPage.css" BorderPane.alignment="CENTER">
          <children>
             <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="109.0" layoutY="106.0" stroke="WHITE" strokeType="INSIDE" width="598.0" />
-            <Text fx:id="txtPlayerO" layoutX="305.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
+            <Text fx:id="txtPlayerO" layoutX="339.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
                <font>
                   <Font size="36.0" />
                </font>
             </Text>
-            <TextField fx:id="txtfieldPayerO" layoutX="238.0" layoutY="324.0" prefHeight="50.0" prefWidth="299.0" />
+            <TextField fx:id="txtfieldPayerO" layoutX="269.0" layoutY="326.0" prefHeight="50.0" prefWidth="299.0" />
             <Button fx:id="btnStart" layoutX="314.0" layoutY="414.0" mnemonicParsing="false" onAction="#onclickstart" prefHeight="58.0" prefWidth="172.0" text="START">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="174.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="203.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtfieldPayerX" layoutX="238.0" layoutY="208.0" prefHeight="50.0" prefWidth="299.0" />
-            <Text fx:id="txtPlayerX" layoutX="305.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
+            <TextField fx:id="txtfieldPayerX" layoutX="268.0" layoutY="205.0" prefHeight="50.0" prefWidth="299.0" />
+            <Text fx:id="txtPlayerX" layoutX="332.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
                <font>
                   <Font size="36.0" />
                </font>
@@ -48,13 +48,13 @@
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-            <Text fx:id="txtVS" fill="#fbf33f" layoutX="320.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
+            <Text fx:id="txtVS" fill="#fbf33f" layoutX="344.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
                <font>
                   <Font size="96.0" />
                </font>
             </Text>
 
-            <Text fx:id="txtS" fill="#003055" layoutX="394.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+            <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
 
             
 

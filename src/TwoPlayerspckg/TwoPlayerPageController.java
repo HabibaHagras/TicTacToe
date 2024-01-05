@@ -98,8 +98,7 @@ public class TwoPlayerPageController implements Initializable {
         }else{
             Alert missingInfoAlert = new Alert(AlertType.WARNING);
             missingInfoAlert.setTitle("Missing Information");
-            //alert.setHeaderText(null);
-            missingInfoAlert.setContentText("Please enter names for 2 players.");
+            missingInfoAlert.setContentText("Please Enter Names for 2 Players.");
             missingInfoAlert.showAndWait();
         }
     }    
