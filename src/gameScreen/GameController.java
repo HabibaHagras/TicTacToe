@@ -200,8 +200,8 @@ public class GameController implements Initializable {
     }
 
     public void displayPlayers(String x, String o) {
-        player1.setText(x);
-        player2.setText(o);
+            player1.setText(x);
+            player2.setText(o); 
     }
 
     public String checkWinner(String playerX, String playerO) {

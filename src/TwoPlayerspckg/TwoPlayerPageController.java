@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -77,21 +79,28 @@ public class TwoPlayerPageController implements Initializable {
     public void onclickstart(ActionEvent event) throws IOException{    
         String playerX=txtfieldPayerX.getText();
         String playerO=txtfieldPayerO.getText();
-    
+
         Stage stage = null;
         Parent myNewScene = null;
 
-        if (event.getSource() == btnStart){
+        if (event.getSource() == btnStart && !playerX.isEmpty() && !playerO.isEmpty()){
             stage = (Stage) btnStart.getScene().getWindow();
            FXMLLoader loader= new FXMLLoader(getClass().getResource("/gameScreen/Game.fxml"));
             myNewScene=loader.load();
             GameController game= loader.getController();
             game.displayPlayers(playerX, playerO);
-        } else{System.out.println("gameScreen.GameController.onclicknewgame()");}
+         
 
-        Scene scene = new Scene(myNewScene);
-        stage.setScene(scene);
-        stage.setTitle("My New Scene");
-        stage.show();   
-    }           
+            Scene scene = new Scene(myNewScene);
+            stage.setScene(scene);
+            stage.setTitle("My New Scene");
+            stage.show();  
+        }else{
+            Alert missingInfoAlert = new Alert(AlertType.WARNING);
+            missingInfoAlert.setTitle("Missing Information");
+            //alert.setHeaderText(null);
+            missingInfoAlert.setContentText("Please enter names for 2 players.");
+            missingInfoAlert.showAndWait();
+        }
+    }    
 }
