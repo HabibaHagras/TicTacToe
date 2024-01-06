@@ -8,18 +8,19 @@ and open the template in the editor.
     Author     : Chicoo
 */
 
+
 #AnchorPane{
     -fx-background-color: #003055
 }
 
 #txt{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 30px;
     -FX-font-fill: #ffffff;
 }
 
 #gusetScore{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 40px;
 }
 

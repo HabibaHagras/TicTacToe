@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 public class LevelsPageController implements Initializable {
     Stage stage ;
     Parent myNewScene;
+    public static String type;
     @FXML
     private Text txtLevels;
     @FXML
@@ -51,7 +52,7 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnEasy.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
-            AdversarialSearchTicTacToe.level("Easy");
+            type = "Easy";
         }
 
         Scene scene = new Scene(myNewScene);
@@ -65,7 +66,7 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnMedium.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
-            AdversarialSearchTicTacToe.level("Meduim");
+            type = "Meduim";
         }
 
         Scene scene = new Scene(myNewScene);
@@ -79,7 +80,7 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnHard.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
-            AdversarialSearchTicTacToe.level("Hard");
+            type = "Hard";
         }
 
         Scene scene = new Scene(myNewScene);

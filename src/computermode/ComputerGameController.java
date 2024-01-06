@@ -97,9 +97,11 @@ public class ComputerGameController implements Initializable {
     
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
+            winner = "";
             button.setText("X");
             button.setDisable(true);
             button.setTextFill(Paint.valueOf("#ff0000"));
+            checkIfGameIsOver();
             makeAIMove();
             checkIfGameIsOver();
         });
@@ -107,7 +109,9 @@ public class ComputerGameController implements Initializable {
 
     public void makeAIMove() {
         int move = ticTacToeAI.minMaxDecision(getBoardState());
-        pickButton(move);
+        if("".equals(winner)){
+            pickButton(move);
+        }
     }
 
     private void pickButton(int index) {
@@ -129,7 +133,7 @@ public class ComputerGameController implements Initializable {
     
     public void checkIfGameIsOver() {
 
-        for (int a = 0; a < 8; a++) {
+        /*for (int a = 0; a < 8; a++) {
 
             switch (a) {
                 case 0:
@@ -158,22 +162,154 @@ public class ComputerGameController implements Initializable {
                     break;
                 default:
                     winner = null;
+            }*/
+            
+            String b1 = button1.getText();
+            String b2 = button2.getText();
+            String b3 = button3.getText();
+            String b4 = button4.getText();
+            String b5 = button5.getText();
+            String b6 = button6.getText();
+            String b7 = button7.getText();
+            String b8 = button8.getText();
+            String b9 = button9.getText();
+            
+            if (b1.equals(b2) && b1.equals(b3)) {
+            System.out.println("x player");
+            if (b1.equals("X")) {
+                winner = "XXX";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button2.setStyle("-fx-background-color: aliceblue;");
+                button3.setStyle("-fx-background-color: aliceblue;");
+
+
+            } else if (b1.equals("O")) {
+                winner = "OOO";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button2.setStyle("-fx-background-color: aliceblue;");
+                button3.setStyle("-fx-background-color: aliceblue;");
+
             }
+        }
+        if (b4.equals(b5) && b4.equals(b6)) {
+            if (b4.equals("X")) {
+                winner = "XXX";
+                button4.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button6.setStyle("-fx-background-color: aliceblue;");
+
+            } else if (b4.equals("O")) {
+                winner = "OOO";
+                button4.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button6.setStyle("-fx-background-color: aliceblue;");
+
+            }
+        }
+        if (b7.equals(b8) && b7.equals(b9)) {
+            if (b7.equals("X")) {
+                winner = "XXX";
+                button7.setStyle("-fx-background-color: aliceblue;");
+                button8.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+
+            } else if (b7.equals("O")) {
+                winner = "OOO";
+                button7.setStyle("-fx-background-color: aliceblue;");
+                button8.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+
+            }
+        }
+        if (b1.equals(b4) && b1.equals(b7)) {
+            if (b1.equals("X")) {
+                winner = "XXX";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button4.setStyle("-fx-background-color: aliceblue;");
+                button7.setStyle("-fx-background-color: aliceblue;");
+
+            } else if (b1.equals("O")) {
+                winner = "OOO";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button4.setStyle("-fx-background-color: aliceblue;");
+                button7.setStyle("-fx-background-color: aliceblue;");
+
+            }
+        }
+        if (b2.equals(b5) && b2.equals(b8)) {
+            if (b2.equals("X")) {
+                winner = "XXX";
+                button2.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button8.setStyle("-fx-background-color: aliceblue;");
+
+            } else if (b2.equals("O")) {
+                winner = "OOO";
+                button2.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button8.setStyle("-fx-background-color: aliceblue;");
+                
+            }
+        }
+        if (b3.equals(b6) && b3.equals(b9)) {
+            if (b3.equals("X")) {
+                winner = "XXX";
+                button3.setStyle("-fx-background-color: aliceblue;");
+                button6.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+                
+
+            } else if (b3.equals("O")) {
+                winner = "OOO";
+                button3.setStyle("-fx-background-color: aliceblue;");
+                button6.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+                
+            }
+        }
+        if (b1.equals(b5) && b1.equals(b9)) {
+            if (b1.equals("X")) {
+                winner = "XXX";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+                
+            } else if (b1.equals("O")) {
+                winner = "OOO";
+                button1.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button9.setStyle("-fx-background-color: aliceblue;");
+                
+            }
+        }
+        if (b3.equals(b5) && b3.equals(b7)) {
+            if (b3.equals("X")) {
+                winner = "XXX";
+                button3.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button7.setStyle("-fx-background-color: aliceblue;");
+            } else if (b3.equals("O")) {
+                winner = "OOO";
+                button3.setStyle("-fx-background-color: aliceblue;");
+                button5.setStyle("-fx-background-color: aliceblue;");
+                button7.setStyle("-fx-background-color: aliceblue;");
+            }
+        }
 
             //X winner
             if (winner.equals("XXX")) {
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,"the palyer win");
                 alert.show();
-               
+                
             } //O winner
             else if (winner.equals("OOO")) {
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,"the computer win");
-                alert.show();
+                alert.show(); 
             }
         }
-    }
+    //}
     
     public void back(MouseEvent event) {
         try {

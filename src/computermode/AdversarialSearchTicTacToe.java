@@ -1,12 +1,8 @@
 package computermode;
 import java.util.ArrayList;
+import tictactoe.LevelsPckg.LevelsPageController;
 
 public class AdversarialSearchTicTacToe {
-    static String type;
-    public static String level(String level_Type){
-        type = level_Type;
-        return level_Type;
-    }
     
     public int minMaxDecision(State state){
         ArrayList<State> possibleMoves = successorsOf(state);
@@ -21,22 +17,27 @@ public class AdversarialSearchTicTacToe {
         int bestIndex = 0;
 
         for (int i = 1; i < movesList.size(); i++) {
-            if("Easy".equals(type)){
-                if( movesList.get(i) < max){
-                    max = movesList.get(i);
-                    bestIndex = i;
-                }
-            }else if("Meduim".equals(type)){
-                if( movesList.get(i) == 0){
-                    max = movesList.get(i);
-                    bestIndex = i;
-                }
-            }else if("Hard".equals(type)){
+            if("Easy".equals(LevelsPageController.type)){
                 if( movesList.get(i) > max){
                     max = movesList.get(i);
                     bestIndex = i;
                 }
             }
+            
+            if("Meduim".equals(LevelsPageController.type)){
+                if( movesList.get(i) < max){
+                    max = movesList.get(i);
+                    bestIndex = i;
+                }
+            }
+            
+            if("Hard".equals(LevelsPageController.type)){
+                if( movesList.get(i) < max){
+                    max = movesList.get(i);
+                    bestIndex = i;
+                }
+            }
+            
         }
         int action = possibleMoves.get(bestIndex).getPosition();
         return action;
@@ -50,7 +51,7 @@ public class AdversarialSearchTicTacToe {
         int v = (int) -Double.POSITIVE_INFINITY;
 
         for (State possibleMove: successorsOf(state)) {
-            v = Math.max(v, minValue(possibleMove));
+            v = Math.min(v, minValue(possibleMove));
         }
         return v;
     }
@@ -64,7 +65,7 @@ public class AdversarialSearchTicTacToe {
         int v = (int) Double.POSITIVE_INFINITY;
         for (State possibleMove: successorsOf(state)) {
 
-            v = Math.min(v, maxValue(possibleMove));
+            v = Math.max(v, maxValue(possibleMove));
         }
         return v;
     }
@@ -173,7 +174,7 @@ public class AdversarialSearchTicTacToe {
         for (int i = 0; i < 9; i++) {
             String[] newState = state.getState().clone();
 
-            if(newState[i] != "X" && newState[i] != "O"){
+            if(!"X".equals(newState[i]) && !"O".equals(newState[i])){
                 newState[i] = player;
                 possibleMoves.add(new State(i, newState));
             }

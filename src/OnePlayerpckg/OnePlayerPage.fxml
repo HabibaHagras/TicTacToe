@@ -31,7 +31,7 @@
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnBack" fitHeight="85.0" fitWidth="115.0" layoutX="50.0" layoutY="480.0" onDragDetected="#navigateToBack" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="85.0" fitWidth="115.0" layoutX="50.0" layoutY="480.0" onMouseClicked="#navigateToBack" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assest/btn.png" />
                </image>
