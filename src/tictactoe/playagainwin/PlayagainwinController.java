@@ -64,19 +64,20 @@ public class PlayagainwinController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         MediaFile.setMediaPlayer(mediaPlayer);
         mediaPlayer.play();
-        mediaPlayer.setAutoPlay(true);
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
                 mediaPlayer.seek(Duration.ZERO);
                 mediaPlayer.play();
+                mediaPlayer.stop();
+
             }
         });
         mediaPlayer.setOnError(
                 new Runnable() {
             @Override
             public void run() {
-                throw new UnsupportedOperationException("Not supported yet."); 
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         }
         );
@@ -87,7 +88,6 @@ public class PlayagainwinController implements Initializable {
         labelplayer.setText(winner);
         System.out.println(winner);
     }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -104,7 +104,7 @@ public class PlayagainwinController implements Initializable {
         gameController.resetButton(gameController.button7);
         gameController.resetButton(gameController.button8);
         gameController.resetButton(gameController.button9);
-        mediaPlayer.setAutoPlay(false);
+        //mediaPlayer.setAutoPlay(false);
         mediaPlayer.stop();
         stage.close();
     }
@@ -117,7 +117,8 @@ public class PlayagainwinController implements Initializable {
     public void onclickNo(ActionEvent event) throws IOException {
 
         gameController.closeGameStage();
-        closePlayagainwinStage();          
+        closePlayagainwinStage();
+        mediaPlayer.stop();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
         Parent myNewScene = loader.load();
@@ -127,6 +128,8 @@ public class PlayagainwinController implements Initializable {
         newStage.setScene(newScene);
         newStage.setTitle("Start Screen");
         newStage.show();
+        mediaPlayer.stop();
+
     }
 
     public void closePlayagainwinStage() {

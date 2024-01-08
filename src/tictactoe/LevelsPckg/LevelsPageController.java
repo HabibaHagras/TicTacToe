@@ -1,0 +1,91 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tictactoe.LevelsPckg;
+
+import computermode.AdversarialSearchTicTacToe;
+import computermode.ComputerGameController;
+import gameScreen.GameController;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+/**
+ * FXML Controller class
+ *
+ * @author Chicoo
+ */
+public class LevelsPageController implements Initializable {
+    Stage stage ;
+    Parent myNewScene;
+    public static String type;
+    @FXML
+    private Text txtLevels;
+    @FXML
+    private Button btnEasy;
+    @FXML
+    private Button btnMedium;
+    @FXML
+    private Button btnHard;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    } 
+    @FXML
+    public void navigateToEasy (ActionEvent event) throws IOException {
+        if (event.getSource() == btnEasy) {
+            stage = (Stage) btnEasy.getScene().getWindow();
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
+            myNewScene=loader.load();
+            type = "Easy";
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
+    }
+    @FXML
+    public void navigateToMedium (ActionEvent event) throws IOException {
+        if (event.getSource() == btnMedium) {
+            stage = (Stage) btnMedium.getScene().getWindow();
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
+            myNewScene=loader.load();
+            type = "Meduim";
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
+    }
+    @FXML
+    public void navigateToHard (ActionEvent event) throws IOException {
+        if (event.getSource() == btnHard) {
+            stage = (Stage) btnHard.getScene().getWindow();
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
+            myNewScene=loader.load();
+            type = "Hard";
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
+    }
+}
