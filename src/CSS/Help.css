@@ -7,13 +7,11 @@ and open the template in the editor.
     Created on : Dec 20, 2023, 12:18:18 AM
     Author     : Chicoo
 */
-@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
 #AnchorPane{
     -fx-background-color: #D9D9D9;
     -fx-pref-width:800;
     -fx-pref-height:600;
 }
-
 #txt{
     -FX-font-family: "Irish Grover",fantasy;
 }
