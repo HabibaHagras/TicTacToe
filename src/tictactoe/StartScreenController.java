@@ -32,6 +32,9 @@ import javafx.stage.Stage;
  */
 public class StartScreenController implements Initializable {
 
+    Stage stage ;
+    Parent myNewScene;
+
     @FXML
     private Text toe;
     @FXML
@@ -41,11 +44,15 @@ public class StartScreenController implements Initializable {
     @FXML
     private Text tic;
     @FXML
-     Button buttonlocal;
+    GridPane gpane;
     @FXML
-     GridPane gpane;
+    private Button buttonComputer;
     @FXML
-     Button helpicon;
+    private Button buttonLocal;
+    @FXML
+    private Button buttonOnline;
+    @FXML
+    private Button helpIcon;
 
     /**
      * Initializes the controller class.
@@ -53,107 +60,50 @@ public class StartScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
     @FXML
-    public void onclick(ActionEvent event)throws IOException{
-        
-             Stage stage = null;
-        Parent myNewScene = null;
-
-       if (event.getSource() == helpicon){
-            stage = (Stage) helpicon.getScene().getWindow();
+    public void navigateToHelp(ActionEvent event) throws IOException {
+        if (event.getSource() == helpIcon) {
+            stage = (Stage) helpIcon.getScene().getWindow();
             myNewScene = FXMLLoader.load(getClass().getResource("/HelpScreen/Help.fxml"));
 
-        Scene scene = new Scene(myNewScene);
-        stage.setScene(scene);
-        stage.setTitle("My New Scene");
-        stage.show();
-                
-        
-        
-//            try {
-//        // Load the FXML file
-//                BorderPane pane = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
-//
-//        // Verify if gpane is initialized before setting its children
-//        if (gpane != null) {
-//            // Clear the existing children and set the new pane
-//            gpane.getChildren().setAll(pane);
-//        } else {
-//            System.err.println("Error: gpane is not initialized.");
-//        }
-//
-//    } catch (IOException ex) {
-//        Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+            Scene scene = new Scene(myNewScene);
+            stage.setScene(scene);
+            stage.setTitle("Tic Tac Toe");
+            stage.show();
+        }
+    }
 
-//            AnchorPane pane;
-//       
-//        try {
-//            pane = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
-//                           gpane.getChildren().setAll(pane);
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }}
-    
-    
-    
-    //////////////////////////////////////////////////////////////
-      public void onclick1(ActionEvent event)throws IOException{
-        
-             Stage stage = null;
-        Parent myNewScene = null;
-
-        if (event.getSource() == buttonlocal){
-            stage = (Stage) buttonlocal.getScene().getWindow();
+    @FXML
+    public void navigateToLocal (ActionEvent event) throws IOException {
+        if (event.getSource() == buttonLocal) {
+            stage = (Stage) buttonLocal.getScene().getWindow();
             myNewScene = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
-        } 
+        }
 
         Scene scene = new Scene(myNewScene);
         stage.setScene(scene);
-        stage.setTitle("My New Scene");
+        stage.setTitle("Tic Tac Toe");
         stage.show();
-                
-        
     }
 
-//////////////////////////////////
-          public void onclick2(ActionEvent event)throws IOException{
-        
-             Stage stage = null;
-        Parent myNewScene = null;
-
-        if (event.getSource() == helpicon){
-            stage = (Stage) helpicon.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/HelpScreen/Help.fxml"));
-        } 
+   @FXML
+    public void navigateToComputer (ActionEvent event) throws IOException {
+        if (event.getSource() == buttonComputer) {
+            stage = (Stage) buttonComputer.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("/OnePlayerpckg/OnePlayerPage.fxml"));
+        }
 
         Scene scene = new Scene(myNewScene);
         stage.setScene(scene);
-        stage.setTitle("My New Scene");
+        stage.setTitle("Tic Tac Toe");
         stage.show();
-                
-        
     }
-
-
-
-
-
+    
+    @FXML
+    public void navigateToOnline (ActionEvent event) throws IOException {
+       
+    }
 
 }
-    
-    
-
-        
-        
-  
-            
-   
-      
-
-   
-
-    
