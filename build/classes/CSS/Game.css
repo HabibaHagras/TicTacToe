@@ -42,7 +42,8 @@ and open the template in the editor.
 }
 
 #btn{
-    -fx-background-color: #003055;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
     -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
     -fx-font-size: 42px;  
 }

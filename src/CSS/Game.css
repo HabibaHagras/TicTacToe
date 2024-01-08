@@ -25,7 +25,7 @@ and open the template in the editor.
 }
 
 #computerScore{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 40px;
 }
 #newButton{
@@ -36,7 +36,7 @@ and open the template in the editor.
      -fx-border-color: #FFFFFF;
     -fx-border-radius:90;
     -fx-text-fill: white;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
+    -FX-font-family: "IrishGrover";
     -fx-text-fill:white;
     -fx-font-size: 20px;
 }
@@ -44,6 +44,6 @@ and open the template in the editor.
 #btn{
     -fx-border-color: transparent;
     -fx-background-color: transparent;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
+    -FX-font-family: "IrishGrover";
     -fx-font-size: 42px;  
 }
