@@ -195,8 +195,8 @@ public class GameController implements Initializable {
     }
 
     public void displayPlayers(String x, String o) {
-        player1.setText(x);
-        player2.setText(o);
+            player1.setText(x);
+            player2.setText(o); 
     }
 
     public String checkWinner(String playerX, String playerO) {
@@ -236,7 +236,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b4.equals(b5) && b4.equals(b6)) {
+        else if (b4.equals(b5) && b4.equals(b6)) {
             if (b4.equals("X")) {
                 winner = playerX;
                 button4.setStyle("-fx-background-color: aliceblue;");
@@ -255,7 +255,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b7.equals(b8) && b7.equals(b9)) {
+        else if (b7.equals(b8) && b7.equals(b9)) {
             if (b7.equals("X")) {
                 winner = playerX;
                 button7.setStyle("-fx-background-color: aliceblue;");
@@ -274,7 +274,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b1.equals(b4) && b1.equals(b7)) {
+        else if (b1.equals(b4) && b1.equals(b7)) {
             if (b1.equals("X")) {
                 winner = playerX;
                 button1.setStyle("-fx-background-color: aliceblue;");
@@ -293,7 +293,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b2.equals(b5) && b2.equals(b8)) {
+        else if (b2.equals(b5) && b2.equals(b8)) {
             if (b2.equals("X")) {
                 winner = playerX;
                 button2.setStyle("-fx-background-color: aliceblue;");
@@ -312,7 +312,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b3.equals(b6) && b3.equals(b9)) {
+        else if (b3.equals(b6) && b3.equals(b9)) {
             if (b3.equals("X")) {
                 winner = playerX;
                 button3.setStyle("-fx-background-color: aliceblue;");
@@ -331,7 +331,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b1.equals(b5) && b1.equals(b9)) {
+        else if (b1.equals(b5) && b1.equals(b9)) {
             if (b1.equals("X")) {
                 winner = playerX;
                 button1.setStyle("-fx-background-color: aliceblue;");
@@ -350,7 +350,7 @@ public class GameController implements Initializable {
 
             }
         }
-        if (b3.equals(b5) && b3.equals(b7)) {
+        else if (b3.equals(b5) && b3.equals(b7)) {
             if (b3.equals("X")) {
                 winner = playerX;
                 button3.setStyle("-fx-background-color: aliceblue;");
