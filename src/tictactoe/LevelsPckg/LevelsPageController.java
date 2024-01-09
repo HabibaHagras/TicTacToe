@@ -92,6 +92,7 @@ public class LevelsPageController implements Initializable {
             ComputerGameController controller = loader.getController();
             controller.displayPlayerName(player);
             type = "Hard";
+            
         }
 
         Scene scene = new Scene(myNewScene);
