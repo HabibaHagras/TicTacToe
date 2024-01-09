@@ -83,7 +83,7 @@ public class ComputerGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
-
+        makeAIMove();
         buttons.forEach(button -> {
             setupButton(button);
         });
