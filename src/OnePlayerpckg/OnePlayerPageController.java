@@ -5,6 +5,9 @@
  */
 package OnePlayerpckg;
 
+
+import computermode.ComputerGameController;
+import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +28,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tictactoe.LevelsPckg.LevelsPageController;
+
 
 /**
  * FXML Controller class
@@ -34,6 +40,7 @@ public class OnePlayerPageController implements Initializable {
     Scene scene = null;
     Stage stage = null;
     Parent root = null;
+    static String playerName = " ";
     @FXML
     private ImageView btnBack;
     @FXML
@@ -58,16 +65,33 @@ public class OnePlayerPageController implements Initializable {
    
     @FXML
     public void navigateToLevels (ActionEvent event) throws IOException {
-        if (event.getSource() == btnStart) {
-            stage = (Stage) btnStart.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/tictactoe/LevelsPckg/LevelsPage.fxml"));
-        }
+                 
+        String playerX=txtfieldPayerName.getText();
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Tic Tac Toe");
-        stage.show();
-    }
+        Stage stage = null;
+        Parent myNewScene = null;
+
+        if (event.getSource() == btnStart && !playerX.isEmpty()){
+            stage = (Stage) btnStart.getScene().getWindow();
+           FXMLLoader loader= new FXMLLoader(getClass().getResource("/tictactoe/LevelsPckg/LevelsPage.fxml"));
+            myNewScene=loader.load();
+            LevelsPageController controller = loader.getController();
+            controller.setName(playerX);
+         
+
+            Scene scene = new Scene(myNewScene);
+            stage.setScene(scene);
+            stage.setTitle("My New Scene");
+            stage.show();  
+        }else{
+            Alert missingInfoAlert = new Alert(Alert.AlertType.WARNING);
+            missingInfoAlert.setTitle("Missing Information");
+            missingInfoAlert.setContentText("Please Enter Names of Player.");
+            missingInfoAlert.showAndWait();
+        }
+   
+    }// 
+
     
     
     public void navigateToBack (MouseEvent event) {
@@ -83,4 +107,12 @@ public class OnePlayerPageController implements Initializable {
         stage.show();
     }
     
+
+    
+    public String getPlayerName(){
+        
+        return playerName;
+    }
+    
+
 }
