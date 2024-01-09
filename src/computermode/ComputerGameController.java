@@ -5,6 +5,7 @@
  */
 package computermode;
 
+import OnePlayerpckg.OnePlayerPageController;
 import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
@@ -76,9 +77,11 @@ public class ComputerGameController implements Initializable {
     private Button newButton;
     @FXML
     private Text computer;
+
     
     int countX=0;
     int countO=0;
+
 
     /**
      * Initializes the controller class.
@@ -90,6 +93,7 @@ public class ComputerGameController implements Initializable {
         buttons.forEach(button -> {
             setupButton(button);
         });
+
     }    
     
     public void resetButton(Button button) {
@@ -133,6 +137,7 @@ public class ComputerGameController implements Initializable {
 
         return new State(0, board);
     }
+
      public void updateScore(String symbol) {
 
         if (symbol.equalsIgnoreCase("XXX")) {
@@ -147,39 +152,9 @@ public class ComputerGameController implements Initializable {
         }
 
     }
+
     
     public void checkIfGameIsOver() {
-
-        /*for (int a = 0; a < 8; a++) {
-
-            switch (a) {
-                case 0:
-                    winner = button1.getText() + button2.getText() + button3.getText();
-                    break;
-                case 1:
-                    winner = button4.getText() + button5.getText() + button6.getText();
-                    break;
-                case 2:
-                    winner = button7.getText() + button8.getText() + button9.getText();
-                    break;
-                case 3:
-                    winner = button1.getText() + button5.getText() + button9.getText();
-                    break;
-                case 4:
-                    winner = button3.getText() + button5.getText() + button7.getText();
-                    break;
-                case 5:
-                    winner = button1.getText() + button4.getText() + button7.getText();
-                    break;
-                case 6:
-                    winner = button2.getText() + button5.getText() + button8.getText();
-                    break;
-                case 7:
-                    winner = button3.getText() + button6.getText() + button9.getText();
-                    break;
-                default:
-                    winner = null;
-            }*/
             
             String b1 = button1.getText();
             String b2 = button2.getText();
@@ -198,16 +173,15 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
-              
+
             } else if (b1.equals("O")) {
                 winner = "OOO";
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
-               
-
             }
            
+
         }
         if (b4.equals(b5) && b4.equals(b6)) {
             if (b4.equals("X")) {
@@ -215,16 +189,14 @@ public class ComputerGameController implements Initializable {
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-                
+
             } else if (b4.equals("O")) {
                 winner = "OOO";
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-               
-
             }
-            
+
         }
         if (b7.equals(b8) && b7.equals(b9)) {
             if (b7.equals("X")) {
@@ -232,16 +204,14 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-               
 
             } else if (b7.equals("O")) {
                 winner = "OOO";
                 button7.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-             
             }
-            
+
         }
         if (b1.equals(b4) && b1.equals(b7)) {
             if (b1.equals("X")) {
@@ -249,16 +219,13 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
-               
 
             } else if (b1.equals("O")) {
                 winner = "OOO";
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
-               
             }
-           
         }
         if (b2.equals(b5) && b2.equals(b8)) {
             if (b2.equals("X")) {
@@ -266,15 +233,12 @@ public class ComputerGameController implements Initializable {
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
-                
             } else if (b2.equals("O")) {
                 winner = "OOO";
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
-                button8.setStyle("-fx-background-color: aliceblue;");
-          
+                button8.setStyle("-fx-background-color: aliceblue;");     
             }
-           
         }
         if (b3.equals(b6) && b3.equals(b9)) {
             if (b3.equals("X")) {
@@ -282,16 +246,11 @@ public class ComputerGameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-                
-                
-
             } else if (b3.equals("O")) {
                 winner = "OOO";
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-                button9.setStyle("-fx-background-color: aliceblue;");
-            
-                
+                button9.setStyle("-fx-background-color: aliceblue;");    
             }
         }
         if (b1.equals(b5) && b1.equals(b9)) {
@@ -300,17 +259,14 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-                
-                
+
             } else if (b1.equals("O")) {
                 winner = "OOO";
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-                
-                
+               
             }
-           
         }
         if (b3.equals(b5) && b3.equals(b7)) {
             if (b3.equals("X")) {
@@ -339,6 +295,7 @@ public class ComputerGameController implements Initializable {
                 alert.show(); 
             }
             updateScore(winner);
+
         }
     //}
     
@@ -360,5 +317,11 @@ public class ComputerGameController implements Initializable {
         buttons.forEach(this::resetButton);
         pickButton(random.nextInt(9));
     }
+
+    
+    public  void displayPlayerName(String playerName){
+        player.setText(playerName);
+    }
+
    
 }
