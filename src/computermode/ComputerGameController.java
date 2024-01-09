@@ -102,8 +102,10 @@ public class ComputerGameController implements Initializable {
             button.setDisable(true);
             button.setTextFill(Paint.valueOf("#ff0000"));
             checkIfGameIsOver();
-            makeAIMove();
-            checkIfGameIsOver();
+            if("".equals(winner)){
+                makeAIMove();
+                checkIfGameIsOver();
+            }
         });
     }
 
@@ -132,38 +134,7 @@ public class ComputerGameController implements Initializable {
     }
     
     public void checkIfGameIsOver() {
-
-        /*for (int a = 0; a < 8; a++) {
-
-            switch (a) {
-                case 0:
-                    winner = button1.getText() + button2.getText() + button3.getText();
-                    break;
-                case 1:
-                    winner = button4.getText() + button5.getText() + button6.getText();
-                    break;
-                case 2:
-                    winner = button7.getText() + button8.getText() + button9.getText();
-                    break;
-                case 3:
-                    winner = button1.getText() + button5.getText() + button9.getText();
-                    break;
-                case 4:
-                    winner = button3.getText() + button5.getText() + button7.getText();
-                    break;
-                case 5:
-                    winner = button1.getText() + button4.getText() + button7.getText();
-                    break;
-                case 6:
-                    winner = button2.getText() + button5.getText() + button8.getText();
-                    break;
-                case 7:
-                    winner = button3.getText() + button6.getText() + button9.getText();
-                    break;
-                default:
-                    winner = null;
-            }*/
-            
+    
             String b1 = button1.getText();
             String b2 = button2.getText();
             String b3 = button3.getText();
