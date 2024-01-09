@@ -5,6 +5,7 @@
  */
 package OnePlayerpckg;
 
+
 import computermode.ComputerGameController;
 import gameScreen.GameController;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tictactoe.LevelsPckg.LevelsPageController;
+
 
 /**
  * FXML Controller class
@@ -89,6 +91,7 @@ public class OnePlayerPageController implements Initializable {
         }
    
     }// 
+
     
     
     public void navigateToBack (MouseEvent event) {
@@ -104,10 +107,12 @@ public class OnePlayerPageController implements Initializable {
         stage.show();
     }
     
+
     
     public String getPlayerName(){
         
         return playerName;
     }
     
+
 }
