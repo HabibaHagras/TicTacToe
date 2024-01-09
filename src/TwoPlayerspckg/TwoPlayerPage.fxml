@@ -23,7 +23,10 @@
             <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="109.0" layoutY="106.0" stroke="WHITE" strokeType="INSIDE" width="598.0" />
 
             <Text fx:id="txtPlayerO" layoutX="339.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
                <font>
                   <Font size="36.0" />
                </font>
@@ -36,7 +39,10 @@
             </Button>
 
             <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="203.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
                <image>
                   <Image url="@../assest/10.png" />
                </image>
@@ -64,10 +70,15 @@
 
 <<<<<<< HEAD
 
+            <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+=======
+<<<<<<< HEAD
+
 =======
 >>>>>>> dev
             <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
 
+>>>>>>> dev
 
             
 
