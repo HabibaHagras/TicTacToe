@@ -57,6 +57,8 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnEasy.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController controller = loader.getController();
+            controller.displayPlayerName(player);
             type = "Easy";
         }
 
@@ -71,6 +73,8 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnMedium.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController controller = loader.getController();
+            controller.displayPlayerName(player);
             type = "Meduim";
         }
 
@@ -85,6 +89,8 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnHard.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController controller = loader.getController();
+            controller.displayPlayerName(player);
             type = "Hard";
         }
 

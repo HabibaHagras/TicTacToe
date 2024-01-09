@@ -6,30 +6,14 @@ and open the template in the editor.
 /* 
     Created on : Dec 20, 2023, 12:18:18 AM
     Author     : Chicoo
-<<<<<<< HEAD
     @import "Game.css";
 */
 
-=======
-@import "Game.css";
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
-*/
->>>>>>> dev
 
 
 
 
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
->>>>>>> dev
 #AnchorPane{
     -fx-background-color: #003055
 }
@@ -65,10 +49,6 @@ and open the template in the editor.
 #btn{
     -fx-border-color: transparent;
     -fx-background-color: transparent;
-<<<<<<< HEAD
     -FX-font-family: "IrishGrover";
-=======
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
->>>>>>> dev
     -fx-font-size: 42px;  
 }
