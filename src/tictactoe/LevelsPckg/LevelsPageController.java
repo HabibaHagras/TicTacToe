@@ -5,6 +5,7 @@
  */
 package tictactoe.LevelsPckg;
 
+import OnePlayerpckg.OnePlayerPageController;
 import computermode.AdversarialSearchTicTacToe;
 import computermode.ComputerGameController;
 import gameScreen.GameController;
@@ -29,6 +30,7 @@ import javafx.stage.Stage;
 public class LevelsPageController implements Initializable {
     Stage stage ;
     Parent myNewScene;
+    String player;
     public static String type;
     @FXML
     private Text txtLevels;
@@ -48,10 +50,29 @@ public class LevelsPageController implements Initializable {
     } 
     @FXML
     public void navigateToEasy (ActionEvent event) throws IOException {
+        
+//         if (event.getSource() == btnEasy) {
+//            stage = (Stage) btnEasy.getScene().getWindow();
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
+//            Parent myNewScene = loader.load();
+//            ComputerGameController compMode = loader.getController();
+//            OnePlayerPageController onePlayer = new OnePlayerPageController();
+//            String playName = onePlayer.getPlayerName();
+//            System.out.println("Player Name Retrieved: " + playName);
+//            compMode.displayPlayerName(playName);
+//            Scene scene = new Scene(myNewScene);
+//            stage.setScene(scene);
+//            stage.setTitle("Tic Tac Toe");
+//            stage.show();
+//        }
+            
+
         if (event.getSource() == btnEasy) {
             stage = (Stage) btnEasy.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController gameController = loader.getController();
+            gameController.displayPlayerName(player);
             type = "Easy";
         }
 
@@ -66,6 +87,8 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnMedium.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController gameController = loader.getController();
+            gameController.displayPlayerName(player);
             type = "Meduim";
         }
 
@@ -80,6 +103,8 @@ public class LevelsPageController implements Initializable {
             stage = (Stage) btnHard.getScene().getWindow();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/computermode/ComputerGame.fxml"));
             myNewScene=loader.load();
+            ComputerGameController gameController = loader.getController();
+            gameController.displayPlayerName(player);
             type = "Hard";
         }
 
@@ -87,5 +112,9 @@ public class LevelsPageController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Tic Tac Toe");
         stage.show();
+    }
+    
+    public void setName(String name){
+        player = name;
     }
 }

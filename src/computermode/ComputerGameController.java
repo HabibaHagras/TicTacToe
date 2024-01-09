@@ -5,6 +5,7 @@
  */
 package computermode;
 
+import OnePlayerpckg.OnePlayerPageController;
 import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
@@ -83,10 +84,11 @@ public class ComputerGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
-
+        
         buttons.forEach(button -> {
             setupButton(button);
         });
+        
     }    
     
     public void resetButton(Button button) {
@@ -328,6 +330,10 @@ public class ComputerGameController implements Initializable {
     public void newGame(ActionEvent event) throws IOException {
         buttons.forEach(this::resetButton);
         pickButton(random.nextInt(9));
+    }
+    
+    public  void displayPlayerName(String playerName){
+        player.setText(playerName);
     }
    
 }
