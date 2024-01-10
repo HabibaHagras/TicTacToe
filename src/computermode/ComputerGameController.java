@@ -5,8 +5,8 @@
  */
 package computermode;
 
-
 import gameScreen.GameController;
+import static gameScreen.GameController.winner;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,9 +26,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tictactoe.gameover.GameoverController;
+import tictactoe.looserplayer.LosserController;
+import tictactoe.playagainwin.PlayagainwinController;
 
 /**
  * FXML Controller class
@@ -41,7 +45,7 @@ public class ComputerGameController implements Initializable {
     ArrayList<Button> buttons;
     AdversarialSearchTicTacToe ticTacToeAI = new AdversarialSearchTicTacToe();
     String winner = "";
-    
+
     Scene scene = null;
     Stage stage = null;
     Parent root = null;
@@ -54,34 +58,35 @@ public class ComputerGameController implements Initializable {
     @FXML
     private Text score2;
     @FXML
-    private Button button1;
+    public Button button1;
     @FXML
-    private Button button4;
+    public Button button4;
     @FXML
-    private Button button7;
+    public Button button7;
     @FXML
-    private Button button2;
+    public Button button2;
     @FXML
-    private Button button5;
+    public Button button5;
     @FXML
-    private Button button8;
+    public Button button8;
     @FXML
-    private Button button3;
+    public Button button3;
     @FXML
-    private Button button6;
+    public Button button6;
     @FXML
-    private Button button9;
+    public Button button9;
     @FXML
-    private ImageView backBtn;
+    public ImageView backBtn;
     @FXML
-    private Button newButton;
+    public Button newButton;
     @FXML
     private Text computer;
-
-    
-    int countX=0;
-    int countO=0;
-
+    private ComputerGameController coputergameController;
+    @FXML
+    private AnchorPane apane;
+    // String winnerplayer;
+    int countX = 0;
+    int countO = 0;
 
     /**
      * Initializes the controller class.
@@ -94,14 +99,18 @@ public class ComputerGameController implements Initializable {
             setupButton(button);
         });
 
-    }    
-    
+    }
+
+    public void seComputertGameController(ComputerGameController coputergameController) {
+        this.coputergameController = coputergameController;
+    }
+
     public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
         button.setStyle("-fx-background-color: #003055;");
     }
-    
+
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             winner = "";
@@ -109,7 +118,7 @@ public class ComputerGameController implements Initializable {
             button.setDisable(true);
             button.setTextFill(Paint.valueOf("#ff0000"));
             checkIfGameIsOver();
-            if("".equals(winner)){
+            if ("".equals(winner)) {
                 makeAIMove();
                 checkIfGameIsOver();
             }
@@ -118,17 +127,20 @@ public class ComputerGameController implements Initializable {
 
     public void makeAIMove() {
         int move = ticTacToeAI.minMaxDecision(getBoardState());
-        if("".equals(winner)){
+        if ("".equals(winner)) {
             pickButton(move);
         }
     }
 
-    private void pickButton(int index) {
+    public static void main(String[] args) {
+
+    }
+
+    void pickButton(int index) {
         buttons.get(index).setText("O");
         buttons.get(index).setTextFill(Paint.valueOf("#ffc300"));
         buttons.get(index).setDisable(true);
     }
-    
 
     public State getBoardState() {
         String[] board = new String[9];
@@ -140,7 +152,65 @@ public class ComputerGameController implements Initializable {
         return new State(0, board);
     }
 
-     public void updateScore(String symbol) {
+    public void showwin() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
+            root = loader.load();
+            PlayagainwinController playAgainWinController = loader.getController();
+            playAgainWinController.setWinner(winner);
+            // playAgainWinController.setBoll(false);
+            playAgainWinController.seComputertGameController(this);
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            playAgainWinController.setStage(stage);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void showgameover() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
+            root = loader.load();
+            GameoverController GameoverController = loader.getController();
+            GameoverController.seComputertGameController(this);
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            GameoverController.setStage(stage);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void showlooser() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/looserplayer/losser.fxml"));
+            root = loader.load();
+            LosserController LosserController = loader.getController();
+            LosserController.seComputertGameController(this);
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            LosserController.setStage(stage);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateScore(String symbol) {
 
         if (symbol.equalsIgnoreCase("XXX")) {
             System.out.println(countX);
@@ -151,24 +221,24 @@ public class ComputerGameController implements Initializable {
         } else if (symbol.equalsIgnoreCase("OOO")) {
             countO++;
             score1.setText(String.valueOf(countO));
+
         }
 
     }
 
-    
     public void checkIfGameIsOver() {
 
-            String b1 = button1.getText();
-            String b2 = button2.getText();
-            String b3 = button3.getText();
-            String b4 = button4.getText();
-            String b5 = button5.getText();
-            String b6 = button6.getText();
-            String b7 = button7.getText();
-            String b8 = button8.getText();
-            String b9 = button9.getText();
-            
-            if (b1.equals(b2) && b1.equals(b3)) {
+        String b1 = button1.getText();
+        String b2 = button2.getText();
+        String b3 = button3.getText();
+        String b4 = button4.getText();
+        String b5 = button5.getText();
+        String b6 = button6.getText();
+        String b7 = button7.getText();
+        String b8 = button8.getText();
+        String b9 = button9.getText();
+
+        if (b1.equals(b2) && b1.equals(b3)) {
             System.out.println("x player");
             if (b1.equals("X")) {
                 winner = "XXX";
@@ -182,7 +252,6 @@ public class ComputerGameController implements Initializable {
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
             }
-           
 
         }
         if (b4.equals(b5) && b4.equals(b6)) {
@@ -239,7 +308,8 @@ public class ComputerGameController implements Initializable {
                 winner = "OOO";
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
-                button8.setStyle("-fx-background-color: aliceblue;");     
+                button8.setStyle("-fx-background-color: aliceblue;");
+
             }
         }
         if (b3.equals(b6) && b3.equals(b9)) {
@@ -248,11 +318,13 @@ public class ComputerGameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
+
             } else if (b3.equals("O")) {
                 winner = "OOO";
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-                button9.setStyle("-fx-background-color: aliceblue;");    
+                button9.setStyle("-fx-background-color: aliceblue;");
+
             }
         }
         if (b1.equals(b5) && b1.equals(b9)) {
@@ -267,7 +339,7 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-               
+
             }
         }
         if (b3.equals(b5) && b3.equals(b7)) {
@@ -283,24 +355,28 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
             }
         }
+        //X winner
 
-            //X winner
-            if (winner.equals("XXX")) {
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION,"the palyer win");
-                alert.show();
-                
-            } //O winner
-            else if (winner.equals("OOO")) {
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION,"the computer win");
-                alert.show(); 
-            }
-            updateScore(winner);
+        if (winner.equals("XXX")) {
+
+            showwin();
+          
+
+        } //O winner
+        if (winner.equals("OOO")) {
+
+            showlooser();
+          //  this.winner = winner;
 
         }
+        if (winner.equals(null)) {
+            showgameover();
+        }
+        updateScore(winner);
+    }
     //}
-    
+
+    @FXML
     public void back(MouseEvent event) {
         try {
             root = FXMLLoader.load(getClass().getResource("/OnePlayerpckg/OnePlayerPage.fxml"));
@@ -313,17 +389,21 @@ public class ComputerGameController implements Initializable {
         stage.setTitle("TicTacToe");
         stage.show();
     }
-    
+
     @FXML
     public void newGame(ActionEvent event) throws IOException {
         buttons.forEach(this::resetButton);
         pickButton(random.nextInt(9));
     }
 
-    
-    public  void displayPlayerName(String playerName){
+    public void closeComputerGameStage() {
+        Stage gameStage = (Stage) apane.getScene().getWindow();
+        gameStage.close();
+    }
+
+    public void displayPlayerName(String playerName) {
+        this.winner = playerName;
         player.setText(playerName);
     }
 
-   
 }

@@ -24,8 +24,12 @@
 
             <Text fx:id="txtPlayerO" layoutX="339.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
 =======
 
+>>>>>>> dev
 >>>>>>> dev
                <font>
                   <Font size="36.0" />
@@ -37,17 +41,25 @@
                   <Font size="24.0" />
                </font>
             </Button>
+<<<<<<< HEAD
+            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="203.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+
+=======
 
             <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="203.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
 <<<<<<< HEAD
 =======
 
 >>>>>>> dev
+>>>>>>> dev
                <image>
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
             <TextField fx:id="txtfieldPayerX" layoutX="268.0" layoutY="205.0" prefHeight="50.0" prefWidth="299.0" />
             <Text fx:id="txtPlayerX" layoutX="332.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
 
@@ -60,7 +72,10 @@
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
             <Text fx:id="txtVS" fill="#fbf33f" layoutX="344.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
 
                <font>
@@ -69,6 +84,10 @@
             </Text>
 
 <<<<<<< HEAD
+            <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
+=
+=======
+<<<<<<< HEAD
 
             <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
 =======
@@ -80,6 +99,7 @@
 
 >>>>>>> dev
 
+>>>>>>> dev
             
 
                <font>
