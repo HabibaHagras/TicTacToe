@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  */
 public class StartScreenController implements Initializable {
 
-    Stage stage ;
+    Stage stage;
     Parent myNewScene;
 
     @FXML
@@ -76,7 +76,7 @@ public class StartScreenController implements Initializable {
     }
 
     @FXML
-    public void navigateToLocal (ActionEvent event) throws IOException {
+    public void navigateToLocal(ActionEvent event) throws IOException {
         if (event.getSource() == buttonLocal) {
             stage = (Stage) buttonLocal.getScene().getWindow();
             myNewScene = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
@@ -88,8 +88,8 @@ public class StartScreenController implements Initializable {
         stage.show();
     }
 
-   @FXML
-    public void navigateToComputer (ActionEvent event) throws IOException {
+    @FXML
+    public void navigateToComputer(ActionEvent event) throws IOException {
         if (event.getSource() == buttonComputer) {
             stage = (Stage) buttonComputer.getScene().getWindow();
             myNewScene = FXMLLoader.load(getClass().getResource("/OnePlayerpckg/OnePlayerPage.fxml"));
@@ -100,10 +100,18 @@ public class StartScreenController implements Initializable {
         stage.setTitle("Tic Tac Toe");
         stage.show();
     }
-    
+
     @FXML
-    public void navigateToOnline (ActionEvent event) throws IOException {
-       
+    public void navigateToOnline(ActionEvent event) throws IOException {
+        if (event.getSource() == buttonOnline) {
+            stage = (Stage) buttonOnline.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("login.fxml"));
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
     }
 
 }

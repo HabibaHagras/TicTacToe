@@ -21,11 +21,9 @@
       <AnchorPane id="root" fx:id="apane" prefHeight="433.0" prefWidth="690.0" stylesheets="@TwoPlayersPage.css" BorderPane.alignment="CENTER">
          <children>
             <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="109.0" layoutY="106.0" stroke="WHITE" strokeType="INSIDE" width="598.0" />
-<<<<<<< HEAD
+
             <Text fx:id="txtPlayerO" layoutX="339.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
-=======
-            <Text fx:id="txtPlayerO" layoutX="320.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER O">
->>>>>>> dev
+
                <font>
                   <Font size="36.0" />
                </font>
@@ -36,22 +34,15 @@
                   <Font size="24.0" />
                </font>
             </Button>
-<<<<<<< HEAD
             <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="203.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="109.0" fitWidth="131.0" layoutX="190.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> dev
+
                <image>
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <TextField fx:id="txtfieldPayerX" layoutX="268.0" layoutY="205.0" prefHeight="50.0" prefWidth="299.0" />
             <Text fx:id="txtPlayerX" layoutX="332.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
-=======
-            <TextField fx:id="txtfieldPayerX" layoutX="238.0" layoutY="208.0" prefHeight="50.0" prefWidth="299.0" />
-            <Text fx:id="txtPlayerX" layoutX="320.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER X">
->>>>>>> dev
+
                <font>
                   <Font size="36.0" />
                </font>
@@ -61,22 +52,15 @@
                   <Image url="@../assest/10.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <Text fx:id="txtVS" fill="#fbf33f" layoutX="344.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
-=======
-            <Text fx:id="txtVS" fill="#fbf33f" layoutX="360.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" wrappingWidth="73.625">
->>>>>>> dev
+
                <font>
                   <Font size="96.0" />
                </font>
             </Text>
 
-<<<<<<< HEAD
             <Text fx:id="txtS" fill="#003055" layoutX="418.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
-=======
-            <Text fx:id="txtS" fill="#003055" layoutX="390.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S" wrappingWidth="77.0">
->>>>>>> dev
-
+=
             
 
                <font>

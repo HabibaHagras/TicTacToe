@@ -5,6 +5,7 @@
  */
 package tictactoe.playagainwin;
 
+import computermode.ComputerGameController;
 import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
@@ -53,6 +54,8 @@ public class PlayagainwinController implements Initializable {
     @FXML
     private Label labelplayer;
     private GameController gameController;
+    private ComputerGameController gamecomputercontroller;
+    boolean a;
 
     /**
      * Initializes the controller class.
@@ -95,16 +98,29 @@ public class PlayagainwinController implements Initializable {
 
     @FXML
     public void onclickplayagain(ActionEvent event) {
-        gameController.resetButton(gameController.button1);
-        gameController.resetButton(gameController.button2);
-        gameController.resetButton(gameController.button3);
-        gameController.resetButton(gameController.button4);
-        gameController.resetButton(gameController.button5);
-        gameController.resetButton(gameController.button6);
-        gameController.resetButton(gameController.button7);
-        gameController.resetButton(gameController.button8);
-        gameController.resetButton(gameController.button9);
-        //mediaPlayer.setAutoPlay(false);
+        if (a == true) {
+            gameController.resetButton(gameController.button1);
+            gameController.resetButton(gameController.button2);
+            gameController.resetButton(gameController.button3);
+            gameController.resetButton(gameController.button4);
+            gameController.resetButton(gameController.button5);
+            gameController.resetButton(gameController.button6);
+            gameController.resetButton(gameController.button7);
+            gameController.resetButton(gameController.button8);
+            gameController.resetButton(gameController.button9);
+            //mediaPlayer.setAutoPlay(false);
+        } else {
+            gamecomputercontroller.resetButton(gamecomputercontroller.button1);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button2);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button3);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button4);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button5);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button6);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button7);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button8);
+            gamecomputercontroller.resetButton(gamecomputercontroller.button9);
+
+        }
         mediaPlayer.stop();
         stage.close();
     }
@@ -115,11 +131,15 @@ public class PlayagainwinController implements Initializable {
 
     @FXML
     public void onclickNo(ActionEvent event) throws IOException {
-
-        gameController.closeGameStage();
-        closePlayagainwinStage();
-        mediaPlayer.stop();
-
+        if (a == true) {
+            gameController.closeGameStage();
+            closePlayagainwinStage();
+            mediaPlayer.stop();
+        } else {
+            gamecomputercontroller.closeComputerGameStage();
+            closePlayagainwinStage();
+            mediaPlayer.stop();
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
         Parent myNewScene = loader.load();
         Scene newScene = new Scene(myNewScene);
@@ -135,5 +155,14 @@ public class PlayagainwinController implements Initializable {
     public void closePlayagainwinStage() {
         Stage playagainwinStage = (Stage) apane.getScene().getWindow();
         playagainwinStage.close();
+    }
+
+    public void seComputertGameController(ComputerGameController gamecomputercontroller) {
+        this.gamecomputercontroller = gamecomputercontroller;
+    }
+
+    public void setBoll(boolean b) {
+        this.a = b;
+        System.out.println(b);
     }
 }
