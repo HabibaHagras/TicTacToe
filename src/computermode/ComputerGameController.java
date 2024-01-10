@@ -84,6 +84,9 @@ public class ComputerGameController implements Initializable {
     private ComputerGameController coputergameController;
     @FXML
     private AnchorPane apane;
+    // String winnerplayer;
+    int countX = 0;
+    int countO = 0;
 
     /**
      * Initializes the controller class.
@@ -91,10 +94,11 @@ public class ComputerGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
-
+        makeAIMove();
         buttons.forEach(button -> {
             setupButton(button);
         });
+
     }
 
     public void seComputertGameController(ComputerGameController coputergameController) {
@@ -114,8 +118,10 @@ public class ComputerGameController implements Initializable {
             button.setDisable(true);
             button.setTextFill(Paint.valueOf("#ff0000"));
             checkIfGameIsOver();
-            makeAIMove();
-            checkIfGameIsOver();
+            if ("".equals(winner)) {
+                makeAIMove();
+                checkIfGameIsOver();
+            }
         });
     }
 
@@ -164,7 +170,8 @@ public class ComputerGameController implements Initializable {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        public void showgameover() {
+
+    public void showgameover() {
 
         try {
 
@@ -201,41 +208,26 @@ public class ComputerGameController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void updateScore(String symbol) {
+
+        if (symbol.equalsIgnoreCase("XXX")) {
+            System.out.println(countX);
+            countX++;
+            System.out.println(countX);
+            score2.setText(String.valueOf(countX));
+            System.out.println(countX);
+        } else if (symbol.equalsIgnoreCase("OOO")) {
+            countO++;
+            score1.setText(String.valueOf(countO));
+
+        }
 
     }
 
     public void checkIfGameIsOver() {
 
-        /*for (int a = 0; a < 8; a++) {
-
-            switch (a) {
-                case 0:
-                    winner = button1.getText() + button2.getText() + button3.getText();
-                    break;
-                case 1:
-                    winner = button4.getText() + button5.getText() + button6.getText();
-                    break;
-                case 2:
-                    winner = button7.getText() + button8.getText() + button9.getText();
-                    break;
-                case 3:
-                    winner = button1.getText() + button5.getText() + button9.getText();
-                    break;
-                case 4:
-                    winner = button3.getText() + button5.getText() + button7.getText();
-                    break;
-                case 5:
-                    winner = button1.getText() + button4.getText() + button7.getText();
-                    break;
-                case 6:
-                    winner = button2.getText() + button5.getText() + button8.getText();
-                    break;
-                case 7:
-                    winner = button3.getText() + button6.getText() + button9.getText();
-                    break;
-                default:
-                    winner = null;
-            }*/
         String b1 = button1.getText();
         String b2 = button2.getText();
         String b3 = button3.getText();
@@ -259,8 +251,8 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
-
             }
+
         }
         if (b4.equals(b5) && b4.equals(b6)) {
             if (b4.equals("X")) {
@@ -274,8 +266,8 @@ public class ComputerGameController implements Initializable {
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-
             }
+
         }
         if (b7.equals(b8) && b7.equals(b9)) {
             if (b7.equals("X")) {
@@ -289,8 +281,8 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             }
+
         }
         if (b1.equals(b4) && b1.equals(b7)) {
             if (b1.equals("X")) {
@@ -304,7 +296,6 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
-
             }
         }
         if (b2.equals(b5) && b2.equals(b8)) {
@@ -313,7 +304,6 @@ public class ComputerGameController implements Initializable {
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b2.equals("O")) {
                 winner = "OOO";
                 button2.setStyle("-fx-background-color: aliceblue;");
@@ -365,24 +355,24 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
             }
         }
-
         //X winner
+
         if (winner.equals("XXX")) {
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "the palyer win");
-            alert.show();
             showwin();
+          
 
         } //O winner
         if (winner.equals("OOO")) {
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "the computer win");
-            alert.show();
             showlooser();
+          //  this.winner = winner;
+
         }
-        if (winner.equals(null)){
+        if (winner.equals(null)) {
             showgameover();
         }
+        updateScore(winner);
     }
     //}
 
@@ -410,4 +400,10 @@ public class ComputerGameController implements Initializable {
         Stage gameStage = (Stage) apane.getScene().getWindow();
         gameStage.close();
     }
+
+    public void displayPlayerName(String playerName) {
+        this.winner = playerName;
+        player.setText(playerName);
+    }
+
 }
