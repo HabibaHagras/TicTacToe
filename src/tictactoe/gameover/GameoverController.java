@@ -5,6 +5,7 @@
  */
 package tictactoe.gameover;
 
+import computermode.ComputerGameController;
 import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +42,7 @@ public class GameoverController implements Initializable {
     private Text Text1;
     @FXML
     private Button button;
+    private ComputerGameController gamecomputercontroller;
 
     /**
      * Initializes the controller class.
@@ -75,5 +77,9 @@ public class GameoverController implements Initializable {
     public void closeGameoverStage() {
         Stage closeGameoverStage = (Stage) apane.getScene().getWindow();
         closeGameoverStage.close();
+    }
+
+    public void seComputertGameController(ComputerGameController gamecomputercontroller) {
+        this.gamecomputercontroller = gamecomputercontroller;
     }
 }
