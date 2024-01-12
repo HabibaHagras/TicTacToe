@@ -9,6 +9,8 @@ import DTO.DTO;
 import Database.DataAccessLayer;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -77,22 +79,29 @@ public class SignUpController implements Initializable {
         String enteredUsername = feildusername.getText();
         String enteredPassword = feildpass.getText();
         String ConfirmPassword = feildconfirm.getText();
-
         try {
             server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
             ear = new DataInputStream(server.getInputStream());
             mouth = new PrintStream(server.getOutputStream());
-
+            InputStream inputStream = server.getInputStream();
+            OutputStream outputStream = server.getOutputStream();
+            String msg = "signup" + " " + enteredUsername + " " + enteredPassword;
+            System.out.println(msg);
+            mouth.println(msg);
+            outputStream.write(msg.getBytes());
             System.out.println("feild: " + enteredUsername);
             System.out.println("feild1: " + enteredPassword);
             System.out.println("feild2: " + ConfirmPassword);
             System.out.println("apane: " + apane);
             if (!enteredPassword.equals(ConfirmPassword)) {
                 System.out.println("Passwords do not match!");
-                // Handle the case where passwords do not match (show an error message or perform other actions)
                 return;
             }
-            DataAccessLayer.addContact(new DTO(enteredUsername, enteredPassword,1, "offline"));
+            byte[] responseBuffer = new byte[1024];
+            int responseBytes = inputStream.read(responseBuffer);
+            String serverResponse = new String(responseBuffer, 0, responseBytes);
+            System.out.println("Server response: " + serverResponse);
+            if(serverResponse.equals("signup succeed")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
             Parent onlinePlayersPage = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -101,11 +110,7 @@ public class SignUpController implements Initializable {
             stage.setTitle("TicTacToe");
             stage.show();
             System.out.println("Siiiiign up  process!");
-
-            System.out.println("Siiiiign up  successful!");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Siiiiign up  successful!");}
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -28,6 +28,7 @@ import Database.DataAccessLayer;
 import DTO.DTO;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
@@ -111,8 +112,9 @@ public class LoginController implements Initializable {
             ear = new DataInputStream(server.getInputStream());
             mouth = new PrintStream(server.getOutputStream());
             OutputStream outputStream = server.getOutputStream();
+            InputStream inputStream = server.getInputStream();
 
-            String msg = "login" +" "+ enteredUsername +" "+ enteredPassword;
+            String msg = "login" + " " + enteredUsername + " " + enteredPassword;
             System.out.println(msg);
             mouth.println(msg);
             outputStream.write(msg.getBytes());
@@ -122,7 +124,11 @@ public class LoginController implements Initializable {
             System.out.println("feild: " + enteredUsername);
             System.out.println("feild1: " + enteredPassword);
             System.out.println("apane: " + apane);
-            if (DataAccessLayer.isValidUser(enteredUsername, enteredPassword)) {
+            byte[] responseBuffer = new byte[1024];
+            int responseBytes = inputStream.read(responseBuffer);
+            String serverResponse = new String(responseBuffer, 0, responseBytes);
+            System.out.println("Server response: " + serverResponse);
+            if (serverResponse.equals("login succeed")) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                 Parent onlinePlayersPage = loader.load();
 //                OnlineUserController onlinePlayersController = loader.getController();
@@ -143,8 +149,6 @@ public class LoginController implements Initializable {
                 // If not valid, show an error message or perform other actions
                 System.out.println("Invalid credentials!");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
