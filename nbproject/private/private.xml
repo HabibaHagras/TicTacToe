@@ -2,29 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/H:/iti/JavaProject/TicTacToe/src/onlineUserScrren/OnlineUserController.java</file>
-            <file>file:/H:/iti/JavaProject/TicTacToe/src/tictactoe/LoginController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/gameScreen/GameController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/SignUpController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/1_1.css</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/LoginController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/StartScreenController.java</file>
         </group>
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        <group/>
-=======
-<<<<<<< HEAD
->>>>>>> dev
-        <group>
-            <file>file:/F:/Java/Java%20Project/TicTacToe/src/computermode/ComputerGameController.java</file>
-        </group>
-<<<<<<< HEAD
-=======
-=======
-        <group/>
->>>>>>> dev
->>>>>>> dev
->>>>>>> dev
->>>>>>> dev
     </open-files>
 </project-private>

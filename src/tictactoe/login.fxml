@@ -17,7 +17,7 @@
       <TextField fx:id="feild" layoutX="229.0" layoutY="186.0" prefHeight="48.0" prefWidth="369.0" />
       <TextField fx:id="feild1" layoutX="229.0" layoutY="288.0" prefHeight="48.0" prefWidth="369.0" />
       <Button fx:id="buttonlogin" layoutX="355.0" layoutY="464.0" mnemonicParsing="false" onAction="#setaction1" text="LOGIN" />
-      <Button fx:id="buttonregistration1" layoutX="355.0" layoutY="518.0" mnemonicParsing="false" onAction="#setaction1" prefHeight="63.0" prefWidth="135.0" text="Register" />
+      <Button fx:id="buttonregistration1" layoutX="356.0" layoutY="518.0" mnemonicParsing="false" onAction="#setNavigateregistraton" prefHeight="63.0" prefWidth="135.0" text="Register" />
       <Text fx:id="Text" layoutX="138.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" x="209.0" y="49.0" />
       <ImageView fitHeight="60.0" fitWidth="66.0" layoutX="22.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
          <image>
