@@ -5,14 +5,22 @@
  */
 package gameScreen;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.SocketException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,9 +30,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -75,6 +86,7 @@ public class GameController implements Initializable {
     private Button newButton;
     @FXML
     AnchorPane apane;
+    public Button button;
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
@@ -82,9 +94,71 @@ public class GameController implements Initializable {
 
     int countX = 0;
     int countO = 0;
+     
+    
+     Button txtOut;
+     Button btnSend;
+    Socket server;
+    DataInputStream dataInputStream;
+    BufferedReader bufferedReader;
+    PrintStream printStream;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+         try {
+            server = new Socket("127.0.0.1",5005);
+            bufferedReader =new BufferedReader(new InputStreamReader(server.getInputStream()));
+            printStream = new PrintStream(server.getOutputStream());
+                     button1.setOnAction((event) -> {
+                                 
+                    String msg = "a";
+                            button1.getText();
+                    printStream.println(msg);
+                    printStream.flush();
+                    System.out.println("Sent to server: " + msg);
+                             });  
+            new Thread(){
+                
+                public void run(){
+                   while(true){
+                      //  String msg;
+                       try {
+                             String message = bufferedReader.readLine();
+                             System.out.println("Received from server: " + message);
+                             Platform.runLater(() -> {
+                button1.setText(message);
+                button2.setText(message);
+                // Update other buttons if needed
+            });
+                             
+                             for (Button button : buttons) {
+                                 button.setText(message);
+}
+
+                        if (message == null) {
+                            break;
+                        }
+                        
+                        
+                   
+                       }
+                       catch(SocketException e){
+                           //System.out.println("");
+                           //break;
+                        }
+                       catch (IOException ex) {
+                           Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                       }
+            }
+                }
+            
+            
+            }.start();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
         buttons.forEach(button -> {
@@ -93,6 +167,9 @@ public class GameController implements Initializable {
         });
 
     }
+  
+
+
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -387,5 +464,7 @@ public class GameController implements Initializable {
         Stage gameStage = (Stage) apane.getScene().getWindow();
         gameStage.close();
     }
+    
+    
 
 }

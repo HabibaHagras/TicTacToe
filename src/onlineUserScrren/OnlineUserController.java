@@ -5,7 +5,9 @@
  */
 package onlineUserScrren;
 
-import dto.DTO;
+//import Database.Player;
+//import dto.DTO;
+import Database.Player;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -26,7 +28,7 @@ public class OnlineUserController implements Initializable {
     @FXML
     private Text point;
     @FXML
-    private javafx.scene.control.ListView<DTO> onlinePlayersListView;
+    private javafx.scene.control.ListView<Player> onlinePlayersListView;
 
     /**
      * Initializes the controller class.
@@ -36,9 +38,9 @@ public class OnlineUserController implements Initializable {
         // TODO
     }
 
-    @FXML
+    //@FXML
 
-    public void updateOnlinePlayersList(ArrayList<DTO> onlinePlayers) {
+    public void updateOnlinePlayersList(ArrayList<Player> onlinePlayers) {
        System.out.println(onlinePlayers.getClass());
         onlinePlayersListView.getItems().setAll(onlinePlayers);
         

@@ -5,6 +5,10 @@
  */
 package tictactoe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +25,8 @@ public class TicTacToe extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gameScreen/Game.fxml"));
+        
         
         Scene scene = new Scene(root);
        String css=this.getClass().getResource("start.css").toExternalForm();

@@ -9,8 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@signup/1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.FXMLDocumentController">
+<AnchorPane fx:id="apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.FXMLDocumentController">
    <children>
       <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="269.0" layoutX="101.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="399.0" />
       <Label fx:id="username" layoutX="253.0" layoutY="94.0" text="UserName" />
@@ -22,9 +21,9 @@
       <Text fx:id="Text" layoutX="243.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register" wrappingWidth="251.61392211914062" />
       <ImageView fx:id="backarrow" fitHeight="51.0" fitWidth="49.0" layoutX="7.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@signup/arrow.jpg" />
+            <Image url="@arrow.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="buttonregistration1" layoutX="251.0" layoutY="310.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="147.0" text="Register" />
+      <Button fx:id="buttonregistration1" layoutX="251.0" layoutY="310.0" mnemonicParsing="false" onAction="#registeration" prefHeight="58.0" prefWidth="147.0" text="Register" />
    </children>
 </AnchorPane>

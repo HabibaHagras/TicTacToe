@@ -5,6 +5,8 @@
  */
 package tictactoe;
 
+import Database.DataAccessLayer;
+import Database.Player;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,8 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import tictactoe.helpcontroller;
-import Database.DataAccessLayer;
-import dto.DTO;
+//import Database.DataAccessLayer;
+//import Database.Player;
+//import dto.DTO;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.PrintStream;
@@ -38,7 +41,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import onlineUserScrren.OnlineUserController;
-import tictactoeserver.ClientConnection;
+//import tictactoeserver.ClientConnection;
 
 /**
  * FXML Controller class
@@ -47,6 +50,8 @@ import tictactoeserver.ClientConnection;
  */
 public class LoginController implements Initializable {
 
+    Stage stage;
+    Parent myNewScene;
     @FXML
     AnchorPane apane;
     @FXML
@@ -116,7 +121,7 @@ public class LoginController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
                 Parent onlinePlayersPage = loader.load();
                 OnlineUserController onlinePlayersController = loader.getController();
-                ArrayList<DTO> onlinePlayers = DataAccessLayer.getOnlineUsers(); // Call your method to get online players
+                ArrayList<Player> onlinePlayers = DataAccessLayer.getOnlineUsers(); // Call your method to get online players
                 onlinePlayersController.updateOnlinePlayersList(onlinePlayers);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(onlinePlayersPage);
@@ -154,6 +159,19 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void setAction2(ActionEvent event) throws IOException{
+         
+        if (event.getSource() == buttonregistration1) {
+            stage = (Stage) buttonregistration1.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/signup/signup.fxml"));
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
     }
 
 }
