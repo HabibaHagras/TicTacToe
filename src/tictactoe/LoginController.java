@@ -26,7 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import tictactoe.helpcontroller;
 import Database.DataAccessLayer;
-import dto.DTO;
+import DTO.DTO;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.PrintStream;
