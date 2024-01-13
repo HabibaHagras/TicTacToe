@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="apane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="online.OnlinemodeController">
+<AnchorPane id="AnchorPane" fx:id="apane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="online.OnlinemodeController">
     <stylesheets>
         <URL value="@onlinemode.css" />
     </stylesheets>
@@ -72,5 +72,6 @@
       <Line endX="-296.0" layoutX="453.0" layoutY="290.0" startX="165.0" stroke="WHITE" strokeWidth="5.0" />
       <Line endX="-296.0" layoutX="453.0" layoutY="397.0" startX="165.0" stroke="WHITE" strokeWidth="5.0" />
       <Button fx:id="newButton" layoutX="632.0" layoutY="525.0" mnemonicParsing="false" onAction="#newGame" prefHeight="55.0" prefWidth="136.0" text="New Game" />
+      <Button fx:id="logout" layoutX="323.0" layoutY="517.0" mnemonicParsing="false" onAction="#OnClickLogout" prefHeight="55.0" prefWidth="136.0" text="logout" />
    </children>
 </AnchorPane>

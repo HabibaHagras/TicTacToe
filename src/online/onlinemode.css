@@ -55,3 +55,13 @@ and open the template in the editor.
     -FX-font-family: "IrishGrover";
     -fx-font-size: 42px;  
 }
+#logout{    -fx-background-color: #FBF33F;
+    -fx-border-style:solid;
+    -fx-background-radius: 90;
+     -fx-border-width: 2px;
+     -fx-border-color: #FFFFFF;
+    -fx-border-radius:90;
+    -fx-text-fill: white;
+    -FX-font-family: "IrishGrover";
+    -fx-text-fill:white;
+    -fx-font-size: 20px;}

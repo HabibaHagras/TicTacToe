@@ -8,6 +8,8 @@ package online;
 import static gameScreen.GameController.winner;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -89,6 +91,8 @@ public class OnlinemodeController implements Initializable {
     Socket server;
     DataInputStream ear;
     PrintStream mouth;
+    @FXML
+    private Button logout;
 
     /**
      * Initializes the controller class.
@@ -429,6 +433,37 @@ public class OnlinemodeController implements Initializable {
 
     @FXML
     private void newGame(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnClickLogout(ActionEvent event) throws IOException {
+        server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+        ear = new DataInputStream(server.getInputStream());
+        mouth = new PrintStream(server.getOutputStream());
+        String enteredUsername = player1.getText();
+        OutputStream outputStream = server.getOutputStream();
+        InputStream inputStream = server.getInputStream();
+        String msg = "LOGOUT" + " " + "Habiba" + " " + "1234";
+        System.out.println(msg);
+        mouth.println(msg);
+        outputStream.write(msg.getBytes());
+        System.out.println("feild: " + enteredUsername);
+        byte[] responseBuffer = new byte[1024];
+        int responseBytes = inputStream.read(responseBuffer);
+        String serverResponse = new String(responseBuffer, 0, responseBytes);
+        System.out.println("Server response: " + serverResponse);
+        if (serverResponse.equals("LOGOUT succeed")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
+            Parent onlinePlayersPage = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(onlinePlayersPage);
+            stage.setScene(scene);
+            stage.setTitle("TicTacToe");
+            stage.show();
+            System.out.println("LOGOUT  process!");
+            System.out.println("LOGOUT successful!");
+        }
+
     }
 
 }
