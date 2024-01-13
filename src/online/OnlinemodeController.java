@@ -3,9 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameScreen;
+package online;
 
+import static gameScreen.GameController.winner;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,62 +26,57 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tictactoe.gameover.GameoverController;
-import tictactoe.helpcontroller;
 import tictactoe.playagainwin.PlayagainwinController;
 
 /**
+ * FXML Controller class
  *
  * @author HP
  */
-public class GameController implements Initializable {
+public class OnlinemodeController implements Initializable {
 
+    String msg;
     Scene scene = null;
     Stage stage = null;
     Parent root = null;
     @FXML
-    private Text player1;
-    @FXML
-    private Text player2;
+    private AnchorPane apane;
     @FXML
     private Text score1;
     @FXML
+    private Text txt;
+    @FXML
     private Text score2;
     @FXML
-    public Button button1;
+    private Button button1;
     @FXML
-    public Button button2;
+    private Button button4;
     @FXML
-    public Button button3;
+    private Button button7;
     @FXML
-    public Button button4;
+    private Button button2;
     @FXML
-    public Button button5;
+    private Button button5;
     @FXML
-    public Button button6;
+    private Button button8;
     @FXML
-    public Button button7;
+    private Button button3;
     @FXML
-    public Button button8;
+    private Button button6;
     @FXML
-    public Button button9;
+    private Button button9;
     @FXML
     private ImageView backBtn;
     @FXML
     private Button newButton;
-    @FXML
-    AnchorPane apane;
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
@@ -82,7 +84,19 @@ public class GameController implements Initializable {
 
     int countX = 0;
     int countO = 0;
+    @FXML
+    private Text player1;
+    @FXML
+    private Text player2;
+    Socket server;
+    DataInputStream ear;
+    PrintStream mouth;
+    @FXML
+    private Button logout;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -103,14 +117,47 @@ public class GameController implements Initializable {
     }
 
     public void setPlayerSymbol(Button button) {
-        if (playerTurn % 2 == 0) {
-            button.setText("X");
-            button.setTextFill(Paint.valueOf("#ff0000"));
-            playerTurn = 1;
-        } else {
-            button.setText("O");
-            button.setTextFill(Paint.valueOf("#ffc300"));
-            playerTurn = 0;
+        try {
+            server = new Socket("127.0.0.1", 5005);
+            ear = new DataInputStream(server.getInputStream());
+            mouth = new PrintStream(server.getOutputStream());
+            if (playerTurn % 2 == 0) {
+                String msg = "x";
+                mouth.println(msg);
+
+                button.setTextFill(Paint.valueOf("#ff0000"));
+                playerTurn = 1;
+
+            } else {
+                String msg = "O";
+                mouth.println(msg);
+                button.setTextFill(Paint.valueOf("#ffc300"));
+
+                playerTurn = 0;
+
+            }
+            new Thread() {
+                public void run() {
+
+                    while (true) {
+                        String msg;
+                        //String msgo;
+
+                        try {
+                            msg = ear.readLine();
+                            button.setText(msg);
+
+                        } catch (IOException ex) {
+                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                }
+
+            }.start();
+
+        } catch (IOException ex) {
+            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -124,7 +171,7 @@ public class GameController implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getResource("/TwoPlayerspckg/TwoPlayerPage.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(gameScreen.GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -133,7 +180,6 @@ public class GameController implements Initializable {
         stage.show();
     }
 
-    @FXML
     public void onclicknewgame(ActionEvent event) throws IOException {
 
         root = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
@@ -150,17 +196,15 @@ public class GameController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
             root = loader.load();
             PlayagainwinController playAgainWinController = loader.getController();
-            playAgainWinController.setWinner(winner);
-            playAgainWinController.setBoll(true);
-
-            playAgainWinController.setGameController(this);
+//            playAgainWinController.setWinner(winner);
+//            playAgainWinController.setGameController(this);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
             playAgainWinController.setStage(stage);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(gameScreen.GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -170,16 +214,16 @@ public class GameController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
             root = loader.load();
-            GameoverController GameoverController = loader.getController();
-            GameoverController.setGameController(this);
+//            GameoverController GameoverController = loader.getController();
+//            GameoverController.setGameController(this);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
-            GameoverController.setStage(stage);
+//            GameoverController.setStage(stage);
             stage.show();
 
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(gameScreen.GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -381,6 +425,45 @@ public class GameController implements Initializable {
     public void closeGameStage() {
         Stage gameStage = (Stage) apane.getScene().getWindow();
         gameStage.close();
+    }
+
+    @FXML
+    private void back(MouseEvent event) {
+    }
+
+    @FXML
+    private void newGame(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnClickLogout(ActionEvent event) throws IOException {
+        server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+        ear = new DataInputStream(server.getInputStream());
+        mouth = new PrintStream(server.getOutputStream());
+        String enteredUsername = player1.getText();
+        OutputStream outputStream = server.getOutputStream();
+        InputStream inputStream = server.getInputStream();
+        String msg = "LOGOUT" + " " + "Habiba" + " " + "1234";
+        System.out.println(msg);
+        mouth.println(msg);
+        outputStream.write(msg.getBytes());
+        System.out.println("feild: " + enteredUsername);
+        byte[] responseBuffer = new byte[1024];
+        int responseBytes = inputStream.read(responseBuffer);
+        String serverResponse = new String(responseBuffer, 0, responseBytes);
+        System.out.println("Server response: " + serverResponse);
+        if (serverResponse.equals("LOGOUT succeed")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
+            Parent onlinePlayersPage = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(onlinePlayersPage);
+            stage.setScene(scene);
+            stage.setTitle("TicTacToe");
+            stage.show();
+            System.out.println("LOGOUT  process!");
+            System.out.println("LOGOUT successful!");
+        }
+
     }
 
 }

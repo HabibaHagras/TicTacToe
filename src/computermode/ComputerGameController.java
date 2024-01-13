@@ -199,6 +199,7 @@ public class ComputerGameController implements Initializable {
             root = loader.load();
             LosserController LosserController = loader.getController();
             LosserController.seComputertGameController(this);
+            LosserController.setWinner(winner);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -348,6 +349,7 @@ public class ComputerGameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
+                
             } else if (b3.equals("O")) {
                 winner = "OOO";
                 button3.setStyle("-fx-background-color: aliceblue;");
@@ -358,13 +360,13 @@ public class ComputerGameController implements Initializable {
         //X winner
 
         if (winner.equals("XXX")) {
-
+            winner=player.getText();
             showwin();
           
 
         } //O winner
         if (winner.equals("OOO")) {
-
+            winner=player.getText();
             showlooser();
           //  this.winner = winner;
 
@@ -402,7 +404,7 @@ public class ComputerGameController implements Initializable {
     }
 
     public void displayPlayerName(String playerName) {
-        this.winner = playerName;
+        //this.winner = playerName;
         player.setText(playerName);
     }
 

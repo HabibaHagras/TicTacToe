@@ -36,6 +36,7 @@ import tictactoe.playagainwin.PlayagainwinController;
 public class LosserController implements Initializable {
 
     Stage stage;
+    private String winner;
 
     @FXML
     private AnchorPane apane;
@@ -60,7 +61,7 @@ public class LosserController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        url = PlayagainwinController.class.getResource("videoplayback.mp4");
+        url = PlayagainwinController.class.getResource("losser.mp4");
         Media media = new Media(url.toExternalForm());
         mediaPlayer = new MediaPlayer(media);
         MediaFile.setMediaPlayer(mediaPlayer);
@@ -109,7 +110,7 @@ public class LosserController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
             Parent myNewScene = loader.load();
             Scene newScene = new Scene(myNewScene);
-            
+
             Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setTitle("Start Screen");
@@ -125,11 +126,17 @@ public class LosserController implements Initializable {
         losserStage.close();
     }
 
-    public void seComputertGameController(ComputerGameController aThis) {
+    public void seComputertGameController(ComputerGameController gamecomputercontroller) {
         this.gamecomputercontroller = gamecomputercontroller;
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+        labelplayer.setText(winner);
+        System.out.println(winner);
     }
 }
