@@ -24,11 +24,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import tictactoe.helpcontroller;
 import Database.DataAccessLayer;
 import DTO.DTO;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -47,6 +48,8 @@ import tictactoeserver.ClientConnection;
  */
 public class LoginController implements Initializable {
 
+    Stage stage;
+    Parent myNewScene;
     @FXML
     AnchorPane apane;
     @FXML
@@ -89,7 +92,7 @@ public class LoginController implements Initializable {
             System.out.println("cliiiiiicked");
 
         } catch (IOException ex) {
-            Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("cliiiiiicked");
 
         }
@@ -107,17 +110,30 @@ public class LoginController implements Initializable {
         try {
             server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
             ear = new DataInputStream(server.getInputStream());
+            mouth = new PrintStream(server.getOutputStream());
+            OutputStream outputStream = server.getOutputStream();
+            InputStream inputStream = server.getInputStream();
+
+            String msg = "login" + " " + enteredUsername + " " + enteredPassword;
+            System.out.println(msg);
+            mouth.println(msg);
+            outputStream.write(msg.getBytes());
+
             GetIp();
 
             System.out.println("feild: " + enteredUsername);
             System.out.println("feild1: " + enteredPassword);
             System.out.println("apane: " + apane);
-            if (DataAccessLayer.isValidUser(enteredUsername, enteredPassword)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
+            byte[] responseBuffer = new byte[1024];
+            int responseBytes = inputStream.read(responseBuffer);
+            String serverResponse = new String(responseBuffer, 0, responseBytes);
+            System.out.println("Server response: " + serverResponse);
+            if (serverResponse.equals("login succeed")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                 Parent onlinePlayersPage = loader.load();
-                OnlineUserController onlinePlayersController = loader.getController();
-                ArrayList<DTO> onlinePlayers = DataAccessLayer.getOnlineUsers(); // Call your method to get online players
-                onlinePlayersController.updateOnlinePlayersList(onlinePlayers);
+//                OnlineUserController onlinePlayersController = loader.getController();
+//                ArrayList<DTO> onlinePlayers = DataAccessLayer.getOnlineUsers(); // Call your method to get online players
+//                onlinePlayersController.updateOnlinePlayersList(onlinePlayers);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(onlinePlayersPage);
                 stage.setScene(scene);
@@ -133,8 +149,6 @@ public class LoginController implements Initializable {
                 // If not valid, show an error message or perform other actions
                 System.out.println("Invalid credentials!");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -150,10 +164,24 @@ public class LoginController implements Initializable {
 
             // Send the IP address to the server
             mouth.println("IP:" + clientIP);
+            mouth.println("iam x ");
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void setNavigateregistraton(ActionEvent event) throws IOException {
+        if (event.getSource() == buttonregistration1) {
+            stage = (Stage) buttonregistration1.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
     }
 
 }
