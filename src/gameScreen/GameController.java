@@ -5,13 +5,19 @@
  */
 package gameScreen;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +88,9 @@ public class GameController implements Initializable {
 
     int countX = 0;
     int countO = 0;
-
+private Socket server;
+    private DataInputStream reader;
+    private PrintStream printStream;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -91,8 +99,100 @@ public class GameController implements Initializable {
             setupButton(button);
 
         });
+        buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
+        buttons.forEach(this::setupButton);
+
 
     }
+    // Inside GameController class
+
+private void handleServerMessages() {
+    try {
+        while (true) {
+            String message = reader.readLine();
+            if (message == null) {
+                break;  // Server disconnected
+            }
+
+            Platform.runLater(() -> processServerMessage(message));
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+private void processServerMessage(String message) {
+    String[] parts = message.split(":");
+    String command = parts[0];
+
+    switch (command) {
+        case "MOVE":
+            int position = Integer.parseInt(parts[1]);
+            handleMove(position);
+            break;
+        case "WIN":
+            char winnerSymbol = parts[1].charAt(0);
+            handleWin(winnerSymbol);
+            break;
+        case "DRAW":
+            handleDraw();
+            break;
+        default:
+            // Handle other messages if needed
+    }
+}
+
+private void handleMove(int position) {
+    Platform.runLater(() -> {
+        Button button = buttons.get(position);
+        button.setDisable(false);
+        setPlayerSymbol(button);
+    });
+}
+
+// Existing methods...
+// private void handleMove(int position) {
+//        Platform.runLater(() -> {
+//            Button button = buttons.get(position);
+//            button.setDisable(true);
+//        });
+//    }
+
+    private void handleWin(char winnerSymbol) {
+        Platform.runLater(() -> {
+            // Implement logic to handle a win
+            // Highlight winning cells, display a message, etc.
+            // For example, you might disable all buttons and display a win message.
+            disableAllButtons();
+            checkWinner(player1.getText(),player2.getText());
+        });
+    }
+
+    private void handleDraw() {
+        Platform.runLater(() -> {
+            // Implement logic to handle a draw
+            // Display a draw message or perform any necessary actions
+            // For example, you might disable all buttons and display a draw message.
+            disableAllButtons();
+            showDrawMessage();
+        });
+    }
+
+    private void disableAllButtons() {
+        buttons.forEach(button -> button.setDisable(true));
+    }
+
+    private void showWinMessage() {
+        // Implement logic to display a win message
+        System.out.println("You win!");
+    }
+
+    private void showDrawMessage() {
+        // Implement logic to display a draw message
+        System.out.println("It's a draw!");
+    }
+
+
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -172,6 +272,7 @@ public class GameController implements Initializable {
             root = loader.load();
             GameoverController GameoverController = loader.getController();
             GameoverController.setGameController(this);
+            GameoverController.setBoll(1);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -377,10 +478,10 @@ public class GameController implements Initializable {
         }
 
     }
-
+    
     public void closeGameStage() {
         Stage gameStage = (Stage) apane.getScene().getWindow();
-        gameStage.close();
+        gameStage.close();    
     }
 
 }

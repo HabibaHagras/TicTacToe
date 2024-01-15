@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,10 @@ public class OnlinemodeController implements Initializable {
     PrintStream mouth;
     @FXML
     private Button logout;
+    
+   // private Socket server;
+    private DataInputStream reader;
+    private PrintStream printStream;
 
     /**
      * Initializes the controller class.
@@ -105,8 +110,11 @@ public class OnlinemodeController implements Initializable {
             setupButton(button);
 
         });
+        
+       
 
     }
+
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -115,51 +123,63 @@ public class OnlinemodeController implements Initializable {
             checkWinner(player1.getText(), player2.getText());
         });
     }
-
-    public void setPlayerSymbol(Button button) {
-        try {
-            server = new Socket("127.0.0.1", 5005);
-            ear = new DataInputStream(server.getInputStream());
-            mouth = new PrintStream(server.getOutputStream());
-            if (playerTurn % 2 == 0) {
-                String msg = "x";
-                mouth.println(msg);
-
-                button.setTextFill(Paint.valueOf("#ff0000"));
-                playerTurn = 1;
-
-            } else {
-                String msg = "O";
-                mouth.println(msg);
-                button.setTextFill(Paint.valueOf("#ffc300"));
-
-                playerTurn = 0;
-
-            }
-            new Thread() {
-                public void run() {
-
-                    while (true) {
-                        String msg;
-                        //String msgo;
-
-                        try {
-                            msg = ear.readLine();
-                            button.setText(msg);
-
-                        } catch (IOException ex) {
-                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-
-                }
-
-            }.start();
-
-        } catch (IOException ex) {
-            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+  public void setPlayerSymbol(Button button) {
+        if (playerTurn % 2 == 0) {
+            button.setText("X");
+            button.setTextFill(Paint.valueOf("#ff0000"));
+            playerTurn = 1;
+        } else {
+            button.setText("O");
+            button.setTextFill(Paint.valueOf("#ffc300"));
+            playerTurn = 0;
         }
     }
+    
+//    public void setPlayerSymbol(Button button) {
+//        try {
+//            server = new Socket("127.0.0.1", 5005);
+//            ear = new DataInputStream(server.getInputStream());
+//            mouth = new PrintStream(server.getOutputStream());
+//            if (playerTurn % 2 == 0) {
+//                String msg = "x";
+//                mouth.println(msg);
+//
+//                button.setTextFill(Paint.valueOf("#ff0000"));
+//                playerTurn = 1;
+//
+//            } else {
+//                String msg = "O";
+//                mouth.println(msg);
+//                button.setTextFill(Paint.valueOf("#ffc300"));
+//
+//                playerTurn = 0;
+//
+//            }
+//            
+//            new Thread() {
+//                public void run() {
+//
+//                    while (true) {
+//                        String msg;
+//                        //String msgo;
+//
+//                        try {
+//                            msg = ear.readLine();
+//                            button.setText(msg);
+//
+//                        } catch (IOException ex) {
+//                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    }
+//
+//                }
+//
+//            }.start();
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     public void resetButton(Button button) {
         button.setDisable(false);
@@ -214,12 +234,13 @@ public class OnlinemodeController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
             root = loader.load();
-//            GameoverController GameoverController = loader.getController();
-//            GameoverController.setGameController(this);
+          GameoverController GameoverController = loader.getController();
+           GameoverController.setGameController(this);
+           GameoverController.setBoll(3);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
-//            GameoverController.setStage(stage);
+            GameoverController.setStage(stage);
             stage.show();
 
         } catch (IOException ex) {
