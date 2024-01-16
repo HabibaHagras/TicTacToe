@@ -5,10 +5,13 @@
  */
 package gameScreen;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +33,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import tictactoe.gameover.GameoverController;
 import tictactoe.helpcontroller;
 import tictactoe.playagainwin.PlayagainwinController;
@@ -43,6 +58,7 @@ public class GameController implements Initializable {
     Scene scene = null;
     Stage stage = null;
     Parent root = null;
+    boolean recordFlag = false;
     @FXML
     private Text player1;
     @FXML
@@ -70,6 +86,8 @@ public class GameController implements Initializable {
     @FXML
     public Button button9;
     @FXML
+    public Button record;
+    @FXML
     private ImageView backBtn;
     @FXML
     private Button newButton;
@@ -82,6 +100,9 @@ public class GameController implements Initializable {
 
     int countX = 0;
     int countO = 0;
+
+    int[] position = new int[9];
+    int i = 1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,6 +120,37 @@ public class GameController implements Initializable {
             setPlayerSymbol(button);
             button.setDisable(true);
             checkWinner(player1.getText(), player2.getText());
+            if (recordFlag) {
+                if (button == button1) {
+                    position[0] = i;
+                }
+                if (button == button2) {
+                    position[1] = i;
+                }
+                if (button == button3) {
+                    position[2] = i;
+                }
+                if (button == button4) {
+                    position[3] = i;
+                }
+                if (button == button5) {
+                    position[4] = i;
+                }
+                if (button == button6) {
+                    position[5] = i;
+                }
+                if (button == button7) {
+                    position[6] = i;
+                }
+                if (button == button8) {
+                    position[7] = i;
+                }
+                if (button == button9) {
+                    position[8] = i;
+                }
+                i++;
+                createXMLFile();
+            }
         });
     }
 
@@ -118,6 +170,8 @@ public class GameController implements Initializable {
         button.setDisable(false);
         button.setText("");
         button.setStyle("-fx-background-color: #003055;");
+        record.setDisable(false);
+        i = 1;
     }
 
     public void onclickback(MouseEvent event) {
@@ -381,6 +435,105 @@ public class GameController implements Initializable {
     public void closeGameStage() {
         Stage gameStage = (Stage) apane.getScene().getWindow();
         gameStage.close();
+    }
+
+    @FXML
+    public void startRecord(ActionEvent event) throws IOException {
+        record.setDisable(true);
+        recordFlag = true;
+        createXMLFile();
+    }
+
+    void createXMLFile() {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.newDocument();
+            Date d = new Date();
+
+            Element main = document.createElement("Game");
+
+            Element p1 = document.createElement("Player1");
+            p1.setTextContent(player1.getText());
+            main.appendChild(p1);
+
+            Element p2 = document.createElement("Player2");
+            p2.setTextContent(this.player2.getText());
+            main.appendChild(p2);
+
+            Element date = document.createElement("Date");
+            date.setTextContent(d.toString());
+            main.appendChild(date);
+
+            Element b1 = document.createElement("Button1");
+            b1.setAttribute("position", String.valueOf(position[0]));
+            b1.setTextContent(button1.getText());
+            main.appendChild(b1);
+            Element b2 = document.createElement("Button2");
+            b2.setAttribute("position", String.valueOf(position[1]));
+            b2.setTextContent(button2.getText());
+            main.appendChild(b2);
+            Element b3 = document.createElement("Button3");
+            b3.setAttribute("position", String.valueOf(position[2]));
+            b3.setTextContent(button3.getText());
+            main.appendChild(b3);
+            Element b4 = document.createElement("Button4");
+            b4.setAttribute("position", String.valueOf(position[3]));
+            b4.setTextContent(button4.getText());
+            main.appendChild(b4);
+            Element b5 = document.createElement("Button5");
+            b5.setAttribute("position", String.valueOf(position[4]));
+            b5.setTextContent(button5.getText());
+            main.appendChild(b5);
+            Element b6 = document.createElement("Button6");
+            b6.setAttribute("position", String.valueOf(position[5]));
+            b6.setTextContent(button6.getText());
+            main.appendChild(b6);
+            Element b7 = document.createElement("Button7");
+            b7.setAttribute("position", String.valueOf(position[6]));
+            b7.setTextContent(button7.getText());
+            main.appendChild(b7);
+            Element b8 = document.createElement("Button8");
+            b8.setAttribute("position", String.valueOf(position[7]));
+            b8.setTextContent(button8.getText());
+            main.appendChild(b8);
+            Element b9 = document.createElement("Button9");
+            b9.setAttribute("position", String.valueOf(position[8]));
+            b9.setTextContent(button9.getText());
+            main.appendChild(b9);
+
+            Element scorePalyer1 = document.createElement("ScorePalyer1");
+            scorePalyer1.setTextContent(String.valueOf(countX));
+            main.appendChild(scorePalyer1);
+
+            Element scorePalyer2 = document.createElement("ScorePalyer2");
+            scorePalyer2.setTextContent(String.valueOf(countO));
+            main.appendChild(scorePalyer2);
+
+            Element win = document.createElement("Winner");
+            win.setTextContent(winner);
+            main.appendChild(win);
+
+            document.appendChild(main);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(document);
+            String name = player1.getText() + "VS" + player2.getText() + String.valueOf(d.getDate()) + "_" + String.valueOf(d.getHours()) + String.valueOf(d.getMinutes());
+            FileOutputStream output = new FileOutputStream("F:\\Java\\Java Project\\TicTacToe\\src\\Files\\" + name + ".xml");
+            StreamResult result = new StreamResult(output);
+            transformer.transform(source, result);
+
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

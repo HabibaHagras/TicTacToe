@@ -39,7 +39,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import onlineUserScrren.OnlineUserController;
-import tictactoeserver.ClientConnection;
+
 
 /**
  * FXML Controller class
