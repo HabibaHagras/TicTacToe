@@ -33,10 +33,12 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import onlineUserScrren.OnlineUserController;
@@ -131,6 +133,7 @@ public class LoginController implements Initializable {
                     // Load the OnlineUserController and get its controller instance
                     Parent onlinePlayersPage = loader.load();
                     OnlineUserController onlineUserController = loader.getController();
+                    onlineUserController.setloginName(enteredUsername);
 
                     while ((responseBytes = inputStream.read(responseBuffer)) != -1) {
                         String onlineUser = new String(responseBuffer, 0, responseBytes);
@@ -143,14 +146,34 @@ public class LoginController implements Initializable {
                         System.out.println("Online user: " + onlineUser);
                         System.out.println("noooooow");
                         onlineUserController.updateOnlinePlayersList(onlinePlayers);
+                        StringTokenizer tokenizer = new StringTokenizer(onlineUser);
+
+                       String command = tokenizer.nextToken();
+
+                       // String username = tokenizer.nextToken();
+
+                     //   String additionalInfo = tokenizer.nextToken();
+                        if (command.equals("userfound")) {
+
+                            Platform.runLater(() -> {
+                                Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
+                                inviteAlert.setTitle("Invitation");
+                                inviteAlert.setHeaderText("You've received an invitation!");
+                                inviteAlert.setContentText("Do you want to accept?");
+                                inviteAlert.showAndWait();
+
+                            });
+                        }
+                else{
                         Platform.runLater(() -> {
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Scene scene = new Scene(onlinePlayersPage);
                             stage.setScene(scene);
                             stage.setTitle("TicTacToe");
                             stage.show();
-                        });
 
+                        });
+                        }
                     }
 
                     System.out.println("Login successful!");
@@ -162,6 +185,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+
     private void setNavigateregistraton(ActionEvent event) throws IOException {
         if (event.getSource() == buttonregistration1) {
             stagenow = (Stage) buttonregistration1.getScene().getWindow();

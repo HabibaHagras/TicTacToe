@@ -39,24 +39,24 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="431.6708984375">
+            <Text id="txt" fx:id="text0" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="431.6708984375">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <Text id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="429.6708984375" GridPane.rowIndex="1">
+            <Text id="txt" fx:id="text1" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="429.6708984375" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <Text id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="430.6708984375" GridPane.rowIndex="2">
+            <Text id="txt" fx:id="text2" strokeType="OUTSIDE" strokeWidth="0.0" text="Habiba" wrappingWidth="430.6708984375" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <Button id="btn" mnemonicParsing="false" stylesheets="@../CSS/onlineuser.css" text="Invite" GridPane.columnIndex="1" />
-            <Button id="btn" mnemonicParsing="false" text="Invite" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button id="btn" mnemonicParsing="false" text="Invite" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="btn" fx:id="invaite1" mnemonicParsing="false" text="Invite" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="btn" fx:id="invaite2" mnemonicParsing="false" text="Invite" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="btn" fx:id="invite0" mnemonicParsing="false" stylesheets="@../CSS/onlineuser.css" text="Invite" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Text id="txt" fx:id="point" fill="WHITE" layoutX="586.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point : 4" wrappingWidth="196.6708984375" />
