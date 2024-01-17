@@ -92,7 +92,49 @@ public class OnlineUserController implements Initializable {
         onlinePlayersListView.setOnMouseClicked(event -> {
             // Get the selected item
             String selectedItem = onlinePlayersListView.getSelectionModel().getSelectedItem();
+            new Thread(() -> {
+                try {
+                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                    OutputStream outputStream = server.getOutputStream();
+                    InputStream inputStream = server.getInputStream();
 
+                    String inviteMessage = "invite" + " " + selectedItem + " " + "1234";
+                    System.out.println(inviteMessage);
+                    outputStream.write(inviteMessage.getBytes());
+
+                    byte[] responseBuffer = new byte[1024];
+                    int responseBytes = inputStream.read(responseBuffer);
+                    String serverResponse = new String(responseBuffer, 0, responseBytes);
+                    System.out.println("Server response: " + serverResponse);
+                    StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+
+                    String command = tokenizer.nextToken();
+
+// Assuming the second token is the username
+                    String username = tokenizer.nextToken();
+
+// Assuming the third token is the additional information (e.g., "111")
+                    String additionalInfo = tokenizer.nextToken();
+                    if (command.equals("userfound")) {
+                        System.out.println("USERFOUND");
+                        if (username.equals(UserInvitatonTO)) {
+
+                            Platform.runLater(() -> {
+                                Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
+                                inviteAlert.setTitle("Invitation");
+                                inviteAlert.setHeaderText("You've received an invitation!");
+                                inviteAlert.setContentText("Do you want to accept?");
+                                inviteAlert.showAndWait();
+
+                            });
+                        }
+                    }
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }).start();
             // Perform the desired action with the selected item
             if (selectedItem != null) {
                 // Example: Display a message with the selected item
@@ -101,7 +143,6 @@ public class OnlineUserController implements Initializable {
         });
     }
 
-    @FXML
     private void inviteFirstClick(ActionEvent event) {
         new Thread(() -> {
             try {
