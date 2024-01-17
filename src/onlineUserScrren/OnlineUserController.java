@@ -78,17 +78,27 @@ public class OnlineUserController implements Initializable {
     public void updateOnlinePlayersList(ArrayList<String> onlinePlayers) {
         // List<String> onlinePlayersList = new ArrayList<>(onlinePlayers);
         List<String> tokenizedPlayers = onlinePlayers.stream()
-                .flatMap(player -> Pattern.compile("1234").splitAsStream(player))
+                .flatMap(player -> Pattern.compile(",").splitAsStream(player))
                 .map(String::trim) // Remove leading and trailing whitespaces
                 .filter(part -> !part.isEmpty()) // Filter out empty parts
                 .collect(Collectors.toList());
         text0.setText(tokenizedPlayers.get(0));
-        
+        text1.setText(tokenizedPlayers.get(1));
+
         //   System.out.println(tokenizedPlayers.get(0));
         //   System.out.println(onlinePlayers.getClass());
-        //onlinePlayersListView.getItems().setAll(tokenizedPlayers);
+        onlinePlayersListView.getItems().setAll(tokenizedPlayers);
         System.out.println("onlineUserScrren.OnlineUserController.updateOnlinePlayersList()" + "onlinePlayers");
+        onlinePlayersListView.setOnMouseClicked(event -> {
+            // Get the selected item
+            String selectedItem = onlinePlayersListView.getSelectionModel().getSelectedItem();
 
+            // Perform the desired action with the selected item
+            if (selectedItem != null) {
+                // Example: Display a message with the selected item
+                System.out.println("Selected item: " + selectedItem);
+            }
+        });
     }
 
     @FXML
@@ -126,7 +136,7 @@ public class OnlineUserController implements Initializable {
                             inviteAlert.setHeaderText("You've received an invitation!");
                             inviteAlert.setContentText("Do you want to accept?");
                             inviteAlert.showAndWait();
-                         
+
                         });
                     }
                 }
@@ -142,4 +152,5 @@ public class OnlineUserController implements Initializable {
         System.out.println("LOGIN NAME" + login_name);
         this.UserInvitatonTO = login_name;
     }
+
 }
