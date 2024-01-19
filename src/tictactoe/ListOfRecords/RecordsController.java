@@ -60,32 +60,32 @@ public class RecordsController implements Initializable {
     @FXML
     private ImageView backBtn;
     
-    String p1 = null;
-    String p2 = null;
-    String textB1 = null;
-    String textB2 = null;
-    String textB3 = null;
-    String textB4 = null;
-    String textB5 = null;
-    String textB6 = null;
-    String textB7 = null;
-    String textB8 = null;
-    String textB9 = null;
-    String scoreP1 = null;
-    String scoreP2 = null;
+    private String p1 = null;
+    private String p2 = null;
+    private String textB1 = null;
+    private String textB2 = null;
+    private String textB3 = null;
+    private String textB4 = null;
+    private String textB5 = null;
+    private String textB6 = null;
+    private String textB7 = null;
+    private String textB8 = null;
+    private String textB9 = null;
+    private String scoreP1 = null;
+    private String scoreP2 = null;
     
-    String positionB1 = null;
-    String positionB2 = null;
-    String positionB3 = null;
-    String positionB4 = null;
-    String positionB5 = null;
-    String positionB6 = null;
-    String positionB7 = null;
-    String positionB8 = null;
-    String positionB9 = null;
+    private String positionB1 = null;
+    private String positionB2 = null;
+    private String positionB3 = null;
+    private String positionB4 = null;
+    private String positionB5 = null;
+    private String positionB6 = null;
+    private String positionB7 = null;
+    private String positionB8 = null;
+    private String positionB9 = null;
     
     
-    String win = null;
+    private String win = null;
     
     
 
@@ -272,13 +272,13 @@ public class RecordsController implements Initializable {
             
             
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(RecordBoardController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(RecordBoardController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         } catch (SAXException ex) {
-            Logger.getLogger(RecordBoardController.class.getName()).log(Level.SEVERE, null, ex);
+           System.err.println(ex);
         } catch (IOException ex) {
-            Logger.getLogger(RecordBoardController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
     }
 }
