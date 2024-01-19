@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="apane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="invitation.InvitationController">
+    <stylesheets>
+        <URL value="@invitation.css" />
+    </stylesheets>
+   <children>
+      <Text fx:id="Text" layoutX="57.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Invitation " />
+      <Label fx:id="labelplayer" layoutX="321.0" layoutY="42.0" text="Label" />
+      <Button fx:id="button1yes" layoutX="178.0" layoutY="294.0" mnemonicParsing="false" onAction="#onclickAccept" prefWidth="136.0" text="YES" />
+      <Button fx:id="button1no" layoutX="342.0" layoutY="294.0" mnemonicParsing="false" onAction="#onclickNo" text="NO" />
+      <Text fx:id="Text" layoutX="239.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accept?" />
+   </children>
+</AnchorPane>
