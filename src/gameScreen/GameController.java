@@ -92,17 +92,17 @@ public class GameController implements Initializable {
     @FXML
     private Button newButton;
     @FXML
-    AnchorPane apane;
+    private AnchorPane apane;
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
     public static String winner;
 
-    int countX = 0;
-    int countO = 0;
+    private int countX = 0;
+    private int countO = 0;
 
-    int[] position = new int[9];
-    int i = 1;
+    private int[] position = new int[9];
+    private int i = 1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -526,13 +526,13 @@ public class GameController implements Initializable {
             transformer.transform(source, result);
 
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
     }
 
