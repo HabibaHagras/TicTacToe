@@ -47,9 +47,9 @@ import org.xml.sax.SAXException;
  */
 public class RecordBoardController implements Initializable {
 
-    Scene scene = null;
-    Stage stage = null;
-    Parent root = null;
+    private Scene scene = null;
+    private Stage stage = null;
+    private Parent root = null;
 
     @FXML
     private Text player1;
@@ -83,11 +83,11 @@ public class RecordBoardController implements Initializable {
     private ImageView backBtn;
     @FXML
     private Button againButton;
-    ArrayList<Button> buttons;
-    ArrayList<String> b;
-    Timeline timeline;
-    String b1, b2, b3, b4, b5, b6, b7, b8, b9;
-    String positionB1, positionB2, positionB3, positionB4, positionB5, positionB6, positionB7, positionB8, positionB9;
+    private ArrayList<Button> buttons;
+    private ArrayList<String> b;
+    private Timeline timeline;
+    private String b1, b2, b3, b4, b5, b6, b7, b8, b9;
+    private String positionB1, positionB2, positionB3, positionB4, positionB5, positionB6, positionB7, positionB8, positionB9;
 
     /**
      * Initializes the controller class.
@@ -124,76 +124,11 @@ public class RecordBoardController implements Initializable {
 
         this.player1.setText(player1);
         this.player2.setText(player2);
-//        if ("X".equals(textB1)) {
-//            button1.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB1)) {
-//            button1.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button1.setText(textB1);
-//
-//        if ("X".equals(textB2)) {
-//            button2.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB2)) {
-//            button2.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button2.setText(textB2);
-//
-//        if ("X".equals(textB3)) {
-//            button3.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB3)) {
-//            button3.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button3.setText(textB3);
-//
-//        if ("X".equals(textB4)) {
-//            button4.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB4)) {
-//            button4.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button4.setText(textB4);
-//
-//        if ("X".equals(textB5)) {
-//            button5.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB5)) {
-//            button5.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button5.setText(textB5);
-//
-//        if ("X".equals(textB6)) {
-//            button6.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB6)) {
-//            button6.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button6.setText(textB6);
-//
-//        if ("X".equals(textB7)) {
-//            button7.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB7)) {
-//            button7.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button7.setText(textB7);
-//
-//        if ("X".equals(textB8)) {
-//            button8.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB8)) {
-//            button8.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button8.setText(textB8);
-//
-//        if ("X".equals(textB9)) {
-//            button9.setTextFill(Paint.valueOf("#ff0000"));
-//        } else if ("O".equals(textB9)) {
-//            button9.setTextFill(Paint.valueOf("#ffc300"));
-//        }
-//        button9.setText(textB9);
-//
         score1.setText(scoreP1);
         score2.setText(scoreP2);
-//        
-//        highLight();
     }
 
-    void highLight() {
+    private void highLight() {
         if (button1.getText().equals(button2.getText()) && button1.getText().equals(button3.getText())) {
             button1.setStyle("-fx-background-color: aliceblue;");
             button2.setStyle("-fx-background-color: aliceblue;");
@@ -251,7 +186,7 @@ public class RecordBoardController implements Initializable {
         stage.show();
     }
 
-    void draw() {
+    private void draw() {
         Duration duration = Duration.seconds(1);
         for (int i = 1; i < 10; i++) {
             if (b1 != null && positionB1.equals(String.valueOf(i))) {
@@ -389,7 +324,7 @@ public class RecordBoardController implements Initializable {
         draw();
     }
 
-    void clearButton() {
+    private void clearButton() {
         buttons.forEach((button) -> {
             button.setText(" ");
             button.setStyle("-fx-background-color: transparent;");
