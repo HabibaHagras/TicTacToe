@@ -114,4 +114,17 @@ public class StartScreenController implements Initializable {
         stage.show();
     }
 
+    
+    @FXML
+    public void navigateToRecord (ActionEvent event) throws IOException {
+        if (event.getSource() == rec) {
+            stage = (Stage) rec.getScene().getWindow();
+            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/ListOfRecords/Records.fxml"));
+        }
+
+        Scene scene = new Scene(myNewScene);
+        stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
+        stage.show();
+    }
 }

@@ -55,3 +55,8 @@ and open the template in the editor.
     -FX-font-family: "IrishGrover";
     -fx-font-size: 42px;  
 }
+
+#record{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+}
