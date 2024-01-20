@@ -84,9 +84,9 @@ public class ComputerGameController implements Initializable {
     private ComputerGameController coputergameController;
     @FXML
     private AnchorPane apane;
-    // String winnerplayer;
-    int countX = 0;
-    int countO = 0;
+    
+    private int countX = 0;
+    private int countO = 0;
 
     /**
      * Initializes the controller class.
@@ -132,10 +132,6 @@ public class ComputerGameController implements Initializable {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
-
     void pickButton(int index) {
         buttons.get(index).setText("O");
         buttons.get(index).setTextFill(Paint.valueOf("#ffc300"));
@@ -148,18 +144,15 @@ public class ComputerGameController implements Initializable {
         for (int i = 0; i < buttons.size(); i++) {
             board[i] = buttons.get(i).getText();
         }
-
         return new State(0, board);
     }
 
     public void showwin() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
             root = loader.load();
             PlayagainwinController playAgainWinController = loader.getController();
             playAgainWinController.setWinner(winner);
-            // playAgainWinController.setBoll(false);
             playAgainWinController.seComputertGameController(this);
             stage = new Stage();
             scene = new Scene(root);
@@ -174,7 +167,6 @@ public class ComputerGameController implements Initializable {
     public void showgameover() {
 
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
             root = loader.load();
             GameoverController GameoverController = loader.getController();
@@ -184,17 +176,14 @@ public class ComputerGameController implements Initializable {
             stage.setScene(scene);
             GameoverController.setStage(stage);
             stage.show();
-
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void showlooser() {
 
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/looserplayer/losser.fxml"));
             root = loader.load();
             LosserController LosserController = loader.getController();
@@ -205,7 +194,6 @@ public class ComputerGameController implements Initializable {
             stage.setScene(scene);
             LosserController.setStage(stage);
             stage.show();
-
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -222,9 +210,7 @@ public class ComputerGameController implements Initializable {
         } else if (symbol.equalsIgnoreCase("OOO")) {
             countO++;
             score1.setText(String.valueOf(countO));
-
         }
-
     }
 
     public void checkIfGameIsOver() {
@@ -246,14 +232,12 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b1.equals("O")) {
                 winner = "OOO";
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button3.setStyle("-fx-background-color: aliceblue;");
             }
-
         }
         if (b4.equals(b5) && b4.equals(b6)) {
             if (b4.equals("X")) {
@@ -261,14 +245,12 @@ public class ComputerGameController implements Initializable {
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b4.equals("O")) {
                 winner = "OOO";
                 button4.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
             }
-
         }
         if (b7.equals(b8) && b7.equals(b9)) {
             if (b7.equals("X")) {
@@ -276,14 +258,12 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b7.equals("O")) {
                 winner = "OOO";
                 button7.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
             }
-
         }
         if (b1.equals(b4) && b1.equals(b7)) {
             if (b1.equals("X")) {
@@ -310,7 +290,6 @@ public class ComputerGameController implements Initializable {
                 button2.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button8.setStyle("-fx-background-color: aliceblue;");
-
             }
         }
         if (b3.equals(b6) && b3.equals(b9)) {
@@ -319,13 +298,11 @@ public class ComputerGameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b3.equals("O")) {
                 winner = "OOO";
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button6.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             }
         }
         if (b1.equals(b5) && b1.equals(b9)) {
@@ -334,13 +311,11 @@ public class ComputerGameController implements Initializable {
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             } else if (b1.equals("O")) {
                 winner = "OOO";
                 button1.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button9.setStyle("-fx-background-color: aliceblue;");
-
             }
         }
         if (b3.equals(b5) && b3.equals(b7)) {
@@ -357,26 +332,22 @@ public class ComputerGameController implements Initializable {
                 button7.setStyle("-fx-background-color: aliceblue;");
             }
         }
-        //X winner
 
         if (winner.equals("XXX")) {
             winner=player.getText();
             showwin();
-          
-
-        } //O winner
+        } 
+        
         if (winner.equals("OOO")) {
             winner=player.getText();
             showlooser();
-          //  this.winner = winner;
-
         }
+        
         if (winner.equals(null)) {
             showgameover();
         }
         updateScore(winner);
     }
-    //}
 
     @FXML
     public void back(MouseEvent event) {
@@ -404,7 +375,6 @@ public class ComputerGameController implements Initializable {
     }
 
     public void displayPlayerName(String playerName) {
-        //this.winner = playerName;
         player.setText(playerName);
     }
 

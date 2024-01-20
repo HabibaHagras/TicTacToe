@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Game>
+<Player1>hhhh</Player1>
+<Player2>fffff</Player2>
+<Date>Tue Jan 16 22:40:26 EET 2024</Date>
+<Button1 position="1">X</Button1>
+<Button2 position="2">O</Button2>
+<Button3 position="5">X</Button3>
+<Button4 position="0"/>
+<Button5 position="3">X</Button5>
+<Button6 position="6">O</Button6>
+<Button7 position="7">X</Button7>
+<Button8 position="0"/>
+<Button9 position="4">O</Button9>
+<ScorePalyer1>1</ScorePalyer1>
+<ScorePalyer2>0</ScorePalyer2>
+<Winner>hhhh</Winner>
+</Game>

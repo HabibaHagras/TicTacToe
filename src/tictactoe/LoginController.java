@@ -24,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.InputStream;
@@ -45,7 +44,7 @@ import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import online.OnlinemodeController;
 import onlineUserScrren.OnlineUserController;
-//import tictactoeserver.ClientConnection;
+
 
 /**
  * FXML Controller class
@@ -87,6 +86,7 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         System.out.println("tictactoe.LoginController.initialize()");
+
     }
 
     private void setaction(ActionEvent event) {
