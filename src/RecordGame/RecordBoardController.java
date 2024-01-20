@@ -128,49 +128,7 @@ public class RecordBoardController implements Initializable {
         score2.setText(scoreP2);
     }
 
-    private void highLight() {
-        if (button1.getText().equals(button2.getText()) && button1.getText().equals(button3.getText())) {
-            button1.setStyle("-fx-background-color: aliceblue;");
-            button2.setStyle("-fx-background-color: aliceblue;");
-            button3.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button4.getText().equals(button5.getText()) && button4.getText().equals(button6.getText())) {
-            button4.setStyle("-fx-background-color: aliceblue;");
-            button5.setStyle("-fx-background-color: aliceblue;");
-            button6.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button7.getText().equals(button8.getText()) && button7.getText().equals(button9.getText())) {
-            button7.setStyle("-fx-background-color: aliceblue;");
-            button8.setStyle("-fx-background-color: aliceblue;");
-            button9.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button1.getText().equals(button4.getText()) && button1.getText().equals(button7.getText())) {
-            button1.setStyle("-fx-background-color: aliceblue;");
-            button4.setStyle("-fx-background-color: aliceblue;");
-            button7.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button2.getText().equals(button5.getText()) && button2.getText().equals(button8.getText())) {
-            button2.setStyle("-fx-background-color: aliceblue;");
-            button5.setStyle("-fx-background-color: aliceblue;");
-            button8.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button3.getText().equals(button6.getText()) && button3.getText().equals(button9.getText())) {
-            button3.setStyle("-fx-background-color: aliceblue;");
-            button6.setStyle("-fx-background-color: aliceblue;");
-            button9.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button1.getText().equals(button5.getText()) && button1.getText().equals(button9.getText())) {
-            button1.setStyle("-fx-background-color: aliceblue;");
-            button5.setStyle("-fx-background-color: aliceblue;");
-            button9.setStyle("-fx-background-color: aliceblue;");
-
-        } else if (button3.getText().equals(button5.getText()) && button3.getText().equals(button7.getText())) {
-            button3.setStyle("-fx-background-color: aliceblue;");
-            button5.setStyle("-fx-background-color: aliceblue;");
-            button7.setStyle("-fx-background-color: aliceblue;");
-
-        }
-    }
+    
 
     @FXML
     private void navigateBack(MouseEvent event) {
@@ -184,6 +142,20 @@ public class RecordBoardController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("TicTacToe");
         stage.show();
+    }
+
+    @FXML
+    public void playRecord(ActionEvent event) throws IOException {
+        clearButton();
+        againButton.setDisable(true);
+        draw();
+    }
+
+    private void clearButton() {
+        buttons.forEach((button) -> {
+            button.setText(" ");
+            button.setStyle("-fx-background-color: transparent;");
+        });
     }
 
     private void draw() {
@@ -317,17 +289,47 @@ public class RecordBoardController implements Initializable {
 
     }
 
-    @FXML
-    public void playRecord(ActionEvent event) throws IOException {
-        clearButton();
-        againButton.setDisable(true);
-        draw();
-    }
+    private void highLight() {
+        if (button1.getText().equals(button2.getText()) && button1.getText().equals(button3.getText())) {
+            button1.setStyle("-fx-background-color: aliceblue;");
+            button2.setStyle("-fx-background-color: aliceblue;");
+            button3.setStyle("-fx-background-color: aliceblue;");
 
-    private void clearButton() {
-        buttons.forEach((button) -> {
-            button.setText(" ");
-            button.setStyle("-fx-background-color: transparent;");
-        });
+        } else if (button4.getText().equals(button5.getText()) && button4.getText().equals(button6.getText())) {
+            button4.setStyle("-fx-background-color: aliceblue;");
+            button5.setStyle("-fx-background-color: aliceblue;");
+            button6.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button7.getText().equals(button8.getText()) && button7.getText().equals(button9.getText())) {
+            button7.setStyle("-fx-background-color: aliceblue;");
+            button8.setStyle("-fx-background-color: aliceblue;");
+            button9.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button1.getText().equals(button4.getText()) && button1.getText().equals(button7.getText())) {
+            button1.setStyle("-fx-background-color: aliceblue;");
+            button4.setStyle("-fx-background-color: aliceblue;");
+            button7.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button2.getText().equals(button5.getText()) && button2.getText().equals(button8.getText())) {
+            button2.setStyle("-fx-background-color: aliceblue;");
+            button5.setStyle("-fx-background-color: aliceblue;");
+            button8.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button3.getText().equals(button6.getText()) && button3.getText().equals(button9.getText())) {
+            button3.setStyle("-fx-background-color: aliceblue;");
+            button6.setStyle("-fx-background-color: aliceblue;");
+            button9.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button1.getText().equals(button5.getText()) && button1.getText().equals(button9.getText())) {
+            button1.setStyle("-fx-background-color: aliceblue;");
+            button5.setStyle("-fx-background-color: aliceblue;");
+            button9.setStyle("-fx-background-color: aliceblue;");
+
+        } else if (button3.getText().equals(button5.getText()) && button3.getText().equals(button7.getText())) {
+            button3.setStyle("-fx-background-color: aliceblue;");
+            button5.setStyle("-fx-background-color: aliceblue;");
+            button7.setStyle("-fx-background-color: aliceblue;");
+
+        }
     }
 }
