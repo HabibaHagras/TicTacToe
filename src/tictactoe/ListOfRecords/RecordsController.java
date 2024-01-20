@@ -95,16 +95,7 @@ public class RecordsController implements Initializable {
         loadData();
     }
 
-    private void loadData() {
-        list.removeAll(list);
-        String[] pathnames;
-        File file = new File("F:\\Java\\Java Project\\TicTacToe\\src\\Files");
-        pathnames = file.list();
-        for (String pathname : pathnames) {
-            list.add(pathname);
-        }
-        recordList.getItems().addAll(list);
-    }
+    
 
     @FXML
     public void navigateBack(MouseEvent event) {
@@ -142,7 +133,7 @@ public class RecordsController implements Initializable {
     }
     
     
-    void loadFile(String name){
+    private void loadFile(String name){
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -280,5 +271,16 @@ public class RecordsController implements Initializable {
         } catch (IOException ex) {
             System.err.println(ex);
         }
+    }
+    
+    private void loadData() {
+        list.removeAll(list);
+        String[] pathnames;
+        File file = new File("F:\\Java\\Java Project\\TicTacToe\\src\\Files");
+        pathnames = file.list();
+        for (String pathname : pathnames) {
+            list.add(pathname);
+        }
+        recordList.getItems().addAll(list);
     }
 }
