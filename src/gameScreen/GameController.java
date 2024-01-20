@@ -444,7 +444,7 @@ public class GameController implements Initializable {
         createXMLFile();
     }
 
-    void createXMLFile() {
+    private void createXMLFile() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
