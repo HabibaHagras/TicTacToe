@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/TicTacToe.java</file>
             <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/SignUpController.java</file>
             <file>file:/F:/Java_SE/Java_Project/TicTacToe/src/tictactoe/LoginController.java</file>
@@ -17,6 +18,24 @@
 =======
             <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/LoginController.java</file>
 >>>>>>> 3d1951f838880e69cb469b20719cd800f650baf8
+=======
+
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/gameScreen/GameController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/invitation/invitation.css</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/online/onlinemode.css</file>
+
+            <file>file:/F:/Java/Java%20Project/TicTacToe/src/gameScreen/GameController.java</file>
+            <file>file:/F:/Java/Java%20Project/TicTacToe/src/tictactoe/LoginController.java</file>
+            <file>file:/F:/Java/Java%20Project/TicTacToe/src/RecordGame/RecordBoardController.java</file>
+            <file>file:/F:/Java/Java%20Project/TicTacToe/src/tictactoe/ListOfRecords/RecordsController.java</file>
+
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/onlineUserScrren/OnlineUserController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/invitation/invitation.fxml</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/LoginController.java</file>
+
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/invitation/InvitationController.java</file>
+
+>>>>>>> 066f09cae17c0ce5057d4eff565f9488a87b2e1a
         </group>
     </open-files>
 </project-private>
