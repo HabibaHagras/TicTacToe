@@ -35,6 +35,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.concurrent.CountDownLatch;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -42,6 +43,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
+import online.OnlinemodeController;
 import onlineUserScrren.OnlineUserController;
 //import tictactoeserver.ClientConnection;
 
@@ -137,6 +139,7 @@ public class LoginController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
+                    OnlinemodeController onlineGameController = loaderr.getController();
 
                     // Load the OnlineUserController and get its controller instance
                     Parent onlinePlayersPage = loader.load();
@@ -153,12 +156,14 @@ public class LoginController implements Initializable {
                         onlinePlayers.add(onlineUser);
                         System.out.println("Online user: " + onlineUser);
                         System.out.println("noooooow");
-                        onlineUserController.updateOnlinePlayersList(enteredUsername, onlinePlayers);
+                        Platform.runLater(() -> {
+                            onlineUserController.updateOnlinePlayersList(enteredUsername, onlinePlayers);
+                        });
                         StringTokenizer tokenizer = new StringTokenizer(onlineUser);
 
                         String command = tokenizer.nextToken();
 
-                        // String username = tokenizer.nextToken();
+//                        String usernamee = tokenizer.nextToken();
                         //   String additionalInfo = tokenizer.nextToken();
                         if (command.equals("userfound")) {
 
@@ -203,17 +208,32 @@ public class LoginController implements Initializable {
 
                         }
                         if (command.equals("UserAccpeted")) {
+                             Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
+
+                            Platform.runLater(() -> onlineGameController.setPlayer2Name(onlineUserController.setPlayer2Name()));
                             System.out.println("thhhhhhhhhhhhhhhhis gaaaaaaaame online");
+//                            CountDownLatch latch = new CountDownLatch(1);
 
                             Platform.runLater(() -> {
-
+//                                apane.getChildren().clear();
+//                                AnchorPane onlineGamePane = new AnchorPane();  // Create a new AnchorPane instance
+//                                onlineGamePane.getChildren().add(onlineGamePage);
+//
+//                                // Set the Online Game FXML to the AnchorPane
+//                                apane.getChildren().add(onlineGamePane);
+//                                latch.countDown();
+//                                Scene scene = new Scene(onlineGamePage);
+//                                stagenow.setScene(scene);
+//                                stagenow.setTitle("ONLINEGame for login user");
+//                                stagenow.show();
+                                onlineUserController.closeONlineUserStage();
                                 Stage stage = new Stage();
                                 Scene scene = new Scene(onlineGamePage);
                                 stage.setScene(scene);
                                 stage.setTitle("ONLINEGame for login user");
                                 stage.show();
-
                             });
+
                         } else {
                             Platform.runLater(() -> {
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -227,6 +247,15 @@ public class LoginController implements Initializable {
                     }
 
                     System.out.println("Login successful!");
+                } else {
+                    System.out.println("noooooooot");
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Login Failed");
+                        alert.setHeaderText(null);
+                        alert.setContentText("User not found. Please check your credentials.");
+                        alert.showAndWait();
+                    });
                 }
             } catch (IOException ex) {
                 printStackTrace(ex);
@@ -279,7 +308,6 @@ public class LoginController implements Initializable {
 //                    });
 //
 //                }
-
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }

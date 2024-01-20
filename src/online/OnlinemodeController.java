@@ -97,6 +97,8 @@ public class OnlinemodeController implements Initializable {
     private Button logout;
 
     String symbol;
+    String Player11;
+    String Player22;
 
     /**
      * Initializes the controller class.
@@ -489,44 +491,52 @@ public class OnlinemodeController implements Initializable {
 
     private void sendXmove(Button button) {
         new Thread(() -> {
-            try {
-                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+            if (button != null) {
 
-                OutputStream outputStream = server.getOutputStream();
-                InputStream inputStream = server.getInputStream();
+                try {
+                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
 
-                String playMessage = "MOVE " + player1.getText() + " " + button.getId();
-                System.out.println("Sending move: " + playMessage);
+                    OutputStream outputStream = server.getOutputStream();
+                    InputStream inputStream = server.getInputStream();
 
-                outputStream.write(playMessage.getBytes());
+                     String playMessage = "MOVE " + player1.getText() + " " + button.getId();
+                 //   String playMessage = "MOVE " + button.getId();
 
-                // Assuming the server responds with the updated board state
-                byte[] responseBuffer = new byte[1024];
-                int responseBytes = inputStream.read(responseBuffer);
-                String serverResponse = new String(responseBuffer, 0, responseBytes);
+                    System.out.println("Sending move: " + playMessage);
 
-                System.out.println("Server responseeeeeee: " + serverResponse);
-                StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+                    outputStream.write(playMessage.getBytes());
 
-                String command = tokenizer.nextToken();
+                    // Assuming the server responds with the updated board state
+                    byte[] responseBuffer = new byte[1024];
+                    int responseBytes = inputStream.read(responseBuffer);
+                    String serverResponse = new String(responseBuffer, 0, responseBytes);
+
+                    System.out.println("Server responseeeeeee: " + serverResponse);
+                    StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+
+                    String command = tokenizer.nextToken();
 
 // Assuming the second token is the username
-                String username = tokenizer.nextToken();
-
+                    //   String username = tokenizer.nextToken();
 // Assuming the third token is the additional information (e.g., "111")
-                String additionalInfo = tokenizer.nextToken();
-                if (command.equals("X")) {
-                    System.out.println("X online user");
-                    Platform.runLater(() -> {
-                        button.setText("X");
-                    });
-                    // return true;
+                    String additionalInfo = tokenizer.nextToken();
+                    if (command.equals("X")) {
+                        String username = tokenizer.nextToken();
+                        String buttonId = tokenizer.nextToken();
+                        System.out.println("X online user");
+                        Platform.runLater(() -> {
+                            Button secondUserButton = getButtonById(buttonId);
+                            secondUserButton.setText(symbol);
+                            button.setText(symbol);
+                        });
+                        // return true;
 
-                    // button.setText(command);
+                        // button.setText(command);
+                    }
+
+                } catch (IOException ex) {
+                    ex.printStackTrace(); // Handle the exception appropriately
                 }
-
-            } catch (IOException ex) {
-                ex.printStackTrace(); // Handle the exception appropriately
             }
 
         }).start();
@@ -537,4 +547,28 @@ public class OnlinemodeController implements Initializable {
 //        System.out.println("setSymol" + symbol);
 //        this.symbol = symbol;
 //    }
+    private Button getButtonById(String buttonId) {
+        switch (buttonId) {
+            case "button1":
+                return button1;
+            case "button2":
+                return button2;
+            // Add cases for other buttons
+            default:
+                return null;
+        }
+    }
+
+    public void setPlayer1Name(String Player1) {
+        System.out.println("Player 1" + Player1);
+        this.Player11 = Player1;
+    Platform.runLater(() -> player1.setText( Player1));
+    }
+
+    public void setPlayer2Name(String Player2) {
+        System.out.println( Player2);
+        this.Player22 = Player2;
+    Platform.runLater(() -> player2.setText( Player2));
+    }
+
 }
