@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javax.swing.text.html.ListView;
+import online.OnlinemodeController;
 
 /**
  * FXML Controller class
@@ -74,6 +75,7 @@ public class OnlineUserController implements Initializable {
     String WaitingAccpetedPART;
     String WaitingAccpeted_user;
     private Alert waitingAlert;
+    String symbol;
 
     /**
      * Initializes the controller class.
@@ -108,6 +110,13 @@ public class OnlineUserController implements Initializable {
                     System.out.println("WaitingAccpeted user: " + WaitingAccpeted_user);
 
                 }
+                if (firstPart.equals("X")) {
+                    symbol = firstPart;
+                    // WaitingAccpeted_user = tokenizer.nextToken();
+
+                    System.out.println("symbol part: " + symbol);
+
+                }
 
                 System.out.println("First part: " + firstPart);
             } else {
@@ -124,6 +133,7 @@ public class OnlineUserController implements Initializable {
             String selectedItem = onlinePlayersListView.getSelectionModel().getSelectedItem();
             new Thread(() -> {
                 try {
+
                     server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                     OutputStream outputStream = server.getOutputStream();
                     InputStream inputStream = server.getInputStream();
@@ -133,6 +143,7 @@ public class OnlineUserController implements Initializable {
                     outputStream.write(inviteMessage.getBytes());
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
+                    OnlinemodeController onlineGameController = loaderr.getController();
 
                     byte[] responseBuffer = new byte[1024];
                     int responseBytes = inputStream.read(responseBuffer);
@@ -156,7 +167,7 @@ public class OnlineUserController implements Initializable {
                             waitingAlert.setHeaderText("Please wait...");
                             waitingAlert.setContentText("Performing some task. Please wait...");
 
-//                            waitingAlert.showAndWait().ifPresent(response -> {
+                            waitingAlert.showAndWait().ifPresent(response -> {
                                 if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
                                     System.out.println("WaitingAccpeted online user");
 
@@ -164,7 +175,7 @@ public class OnlineUserController implements Initializable {
                                         Stage stage = new Stage();
                                         Scene scene = new Scene(onlineGamePage);
                                         stage.setScene(scene);
-                                        stage.setTitle("ONLINEGamegor online user");
+                                        stage.setTitle("ONLINEGamegor online user" + WaitingAccpeted_user);
                                         stage.show();
 
                                         // Close the alert immediately
@@ -220,22 +231,22 @@ public class OnlineUserController implements Initializable {
                                 //     System.out.println("Alert is closed");
                                 // });
 //                            });
+                            });
 
-//                        }
+                            if (symbol.equals("X")) {
+                                System.out.println("X online user");
+
+                               // onlineGameController.setSymol(symbol);
+
+                            }
                         });
                     }
-                    if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
-                        System.out.println("WaitingAccpeted online user");
+                    if (command.equals("X")) {
+                        System.out.println("X online user");
 
-                        Platform.runLater(() -> {
-                            Stage stage = new Stage();
-                            Scene scene = new Scene(onlineGamePage);
-                            stage.setScene(scene);
-                            stage.setTitle("ONLINEGamegor online user");
-                            stage.show();
-
-                        });
+//                        onlineGameController.setSymol(symbol);
                     }
+
                 } catch (UnknownHostException ex) {
                     Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
