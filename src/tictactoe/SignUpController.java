@@ -5,8 +5,7 @@
  */
 package tictactoe;
 
-import DTO.DTO;
-import Database.DataAccessLayer;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
