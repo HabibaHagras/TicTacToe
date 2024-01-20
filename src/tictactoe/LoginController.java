@@ -33,18 +33,21 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.StringTokenizer;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
+import online.OnlinemodeController;
 import onlineUserScrren.OnlineUserController;
 //import tictactoeserver.ClientConnection;
-
 
 /**
  * FXML Controller class
@@ -53,7 +56,7 @@ import onlineUserScrren.OnlineUserController;
  */
 public class LoginController implements Initializable {
 
-    Stage stagenow;
+    public static Stage stagenow;
     Parent myNewScene;
     @FXML
     AnchorPane apane;
@@ -75,6 +78,7 @@ public class LoginController implements Initializable {
     private Text Text;
     Socket s;
     Socket server;
+    FXMLLoader loader;
 
     /**
      * Initializes the controller class.
@@ -130,7 +134,7 @@ public class LoginController implements Initializable {
 
                 if (serverResponse.equals("login succeed")) {
                     ArrayList<String> onlinePlayers = new ArrayList<>();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
 
                     // Load the OnlineUserController and get its controller instance
                     Parent onlinePlayersPage = loader.load();
@@ -150,31 +154,131 @@ public class LoginController implements Initializable {
                         onlineUserController.updateOnlinePlayersList(onlinePlayers);
                         StringTokenizer tokenizer = new StringTokenizer(onlineUser);
 
-                       String command = tokenizer.nextToken();
+                        String command = tokenizer.nextToken();
 
-                       // String username = tokenizer.nextToken();
-
-                     //   String additionalInfo = tokenizer.nextToken();
+                        // String username = tokenizer.nextToken();
+                        //   String additionalInfo = tokenizer.nextToken();
                         if (command.equals("userfound")) {
+                            //arrString[] = showAlertForInvitedPlayer , username p1 , username p2
+                             
+                            ButtonType Accept = new ButtonType("Accept");
+                            ButtonType Reject = new ButtonType("Reject");
 
                             Platform.runLater(() -> {
-                                Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
-                                inviteAlert.setTitle("Invitation");
-                                inviteAlert.setHeaderText("You've received an invitation!");
-                                inviteAlert.setContentText("Do you want to accept?");
-                                inviteAlert.showAndWait();
+                                Alert alert = new Alert(Alert.AlertType.NONE, "", Accept, Reject);
+                                alert.setTitle("Invitation");
+                                alert.setContentText("Do you want to accept?");
+                                Window window = alert.getDialogPane().getScene().getWindow();
+                                window.setOnCloseRequest(e -> alert.hide());
+
+                                Optional<ButtonType> result = alert.showAndWait();
+                                result.ifPresent(res -> {
+                                    if (res.equals(Accept)) {
+                                        
+                                        new Thread(() -> {
+                                            try {
+                                                String msg1 = "Accept" + " " + enteredUsername + " " + enteredPassword;
+                                                System.out.println(msg1);
+                                                outputStream.write(msg1.getBytes());
+                                                outputStream.flush();
+                                                // Navigate to the game screen for both users
+
+                                        // For the sender
+//                                        FXMLLoader gameLoaderSender = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+//                                        Parent gameScreenSender = gameLoaderSender.load();
+//                                        OnlinemodeController gameControllerSender = gameLoaderSender.getController();
+//                                        gameControllerSender.setPlayers(enteredUsername, "InvitingPlayer"); // Pass usernames
+//                                        Scene gameSceneSender = new Scene(gameScreenSender);
+//                                        Stage gameStageSender = new Stage();
+//                                        gameStageSender.setScene(gameSceneSender);
+//                                        gameStageSender.setTitle("TicTacToe Game (Sender)");
+//                                        gameStageSender.show();
+//
+//                                        // For the receiver
+//                                        FXMLLoader gameLoaderReceiver = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+//                                        Parent gameScreenReceiver = gameLoaderReceiver.load();
+//                                        OnlinemodeController gameControllerReceiver = gameLoaderReceiver.getController();
+//                                        gameControllerReceiver.setPlayers(enteredUsername, "InvitedPlayer"); // Pass usernames
+//                                        Scene gameSceneReceiver = new Scene(gameScreenReceiver);
+//                                        Stage gameStageReceiver = new Stage();
+//                                        gameStageReceiver.setScene(gameSceneReceiver);
+//                                        gameStageReceiver.setTitle("TicTacToe Game (Receiver)");
+//                                        gameStageReceiver.show();
+
+                                                
+                                            } catch (IOException ex) {
+                                                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }).start();
+                                        
+                                    } else if (res.equals(Reject)) {
+                                        try {
+                                            String msg2 = "Reject" + " " + enteredUsername + " " + enteredPassword;
+                                            System.out.println(msg2);
+                                            outputStream.write(msg2.getBytes());
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                    }
+                                });
+                            });
+                            
+                             
+
+//                            Platform.runLater(() -> {
+//                                Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
+//                                inviteAlert.setTitle("Invitation");
+//                                inviteAlert.setHeaderText("You've received an invitation!");
+//                                inviteAlert.setContentText("Do you want to accept?");
+//                               // inviteAlert.showAndWait();
+//                                                    ButtonType result = inviteAlert.showAndWait().orElse(ButtonType.CANCEL);
+//
+//                                 if (result == ButtonType.OK) {
+//                                    try {
+//                                        // User clicked "OK"
+//                                        System.out.println("OK button clicked");
+//                                        
+//                                        // Add your logic for handling the "OK" button click here
+//                                        
+//                                        // loader = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+//                                       myNewScene = FXMLLoader.load(getClass().getResource("/online/onlinemode.fxml"));
+//                                                           OnlinemodeController omc = loader.getController();
+//
+//                                        //Parent myNewScene1 = loader1.load();
+//                                          Scene scene = new Scene(myNewScene);
+//                            //Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//                                        stagenow.setScene(scene);
+//                                       stagenow.setTitle("Tic Tac Toe");
+//                                       stagenow.show();
+//
+//                                           } catch (IOException ex) {
+//                                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//                                    }
+//        } else {
+//            // User closed the dialog without clicking "OK"
+//            System.out.println("Dialog closed without clicking OK");
+//        }
+//
+//
+//                            
+//                                
+//
+//                            });
+                        }
+//                        if(command.equals("twoPlayers")){
+//                                 navigateAfterAccept();
+//                        
+//                    }
+                       else {
+                            Platform.runLater(() -> {
+                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                Scene scene = new Scene(onlinePlayersPage);
+                                stage.setScene(scene);
+                                stage.setTitle("TicTacToe");
+                                stage.show();
 
                             });
-                        }
-                else{
-                        Platform.runLater(() -> {
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = new Scene(onlinePlayersPage);
-                            stage.setScene(scene);
-                            stage.setTitle("TicTacToe");
-                            stage.show();
-
-                        });
                         }
                     }
 
@@ -199,5 +303,26 @@ public class LoginController implements Initializable {
         stagenow.setTitle("Tic Tac Toe");
         stagenow.show();
     }
+
+//    private void navigateAfterAccept() throws IOException {
+//        Platform.runLater(() -> {
+//            System.out.println("tictactoe.LoginController.navigateAfterAccept()");
+//            System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+//
+//            try {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+//                Parent myNewScene = loader.load();
+//                Scene scene = new Scene(myNewScene);
+//                 stagenow = new Stage();
+//
+//                //stagenow = TicTacToe.getStage();
+//                stagenow.setScene(scene);
+//                stagenow.setTitle("game");
+//                stagenow.show();
+//            } catch (IOException e) {
+//                e.printStackTrace(); // Handle or log the exception as needed
+//            }
+//        });
+//    }
 
 }

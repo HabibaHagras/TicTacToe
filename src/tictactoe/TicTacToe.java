@@ -18,6 +18,16 @@ import javafx.stage.Stage;
  */
 public class TicTacToe extends Application {
     
+     private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        TicTacToe.stage = stage;
+    }
+    
     @Override
     public void start(Stage stage) throws Exception {
 

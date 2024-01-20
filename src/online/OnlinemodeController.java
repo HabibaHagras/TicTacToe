@@ -93,6 +93,8 @@ public class OnlinemodeController implements Initializable {
     PrintStream mouth;
     @FXML
     private Button logout;
+     InputStream inputStream;
+  OutputStream outputStream;
 
     /**
      * Initializes the controller class.
@@ -105,6 +107,12 @@ public class OnlinemodeController implements Initializable {
             setupButton(button);
 
         });
+        try {
+            server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+             outputStream= server.getOutputStream();
+        } catch (IOException ex) {
+            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -113,53 +121,78 @@ public class OnlinemodeController implements Initializable {
             setPlayerSymbol(button);
             button.setDisable(true);
             checkWinner(player1.getText(), player2.getText());
+            updateBoardAfterRequest("updateBoard "+"yomna "+"rawan"+" "+"X");
         });
     }
-
-    public void setPlayerSymbol(Button button) {
+    
+      public void updateBoardAfterRequest(String str) {
+         
         try {
-            server = new Socket("127.0.0.1", 5005);
-            ear = new DataInputStream(server.getInputStream());
-            mouth = new PrintStream(server.getOutputStream());
-            if (playerTurn % 2 == 0) {
-                String msg = "x";
-                mouth.println(msg);
-
-                button.setTextFill(Paint.valueOf("#ff0000"));
-                playerTurn = 1;
-
-            } else {
-                String msg = "O";
-                mouth.println(msg);
-                button.setTextFill(Paint.valueOf("#ffc300"));
-
-                playerTurn = 0;
-
-            }
-            new Thread() {
-                public void run() {
-
-                    while (true) {
-                        String msg;
-                        //String msgo;
-
-                        try {
-                            msg = ear.readLine();
-                            button.setText(msg);
-
-                        } catch (IOException ex) {
-                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-
-                }
-
-            }.start();
-
+             
+            outputStream.write(str.getBytes());
+          //  outputStream.flush();
         } catch (IOException ex) {
             Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void setPlayerSymbol(Button button) {
+        if (playerTurn % 2 == 0) {
+            button.setText("X");
+            button.setTextFill(Paint.valueOf("#ff0000"));
+            playerTurn = 1;
+        } else {
+            button.setText("O");
+            button.setTextFill(Paint.valueOf("#ffc300"));
+            playerTurn = 0;
+        }
+    }
+     
+   
+
+//    public void setPlayerSymbol(Button button) {
+//        try {
+//            server = new Socket("127.0.0.1", 5005);
+//            ear = new DataInputStream(server.getInputStream());
+//            mouth = new PrintStream(server.getOutputStream());
+//            if (playerTurn % 2 == 0) {
+//                String msg = "x";
+//                mouth.println(msg);
+//
+//                button.setTextFill(Paint.valueOf("#ff0000"));
+//                playerTurn = 1;
+//
+//            } else {
+//                String msg = "O";
+//                mouth.println(msg);
+//                button.setTextFill(Paint.valueOf("#ffc300"));
+//
+//                playerTurn = 0;
+//
+//            }
+//            new Thread() {
+//                public void run() {
+//
+//                    while (true) {
+//                        String msg;
+//                        //String msgo;
+//
+//                        try {
+//                            msg = ear.readLine();
+//                            button.setText(msg);
+//
+//                        } catch (IOException ex) {
+//                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    }
+//
+//                }
+//
+//            }.start();
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     public void resetButton(Button button) {
         button.setDisable(false);
