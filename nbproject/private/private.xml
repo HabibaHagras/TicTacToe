@@ -6,11 +6,8 @@
         <group/>
 =======
         <group>
-            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/gameScreen/GameController.java</file>
-            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/SignUpController.java</file>
-            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/looserplayer/LosserController.java</file>
+            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/onlineUserScrren/OnlineUserController.java</file>
             <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/LoginController.java</file>
-            <file>file:/H:/iti/JavaProject/tictactoegame/TicTacToe/src/tictactoe/LevelsPckg/LevelsPageController.java</file>
         </group>
 >>>>>>> 7a190b933b1cee42c45e2ef553443ca0ebf492ce
     </open-files>
