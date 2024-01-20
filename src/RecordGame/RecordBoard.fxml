@@ -8,9 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="apane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../CSS/Game.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameScreen.GameController">
-
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../CSS/Game.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RecordGame.RecordBoardController">
+    <children>
       <ImageView fitHeight="112.0" fitWidth="128.0" layoutX="170.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assest/10.png" />
@@ -59,7 +58,7 @@
          </font>
       </Button>
       <Button id="btn" fx:id="button9" layoutX="472.0" layoutY="397.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="136.0" textFill="#ffc300" />
-      <ImageView fx:id="backBtn" fitHeight="85.0" fitWidth="115.0" layoutX="35.0" layoutY="501.0" onMouseClicked="#onclickback" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backBtn" fitHeight="85.0" fitWidth="115.0" layoutX="35.0" layoutY="501.0" onMouseClicked="#navigateBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assest/btn.png" />
          </image>
@@ -68,6 +67,6 @@
       <Line endX="-100.0" endY="293.0" layoutX="561.0" layoutY="187.0" startX="-100.0" stroke="WHITE" strokeWidth="5.0" />
       <Line endX="-296.0" layoutX="443.0" layoutY="280.0" startX="165.0" stroke="WHITE" strokeWidth="5.0" />
       <Line endX="-296.0" layoutX="443.0" layoutY="387.0" startX="165.0" stroke="WHITE" strokeWidth="5.0" />
-      <Button fx:id="newButton" layoutX="625.0" layoutY="515.0" mnemonicParsing="false" onAction="#onclicknewgame" prefHeight="55.0" prefWidth="136.0" text="New Game" />
+      <Button id="newButton" fx:id="againButton" layoutX="625.0" layoutY="515.0" mnemonicParsing="false" onAction="#playRecord" prefHeight="55.0" prefWidth="136.0" text="Play" />
    </children>
 </AnchorPane>
