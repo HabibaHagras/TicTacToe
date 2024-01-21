@@ -45,7 +45,6 @@ import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import online.OnlinemodeController;
 import onlineUserScrren.OnlineUserController;
 
-
 /**
  * FXML Controller class
  *
@@ -78,6 +77,8 @@ public class LoginController implements Initializable {
     OutputStream outputStream;
     InputStream inputStream;
     String Userlogin;
+    String slckted_name;
+    String from_name;
 
     /**
      * Initializes the controller class.
@@ -89,33 +90,13 @@ public class LoginController implements Initializable {
 
     }
 
-    private void setaction(ActionEvent event) {
-
-        AnchorPane pane;
-
-        try {
-            pane = FXMLLoader.load(getClass().getResource("login.fxml"));
-            apane.getChildren().setAll(pane);
-
-            System.out.println("cliiiiiicked");
-
-        } catch (IOException ex) {
-            // Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("cliiiiiicked");
-
-        }
-
-        System.out.println("cliiiiiicked");
-
-    }
-
     public void setStage(Stage stage) {
         this.stagenow = stage;
     }
 
     @FXML
     private void setaction1(ActionEvent event) {
-        AnchorPane pane;
+        // AnchorPane pane;
         String enteredUsername = feild.getText();
         String enteredPassword = feild1.getText();
 
@@ -125,7 +106,7 @@ public class LoginController implements Initializable {
                 outputStream = server.getOutputStream();
                 inputStream = server.getInputStream();
 
-                String msg = "login" + " " + enteredUsername + " " + enteredPassword;
+                String msg = "login" + " " + enteredUsername + " " + enteredPassword + " " + "123456";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
 
@@ -165,6 +146,21 @@ public class LoginController implements Initializable {
 
 //                        String usernamee = tokenizer.nextToken();
                         //   String additionalInfo = tokenizer.nextToken();
+                        
+                          if (command.equals("MOVETO")) {
+                            String playerName = tokenizer.nextToken();
+                            String buttonClicked = tokenizer.nextToken();
+                            String symbol = tokenizer.nextToken();
+                            Platform.runLater(() -> {
+                                onlineGameController.setPlayerSymbol(onlineGameController.getButtonById(buttonClicked));
+                                //      onlineGameController.playerTurn = 1;
+                               
+
+                            });
+                            System.out.println("closeeeeeeeeeeeeeeeeeeeeeeeee");
+                            //  outputStream.close();
+                        }
+                          
                         if (command.equals("userfound")) {
 
                             Platform.runLater(() -> {
@@ -208,9 +204,9 @@ public class LoginController implements Initializable {
 
                         }
                         if (command.equals("UserAccpeted")) {
-                             Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
-
-                            Platform.runLater(() -> onlineGameController.setPlayer2Name(onlineUserController.setPlayer2Name()));
+                            Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
+//
+                            Platform.runLater(() -> onlineGameController.setPlayer2Name());
                             System.out.println("thhhhhhhhhhhhhhhhis gaaaaaaaame online");
 //                            CountDownLatch latch = new CountDownLatch(1);
 
@@ -230,11 +226,14 @@ public class LoginController implements Initializable {
                                 Stage stage = new Stage();
                                 Scene scene = new Scene(onlineGamePage);
                                 stage.setScene(scene);
-                                stage.setTitle("ONLINEGame for login user");
+                                stage.setTitle("ONLINEGame for login user" + enteredUsername);
                                 stage.show();
                             });
 
-                        } else {
+                        }
+
+                       else {
+
                             Platform.runLater(() -> {
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                 Scene scene = new Scene(onlinePlayersPage);
@@ -243,7 +242,9 @@ public class LoginController implements Initializable {
                                 stage.show();
 
                             });
+
                         }
+
                     }
 
                     System.out.println("Login successful!");
@@ -260,6 +261,7 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 printStackTrace(ex);
             }
+            
         }).start();
 
     }
@@ -285,7 +287,7 @@ public class LoginController implements Initializable {
                 server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                 outputStream = server.getOutputStream();
                 inputStream = server.getInputStream();
-                String msg = "accept" + " " + feild.getText() + " " + feild1.getText();
+                String msg = "accept" + " " + feild.getText() + " " + feild1.getText() + " " + "123456";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
 
@@ -313,6 +315,18 @@ public class LoginController implements Initializable {
             }
 
         }).start();
+        
     }
 
+    public void setSelctedName(String slckted_name) {
+        System.out.println("slckted_name" + slckted_name);
+        this.slckted_name = slckted_name;
+//        username.setText(slckted_name);
+    }
+
+    public void setFromName(String from_name) {
+        System.out.println("from_name NAME" + from_name);
+        this.from_name = from_name;
+        //    username.setText(login_name);
+    }
 }

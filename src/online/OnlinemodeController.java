@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -81,7 +82,7 @@ public class OnlinemodeController implements Initializable {
     @FXML
     private Button newButton;
 
-    private int playerTurn = 0;
+    public int playerTurn = 0;
     ArrayList<Button> buttons;
     public static String winner;
 
@@ -99,19 +100,27 @@ public class OnlinemodeController implements Initializable {
     String symbol;
     String Player11;
     String Player22;
+    OutputStream outputStream;
+    InputStream inputStream;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
         buttons.forEach(button -> {
             setupButton(button);
 
         });
+        if (player1.getText().equals("ahmed")) {
+            player2.setText("Habiba");
+        } else if (player1.getText().equals("Habiba")) {
+            player2.setText("ahmed");
 
+        }
     }
 
     private void setupButton(Button button) {
@@ -123,68 +132,47 @@ public class OnlinemodeController implements Initializable {
     }
 
     public void setPlayerSymbol(Button button) {
+
         new Thread(() -> {
-            if (playerTurn % 2 == 0) {
-                sendXmove(button);
-                if (symbol.equals("X")) {
-                    button.setText("X");
-                }
-            } else {
-                button.setText("O");
+        if (playerTurn % 2 == 0) {
+            try {
+                System.out.println(button.getId());
+                System.out.println(button.getId());
+                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+
+                outputStream = server.getOutputStream();
+                String playMessage = "MOVE" + " " + player2.getText() + " " + button.getId() + " " + "X";
+                outputStream.write(playMessage.getBytes());
+
+                sendXmove(button.getId());
+                button.setTextFill(Paint.valueOf("#ff0000"));
+                playerTurn = 1;
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                outputStream = server.getOutputStream();
+                String playMessage2 = "MOVE" + " " + player2.getText() + " " + button.getId() + " " + "O";
+                outputStream.write(playMessage2.getBytes());
+
+                sendXmove(button.getId());
+                sendOmove(button.getId());
+
                 button.setTextFill(Paint.valueOf("#ffc300"));
                 playerTurn = 0;
+            } catch (IOException ex) {
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }).
                 start();
 
     }
 
-    /*
-    public void setPlayerSymbol(Button button) {
-        try {
-            server = new Socket("127.0.0.1", 5005);
-            ear = new DataInputStream(server.getInputStream());
-            mouth = new PrintStream(server.getOutputStream());
-            if (playerTurn % 2 == 0) {
-                String msg = "x";
-                mouth.println(msg);
-
-                button.setTextFill(Paint.valueOf("#ff0000"));
-                playerTurn = 1;
-
-            } else {
-                String msg = "O";
-                mouth.println(msg);
-                button.setTextFill(Paint.valueOf("#ffc300"));
-
-                playerTurn = 0;
-
-            }
-            new Thread() {
-                public void run() {
-
-                    while (true) {
-                        String msg;
-                        //String msgo;
-
-                        try {
-                            msg = ear.readLine();
-                            button.setText(msg);
-
-                        } catch (IOException ex) {
-                            // Logger.getLogger(BorderChat.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-
-                }
-
-            }.start();
-
-        } catch (IOException ex) {
-            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-     */
     public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
@@ -489,72 +477,92 @@ public class OnlinemodeController implements Initializable {
 
     }
 
-    private void sendXmove(Button button) {
+    private void sendXmove(String buttonId) {
         new Thread(() -> {
-            if (button != null) {
 
-                try {
-                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+            try {
+                //     server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
 
-                    OutputStream outputStream = server.getOutputStream();
-                    InputStream inputStream = server.getInputStream();
+                //   OutputStream outputStream = server.getOutputStream();
+                InputStream inputStream = server.getInputStream();
+                String playMessage = "MOVE" + " " + player2.getText() + " " + buttonId + " " + "X";
+                //   String playMessage = "MOVE " + button.getId();
+                System.out.println(getButtonById(buttonId));
+                System.out.println("thisSyymol" + getButtonById(buttonId).getText());
+                System.out.println("Sending move: " + playMessage);
 
-                     String playMessage = "MOVE " + player1.getText() + " " + button.getId();
-                 //   String playMessage = "MOVE " + button.getId();
+                //     outputStream.write(playMessage.getBytes());
+                // Assuming the server responds with the updated board state
+                byte[] responseBuffer = new byte[1024];
+                int responseBytes = inputStream.read(responseBuffer);
+                String serverResponse = new String(responseBuffer, 0, responseBytes);
+                //   outputStream.close();
+                System.out.println("Server responseeeeeee: " + serverResponse);
+                StringTokenizer tokenizer = new StringTokenizer(serverResponse);
 
-                    System.out.println("Sending move: " + playMessage);
+                String command = tokenizer.nextToken();
+//                String palyer2 = tokenizer.nextToken();
+//                String buttton = tokenizer.nextToken();
+//                String symbol = tokenizer.nextToken();
+                if (command.equals("MOVETO")) {
+                    String playerName = tokenizer.nextToken();
+                    String buttonClicked = tokenizer.nextToken();
+                    String symbol = tokenizer.nextToken();
 
-                    outputStream.write(playMessage.getBytes());
-
-                    // Assuming the server responds with the updated board state
-                    byte[] responseBuffer = new byte[1024];
-                    int responseBytes = inputStream.read(responseBuffer);
-                    String serverResponse = new String(responseBuffer, 0, responseBytes);
-
-                    System.out.println("Server responseeeeeee: " + serverResponse);
-                    StringTokenizer tokenizer = new StringTokenizer(serverResponse);
-
-                    String command = tokenizer.nextToken();
-
-// Assuming the second token is the username
-                    //   String username = tokenizer.nextToken();
-// Assuming the third token is the additional information (e.g., "111")
-                    String additionalInfo = tokenizer.nextToken();
-                    if (command.equals("X")) {
-                        String username = tokenizer.nextToken();
-                        String buttonId = tokenizer.nextToken();
-                        System.out.println("X online user");
-                        Platform.runLater(() -> {
-                            Button secondUserButton = getButtonById(buttonId);
-                            secondUserButton.setText(symbol);
-                            button.setText(symbol);
-                        });
-                        // return true;
-
-                        // button.setText(command);
-                    }
-
-                } catch (IOException ex) {
-                    ex.printStackTrace(); // Handle the exception appropriately
+                    Platform.runLater(() -> {
+                        Button clickedButton = getButtonById(buttonClicked);
+                        clickedButton.setText(symbol);
+                        System.out.println("Clicked" + "   " + buttonClicked);
+                        clickedButton.setDisable(true);
+                        setupButton(clickedButton);
+//                        playerTurn = 1;
+                        checkWinner(player1.getText(), player2.getText());
+                    });
                 }
+
+            } catch (IOException ex) {
+                ex.printStackTrace(); // Handle the exception appropriately
             }
 
         }).start();
 
     }
 
-//    public void setSymol(String symbol) {
-//        System.out.println("setSymol" + symbol);
-//        this.symbol = symbol;
-//    }
-    private Button getButtonById(String buttonId) {
+    public void setPlayerrSymbol(Button button, String sy) {
+        if (playerTurn % 2 == 0) {
+            button.setText(sy);
+            button.setTextFill(Paint.valueOf("#ff0000"));
+            playerTurn = 1;
+        } else {
+            button.setText("O");
+            button.setTextFill(Paint.valueOf("#ffc300"));
+            playerTurn = 0;
+        }
+    }
+
+    public Button getButtonById(String buttonId) {
         switch (buttonId) {
             case "button1":
                 return button1;
             case "button2":
                 return button2;
+            case "button3":
+                return button3;
+            case "button4":
+                return button4;
+            case "button5":
+                return button5;
+            case "button6":
+                return button6;
+            case "button7":
+                return button7;
+            case "button8":
+                return button8;
+            case "button9":
+                return button9;
             // Add cases for other buttons
             default:
+                System.out.println("nulllllllllllllllllllllllllllll");
                 return null;
         }
     }
@@ -562,13 +570,82 @@ public class OnlinemodeController implements Initializable {
     public void setPlayer1Name(String Player1) {
         System.out.println("Player 1" + Player1);
         this.Player11 = Player1;
-    Platform.runLater(() -> player1.setText( Player1));
+        Platform.runLater(() -> player1.setText(Player1));
+        if (Player11.equals("ahmed")) {
+            Platform.runLater(() -> player2.setText("Habiba"));
+        } else if (Player11.equals("Habiba")) {
+            Platform.runLater(() -> player2.setText("ahmed"));
+
+        }
     }
 
-    public void setPlayer2Name(String Player2) {
-        System.out.println( Player2);
-        this.Player22 = Player2;
-    Platform.runLater(() -> player2.setText( Player2));
+    public void setPlayer2Name() {
+
+        if (player1.getText().equals("ahmed")) {
+            Platform.runLater(() -> player2.setText("Habiba"));
+        } else if (player1.getText().equals("Habiba")) {
+            Platform.runLater(() -> player2.setText("ahmed"));
+
+        }
     }
 
+    private void sendOmove(String buttonId) {
+        new Thread(() -> {
+
+            try {
+                InputStream inputStream = server.getInputStream();
+
+                String playMessage = "MOVE" + " " + player2.getText() + " " + buttonId + " " + "O";
+                //   String playMessage = "MOVE " + button.getId();
+                System.out.println(getButtonById(buttonId));
+                System.out.println("thisSyymol" + getButtonById(buttonId).getText());
+                System.out.println("Sending move: " + playMessage);
+
+//                outputStream.write(playMessage.getBytes());
+                // Assuming the server responds with the updated board state
+                byte[] responseBuffer = new byte[1024];
+                int responseBytes = inputStream.read(responseBuffer);
+                String serverResponse = new String(responseBuffer, 0, responseBytes);
+
+                System.out.println("Server responseeeeeee: " + serverResponse);
+                StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+
+                String command = tokenizer.nextToken();
+//                String palyer2 = tokenizer.nextToken();
+//                String buttton = tokenizer.nextToken();
+//                String symbol = tokenizer.nextToken();
+                if (command.equals("MOVETO")) {
+                    String playerName = tokenizer.nextToken();
+                    String buttonClicked = tokenizer.nextToken();
+                    String symbol = tokenizer.nextToken();
+
+                    Platform.runLater(() -> {
+                        Button clickedButton = getButtonById(buttonClicked);
+                        clickedButton.setText(symbol);
+                        System.out.println("Clicked" + "   " + buttonClicked);
+                        clickedButton.setDisable(true);
+                        setupButton(clickedButton);
+//                        playerTurn = 0;
+                        checkWinner(player1.getText(), player2.getText());
+                    });
+                }
+//                if (command.equals("MOVEBy")) {
+//
+//                    System.out.println("X online user");
+//                    Platform.runLater(() -> {
+////                        Button secondUserButton = getButtonById(buttonId);
+////                        secondUserButton.setText(symbol);
+//                        getButtonById(buttonId).setText(symbol);
+//                    });
+//                    // return true;
+//
+//                    // button.setText(command);
+//                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace(); // Handle the exception appropriately
+            }
+
+        }).start();
+    }
 }

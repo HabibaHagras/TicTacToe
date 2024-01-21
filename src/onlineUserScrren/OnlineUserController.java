@@ -43,6 +43,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javax.swing.text.html.ListView;
 import online.OnlinemodeController;
+import tictactoe.LoginController;
 
 /**
  * FXML Controller class
@@ -62,7 +63,7 @@ public class OnlineUserController implements Initializable {
     DataInputStream ear;
     PrintStream mouth;
     ArrayList<String> onlinePplayers;
-    String UserInvitatonTO;
+    String UserInvitatonFrom;
     String WaitingAccpetedPART;
     String WaitingAccpeted_user;
     private Alert waitingAlert;
@@ -73,6 +74,10 @@ public class OnlineUserController implements Initializable {
     private Button logout;
     @FXML
     private ImageView btnBack;
+    String MOVEBy;
+    String Sybmol_user;
+    String firstPart;
+    String button;
 
     /**
      * Initializes the controller class.
@@ -111,7 +116,7 @@ public class OnlineUserController implements Initializable {
                 StringTokenizer tokenizer = new StringTokenizer(player);
 
                 if (tokenizer.hasMoreTokens()) {
-                    String firstPart = tokenizer.nextToken();
+                    firstPart = tokenizer.nextToken();
                     if (firstPart.equals("UserAccpeted") && tokenizer.hasMoreTokens()) {
                         WaitingAccpetedPART = firstPart;
                         WaitingAccpeted_user = tokenizer.nextToken();
@@ -135,13 +140,40 @@ public class OnlineUserController implements Initializable {
                         System.out.println("symbol part: " + symbol);
 
                     }
+                    if (firstPart.equals("MOVETO")) {
+                        MOVEBy = firstPart;
+                        String user = tokenizer.nextToken();
+                        button = tokenizer.nextToken();
+                        Sybmol_user = tokenizer.nextToken();
+                        // WaitingAccpeted_user = tokenizer.nextToken();
+
+                        System.out.println("MOVETO part: " + " " + MOVEBy);
+                        System.out.println("Sybmol_user part: " + " " + Sybmol_user);
+
+                    }
 
                     System.out.println("First part: " + firstPart);
                 } else {
                     System.out.println("Invalid input");
                 }
             }
+            /*    
+            FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+            try {
+                Parent onlineGamePage = loaderr.load();
+            } catch (IOException ex) {
+                Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            OnlinemodeController onlineGameController = loaderr.getController();
+            if (firstPart.equals("MOVETO")) {
+            
+                System.out.println("MOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE");
+             //   Platform.runLater(() -> {
+                    onlineGameController.setPlayerSymbol(onlineGameController.getButtonById(button));
+              //  });
 
+            }
+             */
             //   System.out.println(tokenizedPlayers.get(0));
             //   System.out.println(onlinePlayers.getClass());
             onlinePlayersListView.getItems().setAll(tokenizedPlayers);
@@ -157,13 +189,18 @@ public class OnlineUserController implements Initializable {
                     OutputStream outputStream = server.getOutputStream();
                     InputStream inputStream = server.getInputStream();
 
-                    String inviteMessage = "invite" + " " + selectedItem + " " + "1234";
+                    String inviteMessage = "invite" + " " + selectedItem + " " + "By" + " " + UserInvitatonFrom;
                     System.out.println(inviteMessage);
                     outputStream.write(inviteMessage.getBytes());
+               
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
                     OnlinemodeController onlineGameController = loaderr.getController();
-                    onlineGameController.setPlayer2Name(selectedItem);
+                    FXMLLoader loaderrr = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
+                    Parent onlinelogPage = loaderrr.load();
+                    LoginController onlinelogController = loaderrr.getController();
+                    onlinelogController.setSelctedName(selectedItem);
+                    onlinelogController.setFromName(UserInvitatonFrom);
                     byte[] responseBuffer = new byte[1024];
                     int responseBytes = inputStream.read(responseBuffer);
                     String serverResponse = new String(responseBuffer, 0, responseBytes);
@@ -177,8 +214,20 @@ public class OnlineUserController implements Initializable {
 
 // Assuming the third token is the additional information (e.g., "111")
                     String additionalInfo = tokenizer.nextToken();
+
+//                    if (MOVEBy.equals("MOVEBy")) {
+//                        Platform.runLater(() -> {
+////                      
+//                            Stage stage = new Stage();
+//                            Scene scene = new Scene(onlineGamePage);
+//                            stage.setScene(scene);
+//                            stage.setTitle("ONLINEGame for this user");
+//                            stage.show();
+//                        });
+//                    }
                     if (command.equals("userfound")) {
                         System.out.println("USERFOUND");
+
 //                        if (username.equals(UserInvitatonTO)) {
 /*
                         Platform.runLater(() -> {
@@ -252,7 +301,6 @@ public class OnlineUserController implements Initializable {
                         // });
 //                            });
                         /*        });*/
-
                         if (symbol.equals("X")) {
                             System.out.println("X online user");
 
@@ -282,7 +330,7 @@ public class OnlineUserController implements Initializable {
 
     public void setloginName(String login_name) {
         System.out.println("LOGIN NAME" + login_name);
-        this.UserInvitatonTO = login_name;
+        this.UserInvitatonFrom = login_name;
         username.setText(login_name);
     }
 
@@ -298,11 +346,11 @@ public class OnlineUserController implements Initializable {
         //  String enteredUsername = player1.getText();
         OutputStream outputStream = server.getOutputStream();
         InputStream inputStream = server.getInputStream();
-        String msg = "LOGOUT" + " " + UserInvitatonTO + " " + "1234";
+        String msg = "LOGOUT" + " " + UserInvitatonFrom + " " + "1234" + " " + "2345";
         System.out.println(msg);
 
         outputStream.write(msg.getBytes());
-        System.out.println("feild: " + UserInvitatonTO);
+        System.out.println("feild: " + UserInvitatonFrom);
         byte[] responseBuffer = new byte[1024];
         int responseBytes = inputStream.read(responseBuffer);
         String serverResponse = new String(responseBuffer, 0, responseBytes);
@@ -322,9 +370,9 @@ public class OnlineUserController implements Initializable {
     }
 
     public String setPlayer2Name() {
-    
+
         return WaitingAccpeted_user;
-     
+
     }
 
 }
