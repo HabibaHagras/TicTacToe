@@ -55,7 +55,7 @@ public class helpcontroller implements Initializable {
                            apane.getChildren().setAll(pane);
 
         } catch (IOException ex) {
-            Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
      }}
     }
     
