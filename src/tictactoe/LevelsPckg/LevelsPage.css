@@ -7,8 +7,6 @@ and open the template in the editor.
     Created on : Dec 29, 2023, 1:36:59 AM
     Author     : DELL
 */
-@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
-
 .root{
     -fx-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
     -fx-background-color: #003055;

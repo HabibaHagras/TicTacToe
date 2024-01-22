@@ -24,13 +24,13 @@
    <children>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="283.0" prefWidth="349.0" vgap="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="241.0" text="Computer">
+            <Button fx:id="buttonComputer" mnemonicParsing="false" onAction="#navigateToComputer" prefHeight="50.0" prefWidth="241.0" text="Computer">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="buttonlocal" mnemonicParsing="false" onAction="#onclick1" prefHeight="50.0" prefWidth="241.0" text="Local" />
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="254.0" text="Online" />
+            <Button fx:id="buttonLocal" mnemonicParsing="false" onAction="#navigateToLocal" prefHeight="50.0" prefWidth="241.0" text="Local" />
+            <Button fx:id="buttonOnline" mnemonicParsing="false" onAction="#navigateToOnline" prefHeight="45.0" prefWidth="254.0" text="Online" />
          </children>
       </FlowPane>
       <Text fx:id="toe" strokeType="OUTSIDE" strokeWidth="0.0" text="  TOE" textAlignment="CENTER" wrappingWidth="179.1773681640625" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -41,12 +41,12 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Button fx:id="helpicon" alignment="CENTER" mnemonicParsing="false" onAction="#onclick2" prefHeight="65.0" prefWidth="62.0" text="i" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="helpIcon" alignment="CENTER" mnemonicParsing="false" onAction="#navigateToHelp" prefHeight="65.0" prefWidth="62.0" text="i" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="rec" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="REC" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Button fx:id="rec" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#navigateToRecord" prefHeight="46.0" prefWidth="110.0" text="REC" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>

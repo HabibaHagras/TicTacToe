@@ -6,25 +6,34 @@ and open the template in the editor.
 /* 
     Created on : Dec 20, 2023, 12:18:18 AM
     Author     : Chicoo
+<<<<<<< HEAD
+@import "Game.css";
+
 */
-@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+
+
+
+
+
+
 #AnchorPane{
     -fx-background-color: #003055
 }
 
 #txt{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 30px;
     -FX-font-fill: #ffffff;
 }
 
 #gusetScore{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 40px;
 }
 
 #computerScore{
-    -FX-font-family: "Irish Grover",fantasy;
+    -FX-font-family: "IrishGrover";
     -FX-font-size: 40px;
 }
 #newButton{
@@ -35,13 +44,19 @@ and open the template in the editor.
      -fx-border-color: #FFFFFF;
     -fx-border-radius:90;
     -fx-text-fill: white;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
+    -FX-font-family: "IrishGrover";
     -fx-text-fill:white;
     -fx-font-size: 20px;
 }
 
 #btn{
-    -fx-background-color: #003055;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -FX-font-family: "IrishGrover";
     -fx-font-size: 42px;  
+}
+
+#record{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
 }

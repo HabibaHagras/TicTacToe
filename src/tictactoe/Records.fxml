@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@records.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.RecordsController">
+   <children>
+      <Text fx:id="txtRecords" layoutX="331.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECORDS" />
+      <VBox layoutX="37.0" layoutY="140.0" prefHeight="332.0" prefWidth="697.0">
+         <children>
+            <ListView fx:id="recordList" onMouseClicked="#displayBoard" />
+         </children>
+      </VBox>
+      <ImageView fx:id="backBtn" fitHeight="90.0" fitWidth="80.0" layoutX="690.0" layoutY="492.0" onMouseClicked="#navigateBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@right-arrow.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

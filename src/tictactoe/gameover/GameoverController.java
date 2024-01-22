@@ -5,6 +5,7 @@
  */
 package tictactoe.gameover;
 
+import computermode.ComputerGameController;
 import gameScreen.GameController;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import online.OnlinemodeController;
 
 /**
  * FXML Controller class
@@ -41,6 +43,11 @@ public class GameoverController implements Initializable {
     private Text Text1;
     @FXML
     private Button button;
+    private ComputerGameController gamecomputercontroller;
+    private OnlinemodeController onlinemodecontroller;
+    
+    int flag,flag1;
+    
 
     /**
      * Initializes the controller class.
@@ -54,10 +61,31 @@ public class GameoverController implements Initializable {
         this.gameController = gameController;
     }
 
+    public void setGameController(OnlinemodeController onlinemodecontroller) {
+        this.onlinemodecontroller = onlinemodecontroller;
+    }
+
     @FXML
     public void startscreenClick(ActionEvent event) throws IOException {
-        gameController.closeGameStage();
-        closeGameoverStage();
+        if (flag == 1) {
+             
+             gameController.closeGameStage();
+            closeGameoverStage();
+            
+            
+        } else if(flag == 2){
+          gamecomputercontroller.closeComputerGameStage();
+            closeGameoverStage();
+            
+        }
+        else{
+        onlinemodecontroller.closeGameStage();
+         closeGameoverStage();
+        }
+    //    gameController.closeGameStage();
+       
+        
+         //gamecomputercontroller.closeComputerGameStage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
         Parent myNewScene = loader.load();
         Scene newScene = new Scene(myNewScene);
@@ -76,4 +104,16 @@ public class GameoverController implements Initializable {
         Stage closeGameoverStage = (Stage) apane.getScene().getWindow();
         closeGameoverStage.close();
     }
+
+    public void seComputertGameController(ComputerGameController gamecomputercontroller) {
+        this.gamecomputercontroller = gamecomputercontroller;
+    }
+     public void setBoll(int b) {
+        this.flag = b;
+        System.out.println(b);
+    }
+//      public void setBoolean(boolean b1) {
+//        this.flag1 = b1;
+//        System.out.println(b1);
+//    }
 }

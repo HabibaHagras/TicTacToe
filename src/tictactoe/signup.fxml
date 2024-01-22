@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignUpController">
+   <children>
+      <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="414.0" layoutX="101.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="606.0" />
+      <Label fx:id="username" layoutX="357.0" layoutY="119.0" text="UserName" />
+      <Label fx:id="password" layoutX="363.0" layoutY="218.0" text="Password" />
+      <TextField fx:id="feildusername" layoutX="249.0" layoutY="154.0" prefHeight="43.0" prefWidth="325.0" />
+      <Label fx:id="password1" layoutX="335.0" layoutY="329.0" text="Confirm Password" />
+      <Text fx:id="Text" layoutX="332.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register" wrappingWidth="166.61392211914062" />
+      <ImageView fx:id="backarrow" fitHeight="70.0" fitWidth="84.0" layoutX="24.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@arrow.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonregistration1" layoutX="354.0" layoutY="449.0" mnemonicParsing="false" onAction="#setactionRegistration" prefHeight="60.0" prefWidth="200.0" text="Register" />
+      <PasswordField fx:id="feildpass" layoutX="242.0" layoutY="263.0" prefHeight="43.0" prefWidth="346.0" />
+      <PasswordField fx:id="feildconfirm" layoutX="243.0" layoutY="362.0" prefHeight="43.0" prefWidth="346.0" />
+   </children>
+</AnchorPane>

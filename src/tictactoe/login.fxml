@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.LoginController">
+   <children>
+      <Rectangle fx:id="Rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="458.0" layoutX="118.0" layoutY="69.0" stroke="BLACK" strokeType="INSIDE" width="572.0" />
+      <Label fx:id="username" layoutX="360.0" layoutY="164.0" text="UserName" />
+      <Label fx:id="password" layoutX="364.0" layoutY="285.0" prefWidth="135.0" text="Password" />
+      <TextField fx:id="feild" layoutX="222.0" layoutY="215.0" prefHeight="48.0" prefWidth="369.0" />
+      <Button fx:id="buttonlogin" layoutX="354.0" layoutY="461.0" mnemonicParsing="false" onAction="#setaction1" text="LOGIN" />
+      <Button fx:id="buttonregistration1" layoutX="356.0" layoutY="518.0" mnemonicParsing="false" onAction="#setNavigateregistraton" prefHeight="69.0" prefWidth="114.0" text="Register" />
+      <Text fx:id="Text" layoutX="144.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" wrappingWidth="195.29296875" x="209.0" y="49.0" />
+      <ImageView fx:id="back" fitHeight="60.0" fitWidth="66.0" layoutX="22.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@arrow.jpg" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="feild1" layoutX="222.0" layoutY="337.0" prefHeight="48.0" prefWidth="369.0" />
+   </children>
+</AnchorPane>
