@@ -548,7 +548,7 @@ private Socket server;
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (TransformerException ex) {
-            System.err.println(ex);
+            ex.printStackTrace();
         }
     }
 
