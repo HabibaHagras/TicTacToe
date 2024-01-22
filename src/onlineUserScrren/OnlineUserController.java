@@ -224,7 +224,7 @@ public class OnlineUserController implements Initializable {
                         System.out.println("USERFOUND");
                     }
                 } catch (UnknownHostException ex) {
-                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 } catch (IOException ex) {
                     Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
