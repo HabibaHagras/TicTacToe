@@ -111,7 +111,7 @@ public class SignUpController implements Initializable {
             System.out.println("Siiiiign up  process!");
             System.out.println("Siiiiign up  successful!");}
         } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
         System.out.println("cliiiiiicked");
