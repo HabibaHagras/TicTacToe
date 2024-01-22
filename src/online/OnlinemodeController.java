@@ -93,7 +93,6 @@ public class OnlinemodeController implements Initializable {
     private Text player2;
     Socket server;
 
-
     String symbol;
     String Player11;
     String Player22;
@@ -122,18 +121,16 @@ public class OnlinemodeController implements Initializable {
     }
 
     public void setupButton(Button button) {
-        
-           
-            button.setOnMouseClicked(mouseEvent -> {
-               
 
-                    setPlayerSymbol(button);
+        button.setOnMouseClicked(mouseEvent -> {
 
-                    button.setDisable(true);
-                    checkWinner(player1.getText(), player2.getText());
-             
-            });
-     
+            setPlayerSymbol(button);
+
+            button.setDisable(true);
+            checkWinner(player1.getText(), player2.getText());
+
+        });
+
     }
 
     public void setPlayerSymbol(Button button) {
@@ -148,11 +145,7 @@ public class OnlinemodeController implements Initializable {
                     String playMessage = "MOVEX" + " " + player2.getText() + " " + button.getId() + " " + button.getText();
                     outputStream.write(playMessage.getBytes());
                     System.out.println(button.getId());
-                  
-                        sendXmove(button.getId());
-
-                    
-
+                    sendXmove(button.getId());
                     button.setTextFill(Paint.valueOf("#ff0000"));
                     playerTurn = 1;
                     System.out.println("pdddddlaaann");
@@ -169,14 +162,9 @@ public class OnlinemodeController implements Initializable {
                     String playMessage = "MOVEO" + " " + player2.getText() + " " + button.getId() + " " + button.getText();
                     System.out.println("Sending move: " + playMessage);
                     outputStream.write(playMessage.getBytes());
-                 
-
-                        sendOmove(button.getId());
-
-                    
-                    playerTurn = 0;
+                    sendOmove(button.getId());
                     button.setTextFill(Paint.valueOf("#ffc300"));
-                    //    playerTurn = 0;
+                    playerTurn = 0;
                 } catch (IOException ex) {
                     Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -222,8 +210,7 @@ public class OnlinemodeController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/playagainwin/playagainwin.fxml"));
             root = loader.load();
             PlayagainwinController playAgainWinController = loader.getController();
-//            playAgainWinController.setWinner(winner);
-//            playAgainWinController.setGameController(this);
+            playAgainWinController.setWinner(winner);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -453,7 +440,6 @@ public class OnlinemodeController implements Initializable {
         gameStage.close();
     }
 
-
     @FXML
     private void newGame(ActionEvent event) {
     }
@@ -503,10 +489,11 @@ public class OnlinemodeController implements Initializable {
                 String playerName = tokenizer.nextToken();
                 String buttonClicked = tokenizer.nextToken();
                 String symbol = tokenizer.nextToken();
-
                 Button clickedButton = getButtonById(buttonClicked);
                 clickedButton.setText(symbol);
-                System.out.println("Clicked" + "   " + buttonClicked);
+                setupButton(clickedButton);
+
+                System.out.println("ClickedX" + "   " + buttonClicked);
 
             }
 
@@ -550,7 +537,6 @@ public class OnlinemodeController implements Initializable {
                 return button8;
             case "button9":
                 return button9;
-            // Add cases for other buttons
             default:
                 System.out.println("nulllllllllllllllllllllllllllll");
                 return null;
@@ -600,11 +586,12 @@ public class OnlinemodeController implements Initializable {
 
                 Button clickedButton = getButtonById(buttonClicked);
                 clickedButton.setText(symbol);
-                System.out.println("Clicked" + "   " + buttonClicked);
+                setupButton(clickedButton);
+                System.out.println("Clicked0" + "   " + buttonClicked);
 
             }
         } catch (IOException ex) {
-            ex.printStackTrace(); // Handle the exception appropriately
+            ex.printStackTrace();
         }
 
     }
