@@ -178,7 +178,7 @@ public class ComputerGameController implements Initializable {
             GameoverController.setStage(stage);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(ComputerGameController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
