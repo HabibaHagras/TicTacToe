@@ -80,6 +80,7 @@ public class LoginController implements Initializable {
     OutputStream outputStream;
     InputStream inputStream;
     String Userlogin;
+    Button button;
 
     /**
      * Initializes the controller class.
@@ -127,7 +128,7 @@ public class LoginController implements Initializable {
                 outputStream = server.getOutputStream();
                 inputStream = server.getInputStream();
 
-                String msg = "login" + " " + enteredUsername + " " + enteredPassword;
+                String msg = "login" + " " + enteredUsername + " " + enteredPassword+" "+"123";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
 
@@ -194,7 +195,7 @@ public class LoginController implements Initializable {
                                         try {
                                             // Send the "accept" message to the server after user clicks "Accept"
                                             send_invitation();
-                                            String acceptMessage = "accept " + enteredUsername + " " + enteredPassword;
+                                            String acceptMessage = "accept " + enteredUsername + " " + enteredPassword+" "+"123";
                                             outputStream.write(acceptMessage.getBytes());
                                             outputStream.flush();
                                         } catch (IOException ex) {
@@ -236,7 +237,29 @@ public class LoginController implements Initializable {
                                 stage.show();
                             });
 
-                        } else {
+                        } 
+                        if(command.equals("MOVE")){ 
+//                                      
+                           Platform.runLater(() -> {
+                       
+                            String player = tokenizer.nextToken();
+                            String receivedButtonId = tokenizer.nextToken();
+
+                               String receivedButtonSymbol = tokenizer.nextToken();
+
+        Button receivedButton = onlineGameController.getButtonById(receivedButtonId);
+        onlineGameController.setPlayerSymbol(receivedButton);
+                            System.out.println(receivedButtonId);
+//       //Platform.runLater(() -> onlineGameController.sendXmove(button));
+        System.out.println("moooooove");
+                       });
+        //receivedButton.setText(receivedButtonText);
+    
+//                            Platform.runLater(() -> {
+//                            onlineGameController.setPlayerSymbol(button);
+//                 });
+                        }
+                        else {
                             Platform.runLater(() -> {
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                 Scene scene = new Scene(onlinePlayersPage);
@@ -287,7 +310,7 @@ public class LoginController implements Initializable {
                 server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                 outputStream = server.getOutputStream();
                 inputStream = server.getInputStream();
-                String msg = "accept" + " " + feild.getText() + " " + feild1.getText();
+                String msg = "accept" + " " + feild.getText() + " " + feild1.getText()+" "+"123";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
 

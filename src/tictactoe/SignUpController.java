@@ -84,7 +84,7 @@ public class SignUpController implements Initializable {
             mouth = new PrintStream(server.getOutputStream());
             InputStream inputStream = server.getInputStream();
             OutputStream outputStream = server.getOutputStream();
-            String msg = "signup" + " " + enteredUsername + " " + enteredPassword;
+            String msg = "signup" + " " + enteredUsername + " " + enteredPassword+" "+"123";
             System.out.println(msg);
             mouth.println(msg);
             outputStream.write(msg.getBytes());

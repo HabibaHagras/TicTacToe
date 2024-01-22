@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -95,49 +96,111 @@ public class OnlinemodeController implements Initializable {
 
     @FXML
     private Button logout;
-
+Button button;
     String symbol;
     String Player11;
     String Player22;
+    InputStream inputStream;
+  OutputStream outputStream;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
-
-        buttons.forEach(button -> {
-            setupButton(button);
-
-        });
+        
+            buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
+            
+            buttons.forEach(button -> {
+                setupButton(button);
+                
+            });
+            try {
+            server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+//            outputStream= server.getOutputStream();
+//            inputStream = server.getInputStream();
+//            byte[] responseBuffer = new byte[1024];
+//            int responseBytes = inputStream.read(responseBuffer);
+//            String serverResponse = new String(responseBuffer, 0, responseBytes);
+//            System.out.println("client response: " + serverResponse);
+//            
+//            StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+//            String command = tokenizer.nextToken();
+//            if(command.equals("twoPlayers")){
+//                System.out.println("playyyyy");
+//                
+//            }
+//            else if(command.equals("response")){
+//                System.out.println("response");
+//            }
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
 
     }
+    
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
+            
+          setPlayerSymbol(button);
             button.setDisable(true);
             checkWinner(player1.getText(), player2.getText());
+           // updateBoardAfterRequest();
         });
     }
+//      public void updateBoardAfterRequest() {
+//          new Thread(() -> {
+//        try {
+//              
+//             server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+//             outputStream= server.getOutputStream();
+//             inputStream = server.getInputStream();
+//              byte[] responseBuffer = new byte[1024];
+//                int responseBytes = inputStream.read(responseBuffer);
+//                String serverResponse = new String(responseBuffer, 0, responseBytes);
+//                System.out.println("client response: " + serverResponse);
+//                String str="twoPlayers"+" "+"yomna"+" "+"rawan";
+//            outputStream.write(str.getBytes());
+//          //  outputStream.flush();
+//           StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+//          String command = tokenizer.nextToken();
+//          
+//        } catch (IOException ex) {
+//            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        }).
+//                start();
+//    }
+     
 
-    public void setPlayerSymbol(Button button) {
-        new Thread(() -> {
-            if (playerTurn % 2 == 0) {
-                sendXmove(button);
-                if (symbol.equals("X")) {
-                    button.setText("X");
-                }
-            } else {
-                button.setText("O");
-                button.setTextFill(Paint.valueOf("#ffc300"));
-                playerTurn = 0;
-            }
-        }).
-                start();
-
+   public void setPlayerSymbol(Button button) {
+       new Thread(()->{
+//         while(true){
+    if (playerTurn % 2 == 0) {
+            button.setText("X");
+            button.setTextFill(Paint.valueOf("#ff0000"));
+        sendXmove(button.getId());
+        playerTurn = 1;
+    } else {
+                   
+            button.setText("O");
+            button.setTextFill(Paint.valueOf("#ffc300"));
+                 sendXmove(button.getId());  
+        
+        playerTurn = 0;
     }
+//    sendXmove(button.getId());
+//     playerTurn = (playerTurn + 1) % 2;
+//         //}
+           
+       }).start();
+}
+
+    
 
     /*
     public void setPlayerSymbol(Button button) {
@@ -466,7 +529,7 @@ public class OnlinemodeController implements Initializable {
         String enteredUsername = player1.getText();
         OutputStream outputStream = server.getOutputStream();
         InputStream inputStream = server.getInputStream();
-        String msg = "LOGOUT" + " " + "Habiba" + " " + "1234";
+        String msg = "LOGOUT" + " " + "Habiba" + " " + "1234"+" "+"678";
         System.out.println(msg);
 
         outputStream.write(msg.getBytes());
@@ -489,17 +552,24 @@ public class OnlinemodeController implements Initializable {
 
     }
 
-    private void sendXmove(Button button) {
-        new Thread(() -> {
-            if (button != null) {
+    public void sendXmove(String button) {
+                 //  new Thread(()->{
+                      // while(true){
+           
+           if (button != null) {
+                       System.out.println("ooooooooo");
+
+    if (server != null && server.isConnected()) {
 
                 try {
-                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
-
-                    OutputStream outputStream = server.getOutputStream();
+                    //server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                     InputStream inputStream = server.getInputStream();
+                    OutputStream outputStream = server.getOutputStream();
+                   
+                     System.out.println("Sending move: ");
 
-                     String playMessage = "MOVE " + player1.getText() + " " + button.getId();
+
+                     String playMessage = "MOVE"+" " + player1.getText() + " " + button+" "+getButtonById(button).getText();
                  //   String playMessage = "MOVE " + button.getId();
 
                     System.out.println("Sending move: " + playMessage);
@@ -507,7 +577,9 @@ public class OnlinemodeController implements Initializable {
                     outputStream.write(playMessage.getBytes());
 
                     // Assuming the server responds with the updated board state
+                    
                     byte[] responseBuffer = new byte[1024];
+                    
                     int responseBytes = inputStream.read(responseBuffer);
                     String serverResponse = new String(responseBuffer, 0, responseBytes);
 
@@ -515,31 +587,37 @@ public class OnlinemodeController implements Initializable {
                     StringTokenizer tokenizer = new StringTokenizer(serverResponse);
 
                     String command = tokenizer.nextToken();
+                    
 
 // Assuming the second token is the username
                     //   String username = tokenizer.nextToken();
 // Assuming the third token is the additional information (e.g., "111")
-                    String additionalInfo = tokenizer.nextToken();
-                    if (command.equals("X")) {
-                        String username = tokenizer.nextToken();
-                        String buttonId = tokenizer.nextToken();
-                        System.out.println("X online user");
-                        Platform.runLater(() -> {
-                            Button secondUserButton = getButtonById(buttonId);
-                            secondUserButton.setText(symbol);
-                            button.setText(symbol);
-                        });
+                    //String additionalInfo = tokenizer.nextToken();
+                    
+                    if (command.equals("MOVE")) {
+                    String playerName = tokenizer.nextToken();
+                    String buttonClicked = tokenizer.nextToken();
+                    String symbol = tokenizer.nextToken();
+
+                    Platform.runLater(() -> {
+                        Button clickedButton = getButtonById(buttonClicked);
+                        clickedButton.setText(symbol);
+                        System.out.println("Clicked" + "   " + buttonClicked);
                         // return true;
 
-                        // button.setText(command);
-                    }
+                         //button.setText(command);
+                    });
+                            }
 
                 } catch (IOException ex) {
                     ex.printStackTrace(); // Handle the exception appropriately
                 }
-            }
-
-        }).start();
+            
+           }
+           }
+                 //  }
+                //   });
+               //  }).start();
 
     }
 
@@ -547,18 +625,33 @@ public class OnlinemodeController implements Initializable {
 //        System.out.println("setSymol" + symbol);
 //        this.symbol = symbol;
 //    }
-    private Button getButtonById(String buttonId) {
+    public Button getButtonById(String buttonId) {
         switch (buttonId) {
             case "button1":
                 return button1;
             case "button2":
                 return button2;
+            case "button3":
+                return button3;
+            case "button4":
+                return button4;
+            case "button5":
+                return button5;
+            case "button6":
+                return button6;
+            case "button7":
+                return button7;
+case "button8":
+                return button8;
+            case "button9":
+                return button9;
             // Add cases for other buttons
             default:
+                System.out.println("nulllllllllllllllllllllllllllll");
                 return null;
         }
-    }
 
+    }
     public void setPlayer1Name(String Player1) {
         System.out.println("Player 1" + Player1);
         this.Player11 = Player1;

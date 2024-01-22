@@ -206,7 +206,7 @@ public class OnlineUserController implements Initializable {
                     OutputStream outputStream = server.getOutputStream();
                     InputStream inputStream = server.getInputStream();
 
-                    String inviteMessage = "invite" + " " + selectedItem + " " + "1234";
+                    String inviteMessage = "invite" + " " + selectedItem + " " + "1234"+" "+"123";
                     System.out.println(inviteMessage);
                     outputStream.write(inviteMessage.getBytes());
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
@@ -347,7 +347,7 @@ public class OnlineUserController implements Initializable {
         //  String enteredUsername = player1.getText();
         OutputStream outputStream = server.getOutputStream();
         InputStream inputStream = server.getInputStream();
-        String msg = "LOGOUT" + " " + UserInvitatonTO + " " + "1234";
+        String msg = "LOGOUT" + " " + UserInvitatonTO + " " + "1234"+" "+"123";
         System.out.println(msg);
 
         outputStream.write(msg.getBytes());
