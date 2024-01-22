@@ -226,7 +226,7 @@ public class OnlineUserController implements Initializable {
                 } catch (UnknownHostException ex) {
                     ex.printStackTrace();
                 } catch (IOException ex) {
-                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }).start();
             if (selectedItem != null) {
