@@ -5,7 +5,6 @@
  */
 package gameScreen;
 
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 
@@ -107,18 +106,14 @@ public class GameController implements Initializable {
     ArrayList<Button> buttons;
     public static String winner;
 
-
     int countX = 0;
     int countO = 0;
-private Socket server;
+    private Socket server;
     private DataInputStream reader;
     private PrintStream printStream;
 
-    
-
     private int[] position = new int[9];
     private int i = 1;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -128,8 +123,9 @@ private Socket server;
             setupButton(button);
 
         });
-       
+
     }
+
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
@@ -438,7 +434,9 @@ private Socket server;
         if (b1.isEmpty() || b2.isEmpty() || b3.isEmpty()
                 || b4.isEmpty() || b5.isEmpty() || b6.isEmpty()
                 || b7.isEmpty() || b8.isEmpty() || b9.isEmpty()) {
+
             return null;
+
         } else if (winner == null) {
             showgameover();
             return null;
@@ -447,10 +445,10 @@ private Socket server;
         }
 
     }
-    
+
     public void closeGameStage() {
         Stage gameStage = (Stage) apane.getScene().getWindow();
-        gameStage.close();    
+        gameStage.close();
     }
 
     @FXML
@@ -537,7 +535,7 @@ private Socket server;
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(document);
             String name = player1.getText() + "VS" + player2.getText() + String.valueOf(d.getDate()) + "_" + String.valueOf(d.getHours()) + String.valueOf(d.getMinutes());
-            FileOutputStream output = new FileOutputStream("F:\\Java\\Java Project\\TicTacToe\\src\\Files\\" + name + ".xml");
+            FileOutputStream output = new FileOutputStream("H:\\iti\\JavaProject\\tictactoegame\\TicTacToe\\src\\Files\\" + name + ".xml");
             StreamResult result = new StreamResult(output);
             transformer.transform(source, result);
 

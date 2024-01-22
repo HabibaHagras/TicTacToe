@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe.ListOfRecords;
+package tictactoe;
 
 import RecordGame.RecordBoardController;
 import gameScreen.GameController;
@@ -137,7 +137,7 @@ public class RecordsController implements Initializable {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            FileInputStream  stream = new FileInputStream("F:\\Java\\Java Project\\TicTacToe\\src\\Files\\"+name);
+            FileInputStream  stream = new FileInputStream("H:\\iti\\JavaProject\\tictactoegame\\TicTacToe\\src\\Files\\"+name);
             Document document = builder.parse(stream);
             document.getDocumentElement().normalize();
 
@@ -276,7 +276,7 @@ public class RecordsController implements Initializable {
     private void loadData() {
         list.removeAll(list);
         String[] pathnames;
-        File file = new File("F:\\Java\\Java Project\\TicTacToe\\src\\Files");
+        File file = new File("H:\\iti\\JavaProject\\tictactoegame\\TicTacToe\\src\\Files");
         pathnames = file.list();
         for (String pathname : pathnames) {
             list.add(pathname);

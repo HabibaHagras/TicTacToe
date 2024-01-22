@@ -133,7 +133,7 @@ public class RecordBoardController implements Initializable {
     @FXML
     private void navigateBack(MouseEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("/tictactoe/ListOfRecords/Records.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/tictactoe/Records.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }

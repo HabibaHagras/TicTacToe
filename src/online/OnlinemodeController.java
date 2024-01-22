@@ -97,11 +97,10 @@ public class OnlinemodeController implements Initializable {
     PrintStream mouth;
     @FXML
     private Button logout;
-    
-   // private Socket server;
+
+    // private Socket server;
     private DataInputStream reader;
     private PrintStream printStream;
-
 
     String symbol;
     String Player11;
@@ -109,7 +108,6 @@ public class OnlinemodeController implements Initializable {
     OutputStream outputStream;
     InputStream inputStream;
     int boll;
-
 
     /**
      * Initializes the controller class.
@@ -129,16 +127,10 @@ public class OnlinemodeController implements Initializable {
         } else if (player1.getText().equals("Habiba")) {
             player2.setText("ahmed");
 
-
         }
     }
 
-
-
-   
-
     public void setupButton(Button button) {
-
 
         button.setOnMouseClicked(mouseEvent -> {
 
@@ -150,9 +142,6 @@ public class OnlinemodeController implements Initializable {
         });
 
     }
-
- 
-
 
     public void setPlayerSymbol(Button button) {
 
@@ -194,9 +183,7 @@ public class OnlinemodeController implements Initializable {
         }).
                 start();
 
-
     }
-    
 
     public void resetButton(Button button) {
         button.setDisable(false);
@@ -250,9 +237,9 @@ public class OnlinemodeController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
             root = loader.load();
-          GameoverController GameoverController = loader.getController();
-           GameoverController.setGameController(this);
-           GameoverController.setBoll(3);
+            GameoverController GameoverController = loader.getController();
+            GameoverController.setGameController(this);
+            GameoverController.setBoll(3);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -466,6 +453,17 @@ public class OnlinemodeController implements Initializable {
 
     @FXML
     private void newGame(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/StartScreen.fxml"));
+            root = loader.load();
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("TicTacToe");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void OnClickLogout(ActionEvent event) throws IOException {

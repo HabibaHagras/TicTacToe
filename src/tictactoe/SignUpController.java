@@ -5,7 +5,6 @@
  */
 package tictactoe;
 
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,6 +69,18 @@ public class SignUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        backarrow.setOnMouseClicked(event -> {
+            try {
+                Stage stage = (Stage) backarrow.getScene().getWindow();
+                Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+                Scene scene = new Scene(myNewScene);
+                stage.setScene(scene);
+                stage.setTitle("My New Scene");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
@@ -100,16 +111,17 @@ public class SignUpController implements Initializable {
             int responseBytes = inputStream.read(responseBuffer);
             String serverResponse = new String(responseBuffer, 0, responseBytes);
             System.out.println("Server response: " + serverResponse);
-            if(serverResponse.equals("signup succeed")){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
-            Parent onlinePlayersPage = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(onlinePlayersPage);
-            stage.setScene(scene);
-            stage.setTitle("TicTacToe");
-            stage.show();
-            System.out.println("Siiiiign up  process!");
-            System.out.println("Siiiiign up  successful!");}
+            if (serverResponse.equals("signup succeed")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
+                Parent onlinePlayersPage = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(onlinePlayersPage);
+                stage.setScene(scene);
+                stage.setTitle("TicTacToe");
+                stage.show();
+                System.out.println("Siiiiign up  process!");
+                System.out.println("Siiiiign up  successful!");
+            }
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

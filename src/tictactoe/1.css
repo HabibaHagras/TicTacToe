@@ -28,7 +28,7 @@
     /*    -fx-stroke: #FBF33F;
         -fx-stroke-width: 1px;*/
 }
-#feild,#feild1,#feild2{
+#feildusername,#feildpass,#feildconfirm{
     -fx-text-fill: #000000;
     -fx-background-color: #D9D9D9;
     -fx-border-style:solid;
@@ -95,4 +95,13 @@
     -fx-text-fill:white;
     -fx-font-size: 18px;
 
+}
+#feild,#feild1,#feild2{
+    -fx-text-fill: #000000;
+    -fx-background-color: #D9D9D9;
+    -fx-border-style:solid;
+    -fx-background-color: #D9D9D9;
+    -fx-background-radius: 30;
+
+    -fx-border-radius: 30;
 }

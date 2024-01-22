@@ -119,7 +119,7 @@ public class StartScreenController implements Initializable {
     public void navigateToRecord (ActionEvent event) throws IOException {
         if (event.getSource() == rec) {
             stage = (Stage) rec.getScene().getWindow();
-            myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/ListOfRecords/Records.fxml"));
+            myNewScene = FXMLLoader.load(getClass().getResource("Records.fxml"));
         }
 
         Scene scene = new Scene(myNewScene);
