@@ -50,7 +50,7 @@ public class LayerOnlineUserController implements Initializable {
                 stage = (Stage) button.getScene().getWindow();
                 myNewScene = FXMLLoader.load(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
             } catch (IOException ex) {
-                Logger.getLogger(LayerOnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
 
