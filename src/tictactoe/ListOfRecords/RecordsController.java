@@ -123,7 +123,8 @@ public class RecordsController implements Initializable {
                     textB4,positionB4,textB5,positionB5,textB6,positionB6,textB7,positionB7,
                     textB8,positionB8,textB9,positionB9,scoreP1,scoreP2,win);
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
