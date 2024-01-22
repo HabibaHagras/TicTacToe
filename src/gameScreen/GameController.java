@@ -542,7 +542,7 @@ private Socket server;
             transformer.transform(source, result);
 
         } catch (ParserConfigurationException ex) {
-            System.err.println(ex);
+            ex.printStackTrace();
         } catch (TransformerConfigurationException ex) {
             System.err.println(ex);
         } catch (FileNotFoundException ex) {
