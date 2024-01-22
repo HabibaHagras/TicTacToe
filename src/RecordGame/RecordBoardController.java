@@ -135,7 +135,8 @@ public class RecordBoardController implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getResource("/tictactoe/ListOfRecords/Records.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+
         }
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
