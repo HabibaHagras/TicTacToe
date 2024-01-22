@@ -5,9 +5,17 @@
  */
 package gameScreen;
 
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +23,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -98,11 +107,18 @@ public class GameController implements Initializable {
     ArrayList<Button> buttons;
     public static String winner;
 
-    private int countX = 0;
-    private int countO = 0;
+
+    int countX = 0;
+    int countO = 0;
+private Socket server;
+    private DataInputStream reader;
+    private PrintStream printStream;
+
+    
 
     private int[] position = new int[9];
     private int i = 1;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -112,9 +128,8 @@ public class GameController implements Initializable {
             setupButton(button);
 
         });
-
+       
     }
-
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
@@ -226,6 +241,7 @@ public class GameController implements Initializable {
             root = loader.load();
             GameoverController GameoverController = loader.getController();
             GameoverController.setGameController(this);
+            GameoverController.setBoll(1);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -431,10 +447,10 @@ public class GameController implements Initializable {
         }
 
     }
-
+    
     public void closeGameStage() {
         Stage gameStage = (Stage) apane.getScene().getWindow();
-        gameStage.close();
+        gameStage.close();    
     }
 
     @FXML

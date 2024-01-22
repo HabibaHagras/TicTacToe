@@ -171,13 +171,14 @@ public class ComputerGameController implements Initializable {
             root = loader.load();
             GameoverController GameoverController = loader.getController();
             GameoverController.seComputertGameController(this);
+            GameoverController.setBoll(2);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
             GameoverController.setStage(stage);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComputerGameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -324,7 +325,7 @@ public class ComputerGameController implements Initializable {
                 button3.setStyle("-fx-background-color: aliceblue;");
                 button5.setStyle("-fx-background-color: aliceblue;");
                 button7.setStyle("-fx-background-color: aliceblue;");
-                
+
             } else if (b3.equals("O")) {
                 winner = "OOO";
                 button3.setStyle("-fx-background-color: aliceblue;");
@@ -333,20 +334,24 @@ public class ComputerGameController implements Initializable {
             }
         }
 
+        updateScore(winner);
         if (winner.equals("XXX")) {
-            winner=player.getText();
+            winner = player.getText();
             showwin();
-        } 
-        
-        if (winner.equals("OOO")) {
-            winner=player.getText();
+
+        } //O winner
+        else if (winner.equals("OOO")) {
+            winner = player.getText();
             showlooser();
-        }
-        
-        if (winner.equals(null)) {
+            //  this.winner = winner;
+
+        } else if (!b1.isEmpty() && !b2.isEmpty() && !b3.isEmpty()
+                && !b4.isEmpty() && !b5.isEmpty() && !b6.isEmpty()
+                && !b7.isEmpty() && !b8.isEmpty() && !b9.isEmpty()) {
             showgameover();
         }
-        updateScore(winner);
+
+
     }
 
     @FXML

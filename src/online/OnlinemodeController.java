@@ -93,12 +93,23 @@ public class OnlinemodeController implements Initializable {
     private Text player2;
     Socket server;
 
+    DataInputStream ear;
+    PrintStream mouth;
+    @FXML
+    private Button logout;
+    
+   // private Socket server;
+    private DataInputStream reader;
+    private PrintStream printStream;
+
+
     String symbol;
     String Player11;
     String Player22;
     OutputStream outputStream;
     InputStream inputStream;
     int boll;
+
 
     /**
      * Initializes the controller class.
@@ -112,15 +123,22 @@ public class OnlinemodeController implements Initializable {
             setupButton(button);
 
         });
+
         if (player1.getText().equals("ahmed")) {
             player2.setText("Habiba");
         } else if (player1.getText().equals("Habiba")) {
             player2.setText("ahmed");
 
+
         }
     }
 
+
+
+   
+
     public void setupButton(Button button) {
+
 
         button.setOnMouseClicked(mouseEvent -> {
 
@@ -132,6 +150,9 @@ public class OnlinemodeController implements Initializable {
         });
 
     }
+
+ 
+
 
     public void setPlayerSymbol(Button button) {
 
@@ -173,7 +194,9 @@ public class OnlinemodeController implements Initializable {
         }).
                 start();
 
+
     }
+    
 
     public void resetButton(Button button) {
         button.setDisable(false);
@@ -227,12 +250,13 @@ public class OnlinemodeController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/gameover/gameover.fxml"));
             root = loader.load();
-//            GameoverController GameoverController = loader.getController();
-//            GameoverController.setGameController(this);
+          GameoverController GameoverController = loader.getController();
+           GameoverController.setGameController(this);
+           GameoverController.setBoll(3);
             stage = new Stage();
             scene = new Scene(root);
             stage.setScene(scene);
-//            GameoverController.setStage(stage);
+            GameoverController.setStage(stage);
             stage.show();
 
         } catch (IOException ex) {
