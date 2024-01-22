@@ -37,6 +37,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.ir.BreakNode;
+import tictactoe.LoginController;
 import tictactoe.gameover.GameoverController;
 import tictactoe.playagainwin.PlayagainwinController;
 
@@ -78,8 +79,6 @@ public class OnlinemodeController implements Initializable {
     @FXML
     private Button button9;
     @FXML
-    private ImageView backBtn;
-    @FXML
     private Button newButton;
 
     public int playerTurn = 0;
@@ -94,14 +93,13 @@ public class OnlinemodeController implements Initializable {
     private Text player2;
     Socket server;
 
-    @FXML
-    private Button logout;
 
     String symbol;
     String Player11;
     String Player22;
     OutputStream outputStream;
     InputStream inputStream;
+    int boll;
 
     /**
      * Initializes the controller class.
@@ -123,51 +121,67 @@ public class OnlinemodeController implements Initializable {
         }
     }
 
-    private void setupButton(Button button) {
-        button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-            button.setDisable(true);
-            checkWinner(player1.getText(), player2.getText());
-        });
+    public void setupButton(Button button) {
+        
+           
+            button.setOnMouseClicked(mouseEvent -> {
+               
+
+                    setPlayerSymbol(button);
+
+                    button.setDisable(true);
+                    checkWinner(player1.getText(), player2.getText());
+             
+            });
+     
     }
 
     public void setPlayerSymbol(Button button) {
 
         new Thread(() -> {
-        if (playerTurn % 2 == 0) {
-            try {
-                System.out.println(button.getId());
-                System.out.println(button.getId());
-                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+            if (playerTurn % 2 == 0) {
 
-                outputStream = server.getOutputStream();
-                String playMessage = "MOVE" + " " + player2.getText() + " " + button.getId() + " " + "X";
-                outputStream.write(playMessage.getBytes());
+                try {
+                    button.setText("X");
+                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                    OutputStream outputStream = server.getOutputStream();
+                    String playMessage = "MOVEX" + " " + player2.getText() + " " + button.getId() + " " + button.getText();
+                    outputStream.write(playMessage.getBytes());
+                    System.out.println(button.getId());
+                  
+                        sendXmove(button.getId());
 
-                sendXmove(button.getId());
-                button.setTextFill(Paint.valueOf("#ff0000"));
-                playerTurn = 1;
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                    
+
+                    button.setTextFill(Paint.valueOf("#ff0000"));
+                    playerTurn = 1;
+                    System.out.println("pdddddlaaann");
+                } catch (IOException ex) {
+                    Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+
+                try {
+                    button.setText("O");
+                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                    OutputStream outputStream = server.getOutputStream();
+                    String playMessage = "MOVEO" + " " + player2.getText() + " " + button.getId() + " " + button.getText();
+                    System.out.println("Sending move: " + playMessage);
+                    outputStream.write(playMessage.getBytes());
+                 
+
+                        sendOmove(button.getId());
+
+                    
+                    playerTurn = 0;
+                    button.setTextFill(Paint.valueOf("#ffc300"));
+                    //    playerTurn = 0;
+                } catch (IOException ex) {
+                    Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-        } else {
-            try {
-                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
-                outputStream = server.getOutputStream();
-                String playMessage2 = "MOVE" + " " + player2.getText() + " " + button.getId() + " " + "O";
-                outputStream.write(playMessage2.getBytes());
-
-                sendXmove(button.getId());
-                sendOmove(button.getId());
-
-                button.setTextFill(Paint.valueOf("#ffc300"));
-                playerTurn = 0;
-            } catch (IOException ex) {
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
         }).
                 start();
 
@@ -439,15 +453,11 @@ public class OnlinemodeController implements Initializable {
         gameStage.close();
     }
 
-    @FXML
-    private void back(MouseEvent event) {
-    }
 
     @FXML
     private void newGame(ActionEvent event) {
     }
 
-    @FXML
     private void OnClickLogout(ActionEvent event) throws IOException {
         server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
 
@@ -478,53 +488,31 @@ public class OnlinemodeController implements Initializable {
     }
 
     private void sendXmove(String buttonId) {
-        new Thread(() -> {
 
-            try {
-                //     server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+        try {
+            InputStream inputStream = server.getInputStream();
+            System.out.println(getButtonById(buttonId));
+            System.out.println("thisSyymol" + getButtonById(buttonId).getText());
+            byte[] responseBuffer = new byte[1024];
+            int responseBytes = inputStream.read(responseBuffer);
+            String serverResponse = new String(responseBuffer, 0, responseBytes);
+            System.out.println("Server responseeeeeee: " + serverResponse);
+            StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+            String command = tokenizer.nextToken();
+            if (command.equals("MOVEXTO")) {
+                String playerName = tokenizer.nextToken();
+                String buttonClicked = tokenizer.nextToken();
+                String symbol = tokenizer.nextToken();
 
-                //   OutputStream outputStream = server.getOutputStream();
-                InputStream inputStream = server.getInputStream();
-                String playMessage = "MOVE" + " " + player2.getText() + " " + buttonId + " " + "X";
-                //   String playMessage = "MOVE " + button.getId();
-                System.out.println(getButtonById(buttonId));
-                System.out.println("thisSyymol" + getButtonById(buttonId).getText());
-                System.out.println("Sending move: " + playMessage);
+                Button clickedButton = getButtonById(buttonClicked);
+                clickedButton.setText(symbol);
+                System.out.println("Clicked" + "   " + buttonClicked);
 
-                //     outputStream.write(playMessage.getBytes());
-                // Assuming the server responds with the updated board state
-                byte[] responseBuffer = new byte[1024];
-                int responseBytes = inputStream.read(responseBuffer);
-                String serverResponse = new String(responseBuffer, 0, responseBytes);
-                //   outputStream.close();
-                System.out.println("Server responseeeeeee: " + serverResponse);
-                StringTokenizer tokenizer = new StringTokenizer(serverResponse);
-
-                String command = tokenizer.nextToken();
-//                String palyer2 = tokenizer.nextToken();
-//                String buttton = tokenizer.nextToken();
-//                String symbol = tokenizer.nextToken();
-                if (command.equals("MOVETO")) {
-                    String playerName = tokenizer.nextToken();
-                    String buttonClicked = tokenizer.nextToken();
-                    String symbol = tokenizer.nextToken();
-
-                    Platform.runLater(() -> {
-                        Button clickedButton = getButtonById(buttonClicked);
-                        clickedButton.setText(symbol);
-                        System.out.println("Clicked" + "   " + buttonClicked);
-                        clickedButton.setDisable(true);
-                        setupButton(clickedButton);
-//                        playerTurn = 1;
-                        checkWinner(player1.getText(), player2.getText());
-                    });
-                }
-
-            } catch (IOException ex) {
-                ex.printStackTrace(); // Handle the exception appropriately
             }
 
-        }).start();
+        } catch (IOException ex) {
+            ex.printStackTrace(); // Handle the exception appropriately
+        }
 
     }
 
@@ -532,10 +520,12 @@ public class OnlinemodeController implements Initializable {
         if (playerTurn % 2 == 0) {
             button.setText(sy);
             button.setTextFill(Paint.valueOf("#ff0000"));
+
             playerTurn = 1;
         } else {
             button.setText("O");
             button.setTextFill(Paint.valueOf("#ffc300"));
+
             playerTurn = 0;
         }
     }
@@ -590,62 +580,38 @@ public class OnlinemodeController implements Initializable {
     }
 
     private void sendOmove(String buttonId) {
-        new Thread(() -> {
 
-            try {
-                InputStream inputStream = server.getInputStream();
+        try {
+            InputStream inputStream = server.getInputStream();
+            System.out.println(getButtonById(buttonId));
+            System.out.println("thisSyymol" + getButtonById(buttonId).getText());
+            byte[] responseBuffer = new byte[1024];
+            int responseBytes = inputStream.read(responseBuffer);
+            String serverResponse = new String(responseBuffer, 0, responseBytes);
 
-                String playMessage = "MOVE" + " " + player2.getText() + " " + buttonId + " " + "O";
-                //   String playMessage = "MOVE " + button.getId();
-                System.out.println(getButtonById(buttonId));
-                System.out.println("thisSyymol" + getButtonById(buttonId).getText());
-                System.out.println("Sending move: " + playMessage);
+            System.out.println("Server responseeeeeee: " + serverResponse);
+            StringTokenizer tokenizer = new StringTokenizer(serverResponse);
 
-//                outputStream.write(playMessage.getBytes());
-                // Assuming the server responds with the updated board state
-                byte[] responseBuffer = new byte[1024];
-                int responseBytes = inputStream.read(responseBuffer);
-                String serverResponse = new String(responseBuffer, 0, responseBytes);
+            String command = tokenizer.nextToken();
+            if (command.equals("MOVEOTO")) {
+                String playerName = tokenizer.nextToken();
+                String buttonClicked = tokenizer.nextToken();
+                String symbol = tokenizer.nextToken();
 
-                System.out.println("Server responseeeeeee: " + serverResponse);
-                StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+                Button clickedButton = getButtonById(buttonClicked);
+                clickedButton.setText(symbol);
+                System.out.println("Clicked" + "   " + buttonClicked);
 
-                String command = tokenizer.nextToken();
-//                String palyer2 = tokenizer.nextToken();
-//                String buttton = tokenizer.nextToken();
-//                String symbol = tokenizer.nextToken();
-                if (command.equals("MOVETO")) {
-                    String playerName = tokenizer.nextToken();
-                    String buttonClicked = tokenizer.nextToken();
-                    String symbol = tokenizer.nextToken();
-
-                    Platform.runLater(() -> {
-                        Button clickedButton = getButtonById(buttonClicked);
-                        clickedButton.setText(symbol);
-                        System.out.println("Clicked" + "   " + buttonClicked);
-                        clickedButton.setDisable(true);
-                        setupButton(clickedButton);
-//                        playerTurn = 0;
-                        checkWinner(player1.getText(), player2.getText());
-                    });
-                }
-//                if (command.equals("MOVEBy")) {
-//
-//                    System.out.println("X online user");
-//                    Platform.runLater(() -> {
-////                        Button secondUserButton = getButtonById(buttonId);
-////                        secondUserButton.setText(symbol);
-//                        getButtonById(buttonId).setText(symbol);
-//                    });
-//                    // return true;
-//
-//                    // button.setText(command);
-//                }
-
-            } catch (IOException ex) {
-                ex.printStackTrace(); // Handle the exception appropriately
             }
+        } catch (IOException ex) {
+            ex.printStackTrace(); // Handle the exception appropriately
+        }
 
-        }).start();
+    }
+
+    public int setboll(int boll) {
+
+        this.boll = boll;
+        return boll;
     }
 }

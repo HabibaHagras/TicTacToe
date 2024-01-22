@@ -79,6 +79,7 @@ public class LoginController implements Initializable {
     String Userlogin;
     String slckted_name;
     String from_name;
+    int boll;
 
     /**
      * Initializes the controller class.
@@ -105,35 +106,30 @@ public class LoginController implements Initializable {
                 server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                 outputStream = server.getOutputStream();
                 inputStream = server.getInputStream();
-
                 String msg = "login" + " " + enteredUsername + " " + enteredPassword + " " + "123456";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
-
                 byte[] responseBuffer = new byte[1024];
                 int responseBytes = inputStream.read(responseBuffer);
                 String serverResponse = new String(responseBuffer, 0, responseBytes);
                 System.out.println("Server response: " + serverResponse);
-
                 if (serverResponse.equals("login succeed")) {
                     ArrayList<String> onlinePlayers = new ArrayList<>();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
+                    FXMLLoader loaderrrrr = new FXMLLoader(getClass().getResource("/tictactoe/layerOnlineUser.fxml"));
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
+                    Parent layeronline= loaderrrrr.load();
                     OnlinemodeController onlineGameController = loaderr.getController();
-
-                    // Load the OnlineUserController and get its controller instance
                     Parent onlinePlayersPage = loader.load();
                     OnlineUserController onlineUserController = loader.getController();
                     onlineUserController.setloginName(enteredUsername);
-
                     while ((responseBytes = inputStream.read(responseBuffer)) != -1) {
                         String onlineUser = new String(responseBuffer, 0, responseBytes);
                         if (onlineUser.isEmpty()) {
                             System.out.println("Online user: " + "eeeeeeeeepty");
                             break;
                         }
-
                         onlinePlayers.add(onlineUser);
                         System.out.println("Online user: " + onlineUser);
                         System.out.println("noooooow");
@@ -141,52 +137,42 @@ public class LoginController implements Initializable {
                             onlineUserController.updateOnlinePlayersList(enteredUsername, onlinePlayers);
                         });
                         StringTokenizer tokenizer = new StringTokenizer(onlineUser);
-
                         String command = tokenizer.nextToken();
-
-//                        String usernamee = tokenizer.nextToken();
-                        //   String additionalInfo = tokenizer.nextToken();
-                        
-                          if (command.equals("MOVETO")) {
+                        if (command.equals("MOVEXTO")) {
                             String playerName = tokenizer.nextToken();
                             String buttonClicked = tokenizer.nextToken();
                             String symbol = tokenizer.nextToken();
                             Platform.runLater(() -> {
-                                onlineGameController.setPlayerSymbol(onlineGameController.getButtonById(buttonClicked));
-                                //      onlineGameController.playerTurn = 1;
-                               
-
+                           
+                              onlineGameController.setPlayerSymbol(onlineGameController.getButtonById(buttonClicked));
                             });
-                            System.out.println("closeeeeeeeeeeeeeeeeeeeeeeeee");
-                            //  outputStream.close();
+                            System.out.println("closeeeeeeeeeeeeeeeeeeeeeeeeeXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
                         }
-                          
+                        if (command.equals("MOVEOTO")) {
+                            String playerName = tokenizer.nextToken();
+                            String buttonClicked = tokenizer.nextToken();
+                            String symbol = tokenizer.nextToken();
+                            Platform.runLater(() -> {
+                                onlineGameController.setPlayerSymbol(onlineGameController.getButtonById(buttonClicked) );
+                            });
+                            System.out.println("closeeeeeeeeeeeeeeeeeeeeeeeeeOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
+                        }
+
                         if (command.equals("userfound")) {
 
                             Platform.runLater(() -> {
-//                                Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
-//                                inviteAlert.setTitle("Invitation");
-//                                inviteAlert.setHeaderText("You've received an invitation!");
-//                                inviteAlert.setContentText("Do you want to accept?");
-//                                inviteAlert.showAndWait();
                                 Alert inviteAlert = new Alert(Alert.AlertType.CONFIRMATION);
                                 inviteAlert.setTitle("Invitation");
                                 inviteAlert.setHeaderText("You've received an invitation!");
                                 inviteAlert.setContentText("Do you want to accept?");
-
-                                // Create buttons
                                 ButtonType acceptButton = new ButtonType("Accept");
                                 ButtonType rejectButton = new ButtonType("Reject");
-
-                                // Add buttons to the alert
                                 inviteAlert.getButtonTypes().setAll(acceptButton, rejectButton);
-
-                                // Show and wait for the user's choice
                                 inviteAlert.showAndWait().ifPresent(response -> {
                                     if (response == acceptButton) {
                                         System.out.println("Accepted");
                                         try {
-                                            // Send the "accept" message to the server after user clicks "Accept"
                                             send_invitation();
                                             String acceptMessage = "accept " + enteredUsername + " " + enteredPassword;
                                             outputStream.write(acceptMessage.getBytes());
@@ -196,7 +182,6 @@ public class LoginController implements Initializable {
                                         }
                                     } else if (response == rejectButton) {
                                         System.out.println("Rejected");
-                                        // Add your logic for rejecting the invitation here
                                     }
                                 });
 
@@ -205,23 +190,10 @@ public class LoginController implements Initializable {
                         }
                         if (command.equals("UserAccpeted")) {
                             Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
-//
                             Platform.runLater(() -> onlineGameController.setPlayer2Name());
                             System.out.println("thhhhhhhhhhhhhhhhis gaaaaaaaame online");
-//                            CountDownLatch latch = new CountDownLatch(1);
 
                             Platform.runLater(() -> {
-//                                apane.getChildren().clear();
-//                                AnchorPane onlineGamePane = new AnchorPane();  // Create a new AnchorPane instance
-//                                onlineGamePane.getChildren().add(onlineGamePage);
-//
-//                                // Set the Online Game FXML to the AnchorPane
-//                                apane.getChildren().add(onlineGamePane);
-//                                latch.countDown();
-//                                Scene scene = new Scene(onlineGamePage);
-//                                stagenow.setScene(scene);
-//                                stagenow.setTitle("ONLINEGame for login user");
-//                                stagenow.show();
                                 onlineUserController.closeONlineUserStage();
                                 Stage stage = new Stage();
                                 Scene scene = new Scene(onlineGamePage);
@@ -230,13 +202,12 @@ public class LoginController implements Initializable {
                                 stage.show();
                             });
 
-                        }
-
-                       else {
+                        } else {
 
                             Platform.runLater(() -> {
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                 Scene scene = new Scene(onlinePlayersPage);
+                               // Scene scene = new Scene(layeronline);
                                 stage.setScene(scene);
                                 stage.setTitle("TicTacToe");
                                 stage.show();
@@ -261,19 +232,18 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 printStackTrace(ex);
             }
-            
-        }).start();
+
+        }
+        ).start();
 
     }
 
     @FXML
-
     private void setNavigateregistraton(ActionEvent event) throws IOException {
         if (event.getSource() == buttonregistration1) {
             stagenow = (Stage) buttonregistration1.getScene().getWindow();
             myNewScene = FXMLLoader.load(getClass().getResource("signup.fxml"));
         }
-
         Scene scene = new Scene(myNewScene);
         stagenow.setScene(scene);
         stagenow.setTitle("Tic Tac Toe");
@@ -282,7 +252,6 @@ public class LoginController implements Initializable {
 
     private void send_invitation() {
         new Thread(() -> {
-
             try {
                 server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                 outputStream = server.getOutputStream();
@@ -290,43 +259,31 @@ public class LoginController implements Initializable {
                 String msg = "accept" + " " + feild.getText() + " " + feild1.getText() + " " + "123456";
                 System.out.println(msg);
                 outputStream.write(msg.getBytes());
-
                 byte[] responseBuffer = new byte[1024];
                 int responseBytes = inputStream.read(responseBuffer);
                 String serverResponse = new String(responseBuffer, 0, responseBytes);
                 System.out.println("Server response: " + serverResponse);
 
-//                if (serverResponse.equals("UserAccpeted")) {
-//                    System.out.println("tictactoe.LoginController.send_invitation()");
-//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
-//                    Parent onlineGamePage = loader.load();
-//                    Platform.runLater(() -> {
-//                        Stage stage = new Stage();
-//                        Scene scene = new Scene(onlineGamePage);
-//                        stage.setScene(scene);
-//                        stage.setTitle("TicTacToe");
-//                        stage.show();
-//
-//                    });
-//
-//                }
             } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         }).start();
-        
     }
 
     public void setSelctedName(String slckted_name) {
         System.out.println("slckted_name" + slckted_name);
         this.slckted_name = slckted_name;
-//        username.setText(slckted_name);
     }
 
     public void setFromName(String from_name) {
         System.out.println("from_name NAME" + from_name);
         this.from_name = from_name;
-        //    username.setText(login_name);
+    }
+
+    public void setboll(int boll) {
+
+        this.boll = boll;
     }
 }
