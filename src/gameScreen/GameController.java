@@ -249,7 +249,7 @@ private Socket server;
             stage.show();
 
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
