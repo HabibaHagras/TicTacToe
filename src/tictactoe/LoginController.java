@@ -282,8 +282,7 @@ public class LoginController implements Initializable {
                 System.out.println("Server response: " + serverResponse);
 
             } catch (IOException ex) {
-                Logger.getLogger(LoginController.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
 
         }).start();
