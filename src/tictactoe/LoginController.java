@@ -39,6 +39,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import onlineUserScrren.OnlineUserController;
@@ -73,12 +74,26 @@ public class LoginController implements Initializable {
     private Text Text;
     Socket s;
     Socket server;
+    @FXML
+    private ImageView back;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        back.setOnMouseClicked(event -> {
+            try {
+                Stage stage = (Stage) back.getScene().getWindow();
+                Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+                Scene scene = new Scene(myNewScene);
+                stage.setScene(scene);
+                stage.setTitle("My New Scene");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
+        });
         System.out.println("tictactoe.LoginController.initialize()");
     }
 
