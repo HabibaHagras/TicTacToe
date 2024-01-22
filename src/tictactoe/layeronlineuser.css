@@ -1,16 +1,8 @@
 
-
-
 #apane{
-    -fx-background-color: #D9D9D9;
+    -fx-background-color: #003055;
     -fx-pref-width:600;
     -fx-pref-height:375;
-    
-}
-#alert{
-    -fx-background-color: #D9D9D9;
-    -fx-pref-width:301;
-    -fx-pref-height:111;
     
 }
 #Rectangle{
@@ -102,35 +94,12 @@
     -fx-font-size: 18px;
     
 }
-#button1{
-
-  -fx-pref-width:100  ; 
-    -fx-pref-height:40;
-    /*-fx-fill: #FBF33F;*/
-    -fx-background-color: #FBF33F;
+#feildconfirm, #feildusername, #feildpass{
     -fx-border-style:solid;
-    -fx-background-radius: 90;
-     -fx-border-width: 2px;
-     -fx-border-color: #FFFFFF;
-    -fx-border-radius:90;
-    -fx-text-fill: white;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
-    -fx-text-fill:white;
-    -fx-font-size: 20px;
-}
-#button2{
+    -fx-text-fill: #D9D9D9;
+    -fx-background-color: #D9D9D9;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
 
-  -fx-pref-width:100  ; 
-    -fx-pref-height:40;
-    /*-fx-fill: #FBF33F;*/
-    -fx-background-color: #FBF33F;
-    -fx-border-style:solid;
-    -fx-background-radius: 90;
-     -fx-border-width: 2px;
-     -fx-border-color: #FFFFFF;
-    -fx-border-radius:90;
-    -fx-text-fill: white;
-    -FX-font-family: "Irish Grover","Franklin Gothic Medium",fantasy;/* Replace "Irish Grover" with your desired font family */
-    -fx-text-fill:white;
-    -fx-font-size: 18px;
+
 }

@@ -43,7 +43,6 @@ public class AdversarialSearchTicTacToe {
         return action;
     }
 
-    //Picks best option for the X-player
     private int maxValue(State state){
         if (isTerminal(state)){
             return utilityOf(state);
@@ -56,7 +55,6 @@ public class AdversarialSearchTicTacToe {
         return v;
     }
 
-    //Picks best option for the O-player
     private int minValue(State state){
         if (isTerminal(state)){
             return utilityOf(state);
@@ -79,14 +77,11 @@ public class AdversarialSearchTicTacToe {
             }
            
             String line = checkState(state, a);
-
-            //Check for Winners
             if (line.equals("XXX")) {
                 return true;
             } else if (line.equals("OOO")) {
                 return true;
             }
-
             if(takenSpots == 9){
                 return true;
             }
@@ -94,13 +89,10 @@ public class AdversarialSearchTicTacToe {
         return false;
     }
 
-    //Returns +1 if X is winner
-    //Return -1 if O is winner
-    //Returns 0 if no one won
+    
     private int utilityOf(State state){
         for (int a = 0; a < 8; a++) {
             String line = checkState(state, a);
-            //Check for Winners
             if (line.equals("XXX")) {
                 return 1;
             } else if (line.equals("OOO")) {
@@ -110,7 +102,6 @@ public class AdversarialSearchTicTacToe {
         return 0;
     }
 
-    //Find any win state if it exists
     private String checkState(State state, int a) {
       String result = "";
 
@@ -148,14 +139,14 @@ public class AdversarialSearchTicTacToe {
         
   }
 
-    //Returns all possible states form a given state
+   
     private ArrayList<State> successorsOf(State state){
         ArrayList<State> possibleMoves = new ArrayList<>();
         int xMoves = 0;
         int yMoves = 0;
         String player;
 
-        //Calculate player turn
+       
         for (String s: state.getState()) {
             if (s.equals("X")) {
                 xMoves++;
@@ -170,7 +161,6 @@ public class AdversarialSearchTicTacToe {
             player = "O";
         }
 
-        //Create all possible states
         for (int i = 0; i < 9; i++) {
             String[] newState = state.getState().clone();
 
