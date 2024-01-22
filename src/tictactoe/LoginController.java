@@ -76,11 +76,12 @@ public class LoginController implements Initializable {
     @FXML
     private Text Text;
     Socket s;
-    Socket server;
-    OutputStream outputStream;
-    InputStream inputStream;
+   public static Socket server;
+   public static OutputStream outputStream;
+   public static InputStream inputStream;
     String Userlogin;
     Button button;
+    public static Thread thread;
 
     /**
      * Initializes the controller class.
@@ -122,7 +123,7 @@ public class LoginController implements Initializable {
         String enteredUsername = feild.getText();
         String enteredPassword = feild1.getText();
 
-        new Thread(() -> {
+        thread= new Thread(() -> {
             try {
                 server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                 outputStream = server.getOutputStream();
@@ -140,10 +141,7 @@ public class LoginController implements Initializable {
                 if (serverResponse.equals("login succeed")) {
                     ArrayList<String> onlinePlayers = new ArrayList<>();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/onlineUserScrren/OnlineUser.fxml"));
-                    FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
-                    Parent onlineGamePage = loaderr.load();
-                    OnlinemodeController onlineGameController = loaderr.getController();
-
+                    
                     // Load the OnlineUserController and get its controller instance
                     Parent onlinePlayersPage = loader.load();
                     OnlineUserController onlineUserController = loader.getController();
@@ -198,9 +196,11 @@ public class LoginController implements Initializable {
                                             String acceptMessage = "accept " + enteredUsername + " " + enteredPassword+" "+"123";
                                             outputStream.write(acceptMessage.getBytes());
                                             outputStream.flush();
+                                           
                                         } catch (IOException ex) {
                                             ex.printStackTrace();
                                         }
+                                       
                                     } else if (response == rejectButton) {
                                         System.out.println("Rejected");
                                         // Add your logic for rejecting the invitation here
@@ -211,6 +211,10 @@ public class LoginController implements Initializable {
 
                         }
                         if (command.equals("UserAccpeted")) {
+                            FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+                    Parent onlineGamePage = loaderr.load();
+                    OnlinemodeController onlineGameController = loaderr.getController();
+
                              Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
 
                             Platform.runLater(() -> onlineGameController.setPlayer2Name(onlineUserController.setPlayer2Name()));
@@ -236,29 +240,34 @@ public class LoginController implements Initializable {
                                 stage.setTitle("ONLINEGame for login user");
                                 stage.show();
                             });
+                            break;
 
                         } 
-                        if(command.equals("MOVE")){ 
-//                                      
-                           Platform.runLater(() -> {
-                       
-                            String player = tokenizer.nextToken();
-                            String receivedButtonId = tokenizer.nextToken();
-
-                               String receivedButtonSymbol = tokenizer.nextToken();
-
-        Button receivedButton = onlineGameController.getButtonById(receivedButtonId);
-        onlineGameController.setPlayerSymbol(receivedButton);
-                            System.out.println(receivedButtonId);
-//       //Platform.runLater(() -> onlineGameController.sendXmove(button));
-        System.out.println("moooooove");
-                       });
-        //receivedButton.setText(receivedButtonText);
-    
-//                            Platform.runLater(() -> {
-//                            onlineGameController.setPlayerSymbol(button);
-//                 });
-                        }
+//                        if(command.equals("MOVE")){ 
+//                                    Platform.runLater(()  -> { 
+////                           Platform.runLater(new Runnable(){
+////                    
+////                public void run(){
+//                     //  while(true){
+//                            String player = tokenizer.nextToken();
+//                            String receivedButtonId = tokenizer.nextToken();
+//
+//                               String receivedButtonSymbol = tokenizer.nextToken();
+//
+//        Button receivedButton = onlineGameController.getButtonById(receivedButtonId);
+//        onlineGameController.setPlayerSymbol(receivedButton);
+//                            System.out.println(receivedButtonId);
+////       //Platform.runLater(() -> onlineGameController.sendXmove(button));
+//        System.out.println("moooooove");
+//                       
+//                     // }
+//        });
+//        //receivedButton.setText(receivedButtonText);
+//    
+////                            Platform.runLater(() -> {
+////                            onlineGameController.setPlayerSymbol(button);
+////                 });
+//                        }
                         else {
                             Platform.runLater(() -> {
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -285,7 +294,8 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 printStackTrace(ex);
             }
-        }).start();
+        });
+       thread.start();
 
     }
 

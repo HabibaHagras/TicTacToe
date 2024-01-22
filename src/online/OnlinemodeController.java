@@ -29,7 +29,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -37,6 +39,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.ir.BreakNode;
+import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
+import onlineUserScrren.OnlineUserController;
+import tictactoe.LoginController;
+import static tictactoe.LoginController.inputStream;
+import static tictactoe.LoginController.outputStream;
+import static tictactoe.LoginController.server;
+import static tictactoe.LoginController.thread;
 import tictactoe.gameover.GameoverController;
 import tictactoe.playagainwin.PlayagainwinController;
 
@@ -108,6 +117,7 @@ Button button;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      //  LoginController.thread.stop();
         
             buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
             
@@ -115,30 +125,153 @@ Button button;
                 setupButton(button);
                 
             });
-            try {
+            
+        try {
+            //            try {
             server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
-//            outputStream= server.getOutputStream();
-//            inputStream = server.getInputStream();
-//            byte[] responseBuffer = new byte[1024];
-//            int responseBytes = inputStream.read(responseBuffer);
-//            String serverResponse = new String(responseBuffer, 0, responseBytes);
-//            System.out.println("client response: " + serverResponse);
-//            
-//            StringTokenizer tokenizer = new StringTokenizer(serverResponse);
-//            String command = tokenizer.nextToken();
-//            if(command.equals("twoPlayers")){
-//                System.out.println("playyyyy");
-//                
-//            }
-//            else if(command.equals("response")){
-//                System.out.println("response");
-//            }
+            outputStream= server.getOutputStream();
+            inputStream = server.getInputStream();
         } catch (UnknownHostException ex) {
             Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+////            byte[] responseBuffer = new byte[1024];
+////            int responseBytes = inputStream.read(responseBuffer);
+////            String serverResponse = new String(responseBuffer, 0, responseBytes);
+////            System.out.println("client response: " + serverResponse);
+////            
+////            StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+////            String command = tokenizer.nextToken();
+////            if(command.equals("twoPlayers")){
+////                System.out.println("playyyyy");
+////                
+////            }
+////            else if(command.equals("response")){
+////                System.out.println("response");
+////            }
+//        } catch (UnknownHostException ex) {
+//            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        thread= new Thread(() -> {
+            System.out.println("starttttttttt");
+            try {
+                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                outputStream = server.getOutputStream();
+                inputStream = server.getInputStream();
+
+                
+
+
+                    while (true) {
+                       
+                        
+                byte[] responseBuffer = new byte[1024];
+                int responseBytes = inputStream.read(responseBuffer);
+                 if (responseBytes > 0) {
+                String serverResponse = new String(responseBuffer, 0, responseBytes);
+                System.out.println("Server responsenm,nkjk: " + serverResponse);
+
+               
+//                        StringTokenizer tokenizer = new StringTokenizer(onlineUser);
+//
+//                        String command = tokenizer.nextToken();
+ StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+
+                    String command = tokenizer.nextToken();
+                        System.out.println("command"+command);
+
+// Assuming the second token is the username
+                    //   String username = tokenizer.nextToken();
+// Assuming the third token is the additional information (e.g., "111")
+                    //String additionalInfo = tokenizer.nextToken();
+                    
+                    if (command.equals("MOVE")) {
+                    String playerName = tokenizer.nextToken();
+                    String buttonClicked = tokenizer.nextToken()+"p";
+                    String symbol = tokenizer.nextToken();
+                    
+                    String [] id=buttonClicked.split("=");
+                String [] id1=id[1].split(",");
+                String [] strSymbol=symbol.split("'");
+                String [] strSymbol1=strSymbol[1].split("'");
+
+
+                    Platform.runLater(() -> {
+                        
+                        Button clickedButton = getButtonById(id1[0]);
+
+            
+                        //Button clickedButton = getButtonById(buttonClicked);
+                        System.out.println("buttonClicked "+buttonClicked);
+                        System.out.println("clickedButton"+clickedButton);
+                        System.out.println("symbol "+symbol);
+                        clickedButton.setText(strSymbol1[0]);
+                        System.out.println("Clicked" + "   " + buttonClicked);
+                       
+                        // return true;
+                  // setPlayerSymbol(clickedButton);
+                         //button.setText(command);
+                    });
+                            }
+
+//                        String usernamee = tokenizer.nextToken();
+                        //   String additionalInfo = tokenizer.nextToken();
+                       
+                       
+//                        if(command.equals("MOVE")){ 
+//                                    Platform.runLater(()  -> { 
+////                           Platform.runLater(new Runnable(){
+////                    
+////                public void run(){
+//                     //  while(true){
+//                            String player = tokenizer.nextToken();
+//                            String receivedButtonId = tokenizer.nextToken()+"l";
+//
+//                               String receivedButtonSymbol = tokenizer.nextToken();
+//
+//        System.out.println(" num of button"+receivedButtonId);
+////        String [] id=receivedButtonId.split("=");
+////                String [] id1=id[1].split(",");
+//                        Button receivedButton = getButtonById(id1[0]);
+//
+//            
+//        setPlayerSymbol(receivedButton);
+//                            System.out.println(receivedButtonId);
+////       //Platform.runLater(() -> onlineGameController.sendXmove(button));
+//        System.out.println("moooooove");
+                       
+                     // }
+//        });
+//        //receivedButton.setText(receivedButtonText);
+//    
+////                            Platform.runLater(() -> {
+////                            onlineGameController.setPlayerSymbol(button);
+////                 });
+//                        }
+                 }
+                        
+                    }
+
+                  //  System.out.println("Login successful!");
+                } catch (UnknownHostException ex) { 
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+             
+        });
+       thread.start();
+            
+
+    }
+    @FXML
+    private void setaction1(ActionEvent event) {
+       
+
 
     }
     
@@ -146,12 +279,56 @@ Button button;
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             
-          setPlayerSymbol(button);
+        //  setPlayerSymbol(button);
+         
+         button.setText("X");
+         
+                     String playMessage = "MOVE"+" " + player1.getText() + " " + button+" "+(button).getText();
+                 //   String playMessage = "MOVE " + button.getId();
+
+                    System.out.println("Sending move: " + playMessage);
+
+            try {
+                outputStream.write(playMessage.getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             button.setDisable(true);
             checkWinner(player1.getText(), player2.getText());
            // updateBoardAfterRequest();
         });
     }
+     public void setPlayerSymbol(Button button) {
+     //  new Thread(()->{
+//         while(true){
+// Platform.runLater(new Runnable(){
+////                    
+//          public void run(){
+//Platform.runLater(() -> {
+    if (playerTurn % 2 == 0) {
+            button.setText("X");
+            button.setTextFill(Paint.valueOf("#ff0000"));
+       // sendXmove(button.getId());
+        playerTurn = 1;
+    } else {
+                   
+            button.setText("O");
+            button.setTextFill(Paint.valueOf("#ffc300"));
+                // sendXmove(button.getId());  
+        
+        playerTurn = 0;
+    }
+//     }
+//        });
+//    sendXmove(button.getId());
+//     playerTurn = (playerTurn + 1) % 2;
+//         //}
+//          }
+       //   });   
+      // }).start();
+}
+
 //      public void updateBoardAfterRequest() {
 //          new Thread(() -> {
 //        try {
@@ -177,29 +354,7 @@ Button button;
 //    }
      
 
-   public void setPlayerSymbol(Button button) {
-       new Thread(()->{
-//         while(true){
-    if (playerTurn % 2 == 0) {
-            button.setText("X");
-            button.setTextFill(Paint.valueOf("#ff0000"));
-        sendXmove(button.getId());
-        playerTurn = 1;
-    } else {
-                   
-            button.setText("O");
-            button.setTextFill(Paint.valueOf("#ffc300"));
-                 sendXmove(button.getId());  
-        
-        playerTurn = 0;
-    }
-//    sendXmove(button.getId());
-//     playerTurn = (playerTurn + 1) % 2;
-//         //}
-           
-       }).start();
-}
-
+  
     
 
     /*
@@ -524,11 +679,11 @@ Button button;
 
     @FXML
     private void OnClickLogout(ActionEvent event) throws IOException {
-        server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+       // server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
 
         String enteredUsername = player1.getText();
-        OutputStream outputStream = server.getOutputStream();
-        InputStream inputStream = server.getInputStream();
+//        OutputStream outputStream = server.getOutputStream();
+//        InputStream inputStream = server.getInputStream();
         String msg = "LOGOUT" + " " + "Habiba" + " " + "1234"+" "+"678";
         System.out.println(msg);
 
@@ -537,7 +692,7 @@ Button button;
         byte[] responseBuffer = new byte[1024];
         int responseBytes = inputStream.read(responseBuffer);
         String serverResponse = new String(responseBuffer, 0, responseBytes);
-        System.out.println("Server response: " + serverResponse);
+       // System.out.println("Server response: " + serverResponse);
         if (serverResponse.equals("LOGOUT succeed")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tictactoe/login.fxml"));
             Parent onlinePlayersPage = loader.load();
@@ -555,6 +710,7 @@ Button button;
     public void sendXmove(String button) {
                  //  new Thread(()->{
                       // while(true){
+                     
            
            if (button != null) {
                        System.out.println("ooooooooo");
@@ -562,7 +718,8 @@ Button button;
     if (server != null && server.isConnected()) {
 
                 try {
-                    //server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                    
+                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
                     InputStream inputStream = server.getInputStream();
                     OutputStream outputStream = server.getOutputStream();
                    
@@ -593,21 +750,22 @@ Button button;
                     //   String username = tokenizer.nextToken();
 // Assuming the third token is the additional information (e.g., "111")
                     //String additionalInfo = tokenizer.nextToken();
-                    
-                    if (command.equals("MOVE")) {
-                    String playerName = tokenizer.nextToken();
-                    String buttonClicked = tokenizer.nextToken();
-                    String symbol = tokenizer.nextToken();
-
-                    Platform.runLater(() -> {
-                        Button clickedButton = getButtonById(buttonClicked);
-                        clickedButton.setText(symbol);
-                        System.out.println("Clicked" + "   " + buttonClicked);
-                        // return true;
-
-                         //button.setText(command);
-                    });
-                            }
+//                    
+//                    if (command.equals("MOVE")) {
+//                    String playerName = tokenizer.nextToken();
+//                    String buttonClicked = tokenizer.nextToken();
+//                    String symbol = tokenizer.nextToken();
+//
+//                    Platform.runLater(() -> {
+//                        Button clickedButton = getButtonById(buttonClicked);
+//                        clickedButton.setText(symbol);
+//                        System.out.println("Clicked" + "   " + buttonClicked);
+//                        
+//                        // return true;
+//                   setPlayerSymbol(clickedButton);
+//                         //button.setText(command);
+//                    });
+//                            }
 
                 } catch (IOException ex) {
                     ex.printStackTrace(); // Handle the exception appropriately
@@ -615,6 +773,7 @@ Button button;
             
            }
            }
+          
                  //  }
                 //   });
                //  }).start();

@@ -122,7 +122,7 @@ public class OnlineUserController implements Initializable {
     private Button logout;
     @FXML
     private ImageView btnBack;
-
+InputStream inputStream;
     /**
      * Initializes the controller class.
      */
@@ -199,16 +199,24 @@ public class OnlineUserController implements Initializable {
         onlinePlayersListView.setOnMouseClicked(event -> {
             // Get the selected item
             String selectedItem = onlinePlayersListView.getSelectionModel().getSelectedItem();
-            new Thread(() -> {
-                try {
-
-                    server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
-                    OutputStream outputStream = server.getOutputStream();
-                    InputStream inputStream = server.getInputStream();
+            try {
+                server = new Socket(InetAddress.getLocalHost().getHostAddress(), 5005);
+                OutputStream outputStream = server.getOutputStream();
+                     inputStream = server.getInputStream();
 
                     String inviteMessage = "invite" + " " + selectedItem + " " + "1234"+" "+"123";
                     System.out.println(inviteMessage);
                     outputStream.write(inviteMessage.getBytes());
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    
+            new Thread(() -> {
+                try {
+
+                    
                     FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
                     OnlinemodeController onlineGameController = loaderr.getController();
@@ -302,12 +310,12 @@ public class OnlineUserController implements Initializable {
 //                            });
                         /*        });*/
 
-                        if (symbol.equals("X")) {
-                            System.out.println("X online user");
-
-                            // onlineGameController.setSymol(symbol);
-                        }
-                        /*    }); */
+//                        if (symbol.equals("X")) {
+//                            System.out.println("X online user");
+//
+//                            // onlineGameController.setSymol(symbol);
+//                        }
+//                        /*    }); */
                     }
                     if (command.equals("X")) {
                         System.out.println("X online user");
