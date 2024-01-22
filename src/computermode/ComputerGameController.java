@@ -196,7 +196,7 @@ public class ComputerGameController implements Initializable {
             LosserController.setStage(stage);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
