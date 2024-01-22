@@ -466,6 +466,18 @@ public class OnlinemodeController implements Initializable {
 
     @FXML
     private void newGame(ActionEvent event) {
+//        back.setOnMouseClicked(event -> {
+//            try {
+//                Stage stage = (Stage) back.getScene().getWindow();
+//                Parent myNewScene = FXMLLoader.load(getClass().getResource("/tictactoe/StartScreen.fxml"));
+//                Scene scene = new Scene(myNewScene);
+//                stage.setScene(scene);
+//                stage.setTitle("My New Scene");
+//                stage.show();
+//            } catch (Exception e) {
+//                e.printStackTrace(); 
+//            }
+//        });
     }
 
     private void OnClickLogout(ActionEvent event) throws IOException {

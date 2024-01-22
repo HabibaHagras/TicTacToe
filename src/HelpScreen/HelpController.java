@@ -75,7 +75,7 @@ public class HelpController implements Initializable {
                            apane.getChildren().setAll(pane);
 
         } catch (IOException ex) {
-            Logger.getLogger(helpcontroller.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
      }}
       public void onclicknewgame(ActionEvent event) throws IOException{
   
