@@ -258,7 +258,7 @@ Button button;
 
                   //  System.out.println("Login successful!");
                 } catch (UnknownHostException ex) { 
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                     ex.printStackTrace();
             } catch (IOException ex) {
                   ex.printStackTrace();            } 
              
