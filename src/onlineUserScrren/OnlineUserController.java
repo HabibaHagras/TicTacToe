@@ -213,122 +213,122 @@ InputStream inputStream;
                 Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
             }
                     
-            new Thread(() -> {
-                try {
-
-                    
-                    FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
-                    Parent onlineGamePage = loaderr.load();
-                    OnlinemodeController onlineGameController = loaderr.getController();
-                    onlineGameController.setPlayer2Name(selectedItem);
-                    byte[] responseBuffer = new byte[1024];
-                    int responseBytes = inputStream.read(responseBuffer);
-                    String serverResponse = new String(responseBuffer, 0, responseBytes);
-                    System.out.println("Server response: " + serverResponse);
-                    StringTokenizer tokenizer = new StringTokenizer(serverResponse);
-
-                    String command = tokenizer.nextToken();
-
-// Assuming the second token is the username
-                    String username = tokenizer.nextToken();
-
-// Assuming the third token is the additional information (e.g., "111")
-                    String additionalInfo = tokenizer.nextToken();
-                    if (command.equals("userfound")) {
-                        System.out.println("USERFOUND");
-//                        if (username.equals(UserInvitatonTO)) {
-/*
-                        Platform.runLater(() -> {
-                            Alert waitingAlert = new Alert(Alert.AlertType.INFORMATION);
-                            waitingAlert.setTitle("Waiting");
-                            waitingAlert.setHeaderText("Please wait...");
-                            waitingAlert.setContentText("Performing some task. Please wait...");
-
-                            waitingAlert.showAndWait().ifPresent(response -> {
-                                if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
-                                    System.out.println("WaitingAccpeted online user");
-
-                                    Platform.runLater(() -> {
-                                        Stage stage = new Stage();
-                                        Scene scene = new Scene(onlineGamePage);
-                                        stage.setScene(scene);
-                                        stage.setTitle("ONLINEGamegor online user" + WaitingAccpeted_user);
-                                        stage.show();
-
-                                        // Close the alert immediately
-                                        waitingAlert.close();
-                                    });
-                                }
-                         */
-//                            Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
-//                            inviteAlert.setTitle("Wating");
-//                            inviteAlert.setHeaderText("Waaaaiting");
-//                            inviteAlert.setContentText("Waaaaiting");
-//                            inviteAlert.showAndWait();
-/*
-                            Alert waitingAlert = new Alert(Alert.AlertType.INFORMATION);
-
-                            // Set the title and header text
-                            waitingAlert.setTitle("Waiting");
-                            waitingAlert.setHeaderText("Please wait...");
-
-                            // Set the content text
-                            waitingAlert.setContentText("Performing some task. Please wait...");
-
-                            // Create the "OK" button
-                            ButtonType okButton = new ButtonType("OK");
-
-                            // Add the button to the alert
-                            waitingAlert.getButtonTypes().setAll(okButton);
-
-                            waitingAlert.showAndWait().ifPresent(response -> {
-                                if (response == okButton) {
-                                    System.out.println("User clicked OK");
-                                    if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
-                                        System.out.println("WaitingAccpeted online user");
-
-                                        Platform.runLater(() -> {
-                                            Stage stage = new Stage();
-                                            Scene scene = new Scene(onlineGamePage);
-                                            stage.setScene(scene);
-                                            stage.setTitle("ONLINEGamegor online user" + WaitingAccpeted_user);
-                                            stage.show();
-
-                                        });
-                                    }
-                                }
-                            });
-                         */
-                        // Optional: You can also set an event handler for the "OK" button
-                        // waitingAlert.setOnCloseRequest(event -> {
-                        //     System.out.println("User closed the alert");
-                        // });
-                        // Optional: If you want to perform some action after the alert is closed
-                        // waitingAlert.setOnHidden(event -> {
-                        //     System.out.println("Alert is closed");
-                        // });
-//                            });
-                        /*        });*/
-
-//                        if (symbol.equals("X")) {
-//                            System.out.println("X online user");
+//            new Thread(() -> {
+//                try {
 //
-//                            // onlineGameController.setSymol(symbol);
-//                        }
-//                        /*    }); */
-                    }
-                    if (command.equals("X")) {
-                        System.out.println("X online user");
-
-//                        onlineGameController.setSymol(symbol);
-                    }
-
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }).start();
+//                    
+//                    FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
+//                    Parent onlineGamePage = loaderr.load();
+//                    OnlinemodeController onlineGameController = loaderr.getController();
+//                    onlineGameController.setPlayer2Name(selectedItem);
+//                    byte[] responseBuffer = new byte[1024];
+//                    int responseBytes = inputStream.read(responseBuffer);
+//                    String serverResponse = new String(responseBuffer, 0, responseBytes);
+//                    System.out.println("Server response: " + serverResponse);
+//                    StringTokenizer tokenizer = new StringTokenizer(serverResponse);
+//
+//                    String command = tokenizer.nextToken();
+//
+//// Assuming the second token is the username
+//                    String username = tokenizer.nextToken();
+//
+//// Assuming the third token is the additional information (e.g., "111")
+//                    String additionalInfo = tokenizer.nextToken();
+//                    if (command.equals("userfound")) {
+//                        System.out.println("USERFOUND");
+////                        if (username.equals(UserInvitatonTO)) {
+///*
+//                        Platform.runLater(() -> {
+//                            Alert waitingAlert = new Alert(Alert.AlertType.INFORMATION);
+//                            waitingAlert.setTitle("Waiting");
+//                            waitingAlert.setHeaderText("Please wait...");
+//                            waitingAlert.setContentText("Performing some task. Please wait...");
+//
+//                            waitingAlert.showAndWait().ifPresent(response -> {
+//                                if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
+//                                    System.out.println("WaitingAccpeted online user");
+//
+//                                    Platform.runLater(() -> {
+//                                        Stage stage = new Stage();
+//                                        Scene scene = new Scene(onlineGamePage);
+//                                        stage.setScene(scene);
+//                                        stage.setTitle("ONLINEGamegor online user" + WaitingAccpeted_user);
+//                                        stage.show();
+//
+//                                        // Close the alert immediately
+//                                        waitingAlert.close();
+//                                    });
+//                                }
+//                         */
+////                            Alert inviteAlert = new Alert(Alert.AlertType.INFORMATION);
+////                            inviteAlert.setTitle("Wating");
+////                            inviteAlert.setHeaderText("Waaaaiting");
+////                            inviteAlert.setContentText("Waaaaiting");
+////                            inviteAlert.showAndWait();
+///*
+//                            Alert waitingAlert = new Alert(Alert.AlertType.INFORMATION);
+//
+//                            // Set the title and header text
+//                            waitingAlert.setTitle("Waiting");
+//                            waitingAlert.setHeaderText("Please wait...");
+//
+//                            // Set the content text
+//                            waitingAlert.setContentText("Performing some task. Please wait...");
+//
+//                            // Create the "OK" button
+//                            ButtonType okButton = new ButtonType("OK");
+//
+//                            // Add the button to the alert
+//                            waitingAlert.getButtonTypes().setAll(okButton);
+//
+//                            waitingAlert.showAndWait().ifPresent(response -> {
+//                                if (response == okButton) {
+//                                    System.out.println("User clicked OK");
+//                                    if (WaitingAccpetedPART.equals("WaitingAccpeted")) {
+//                                        System.out.println("WaitingAccpeted online user");
+//
+//                                        Platform.runLater(() -> {
+//                                            Stage stage = new Stage();
+//                                            Scene scene = new Scene(onlineGamePage);
+//                                            stage.setScene(scene);
+//                                            stage.setTitle("ONLINEGamegor online user" + WaitingAccpeted_user);
+//                                            stage.show();
+//
+//                                        });
+//                                    }
+//                                }
+//                            });
+//                         */
+//                        // Optional: You can also set an event handler for the "OK" button
+//                        // waitingAlert.setOnCloseRequest(event -> {
+//                        //     System.out.println("User closed the alert");
+//                        // });
+//                        // Optional: If you want to perform some action after the alert is closed
+//                        // waitingAlert.setOnHidden(event -> {
+//                        //     System.out.println("Alert is closed");
+//                        // });
+////                            });
+//                        /*        });*/
+//
+////                        if (symbol.equals("X")) {
+////                            System.out.println("X online user");
+////
+////                            // onlineGameController.setSymol(symbol);
+////                        }
+////                        /*    }); */
+//                    }
+//                    if (command.equals("X")) {
+//                        System.out.println("X online user");
+//
+////                        onlineGameController.setSymol(symbol);
+//                    }
+//
+//                } catch (UnknownHostException ex) {
+//                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (IOException ex) {
+//                    Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }).start();
             // Perform the desired action with the selected item
             if (selectedItem != null) {
                 // Example: Display a message with the selected item

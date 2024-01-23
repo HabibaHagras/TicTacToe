@@ -268,20 +268,17 @@ Button button;
             
 
     }
-    @FXML
-    private void setaction1(ActionEvent event) {
-       
-
-
-    }
-    
+  
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
-            
-        //  setPlayerSymbol(button);
-         
-         button.setText("X");
+           
+          
+          
+               setPlayerSymbol(button);
+               
+       
+       //  button.setText("X");
          
                      String playMessage = "MOVE"+" " + player1.getText() + " " + button+" "+(button).getText();
                  //   String playMessage = "MOVE " + button.getId();
@@ -293,7 +290,7 @@ Button button;
             } catch (IOException ex) {
                 Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+              
             button.setDisable(true);
             checkWinner(player1.getText(), player2.getText());
            // updateBoardAfterRequest();
@@ -307,16 +304,18 @@ Button button;
 //          public void run(){
 //Platform.runLater(() -> {
     if (playerTurn % 2 == 0) {
+       // Platform.runLater(() -> {
             button.setText("X");
             button.setTextFill(Paint.valueOf("#ff0000"));
+          //  });  
        // sendXmove(button.getId());
         playerTurn = 1;
     } else {
-                   
+                //    Platform.runLater(() -> {
             button.setText("O");
             button.setTextFill(Paint.valueOf("#ffc300"));
                 // sendXmove(button.getId());  
-        
+       // });  
         playerTurn = 0;
     }
 //     }
@@ -325,8 +324,8 @@ Button button;
 //     playerTurn = (playerTurn + 1) % 2;
 //         //}
 //          }
-       //   });   
-      // }).start();
+//         });   
+//       }).start();
 }
 
 //      public void updateBoardAfterRequest() {

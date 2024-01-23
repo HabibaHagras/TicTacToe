@@ -521,7 +521,7 @@ public class GameController implements Initializable {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(document);
             String name = player1.getText() + "VS" + player2.getText() + String.valueOf(d.getDate()) + "_" + String.valueOf(d.getHours()) + String.valueOf(d.getMinutes());
-            FileOutputStream output = new FileOutputStream("F:\\Java\\Java Project\\TicTacToe\\src\\Files\\" + name + ".xml");
+            FileOutputStream output = new FileOutputStream("F:\\Java_SE\\Java_Project\\TicTacToe\\src\\Files\\" + name + ".xml");
             StreamResult result = new StreamResult(output);
             transformer.transform(source, result);
 
