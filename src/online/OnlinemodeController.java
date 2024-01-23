@@ -132,7 +132,7 @@ Button button;
             outputStream= server.getOutputStream();
             inputStream = server.getInputStream();
         } catch (UnknownHostException ex) {
-            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                   ex.printStackTrace();       
         } catch (IOException ex) {
             Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
         }
