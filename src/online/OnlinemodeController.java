@@ -280,6 +280,7 @@ Button button;
        //  button.setText("X");
          
                      String playMessage = "MOVE"+" " + player1.getText() + " " + button+" "+(button).getText();
+                    
                  //   String playMessage = "MOVE " + button.getId();
 
                     System.out.println("Sending move: " + playMessage);
@@ -298,9 +299,7 @@ Button button;
      public void setPlayerSymbol(Button button) {
      //  new Thread(()->{
 //         while(true){
-// Platform.runLater(new Runnable(){
-////                    
-//          public void run(){
+
 //Platform.runLater(() -> {
     if (playerTurn % 2 == 0) {
        // Platform.runLater(() -> {
