@@ -260,8 +260,7 @@ Button button;
                 } catch (UnknownHostException ex) { 
                 Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+                  ex.printStackTrace();            } 
              
         });
        thread.start();
@@ -288,7 +287,7 @@ Button button;
             try {
                 outputStream.write(playMessage.getBytes());
             } catch (IOException ex) {
-                Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
               
             button.setDisable(true);
