@@ -92,6 +92,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javax.swing.text.html.ListView;
 import online.OnlinemodeController;
+import tictactoe.LoginController;
 
 /**
  * FXML Controller class
@@ -207,6 +208,7 @@ InputStream inputStream;
                     String inviteMessage = "invite" + " " + selectedItem + " " + "1234"+" "+"123";
                     System.out.println(inviteMessage);
                     outputStream.write(inviteMessage.getBytes());
+                     LoginController.turn=1;
             } catch (UnknownHostException ex) {
                 Logger.getLogger(OnlineUserController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

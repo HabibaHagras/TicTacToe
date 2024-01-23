@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
     String Userlogin;
     Button button;
     public static Thread thread;
-
+       public static int turn;
     /**
      * Initializes the controller class.
      */
@@ -196,7 +196,8 @@ public class LoginController implements Initializable {
                                             String acceptMessage = "accept " + enteredUsername + " " + enteredPassword+" "+"123";
                                             outputStream.write(acceptMessage.getBytes());
                                             outputStream.flush();
-                                           
+                                            
+                                            turn=2;
                                         } catch (IOException ex) {
                                             ex.printStackTrace();
                                         }
@@ -214,6 +215,7 @@ public class LoginController implements Initializable {
                             FXMLLoader loaderr = new FXMLLoader(getClass().getResource("/online/onlinemode.fxml"));
                     Parent onlineGamePage = loaderr.load();
                     OnlinemodeController onlineGameController = loaderr.getController();
+                   
 
                              Platform.runLater(() -> onlineGameController.setPlayer1Name(enteredUsername));
 
