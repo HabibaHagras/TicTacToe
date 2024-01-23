@@ -134,7 +134,7 @@ Button button;
         } catch (UnknownHostException ex) {
                    ex.printStackTrace();       
         } catch (IOException ex) {
-            Logger.getLogger(OnlinemodeController.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
         }
             
 ////            byte[] responseBuffer = new byte[1024];
